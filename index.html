@@ -929,7 +929,9 @@ function renderMatches() {
   document.getElementById('countLabel').textContent = `Showing ${visibleCount} of ${matches.length} matches`;
 }
 
-renderMatches();
+// Default to Today filter on load
+const todayBtn = document.querySelector('.filter-btn:last-child');
+setFilter('today', todayBtn);
 </script>
 </body>
 </html>
