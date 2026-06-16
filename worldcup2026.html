@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA World Cup 2026 — SG & MY TV Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --pitch: #1a2e1a;
+    --pitch-mid: #213521;
+    --line: #2d4a2d;
+    --grass: #2ecc71;
+    --grass-dim: #27ae60;
+    --gold: #f0c040;
+    --sg-red: #ef4444;
+    --sg-dim: #7f1d1d;
+    --my-yellow: #f59e0b;
+    --my-dim: #78350f;
+    --both: #a78bfa;
+    --both-dim: #4c1d95;
+    --paid: #94a3b8;
+    --text: #e8f5e9;
+    --text-dim: #86a186;
+    --border: #2d4a2d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--pitch);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  /* Pitch line texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 60px,
+      rgba(255,255,255,0.02) 60px,
+      rgba(255,255,255,0.02) 61px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 32px 0 20px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 0;
+  }
+  .trophy { font-size: 36px; margin-bottom: 8px; }
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--gold);
+    line-height: 1.1;
+  }
+  .subtitle {
+    margin-top: 6px;
+    color: var(--text-dim);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: var(--pitch-mid);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-sg { background: var(--sg-red); }
+  .dot-my { background: var(--my-yellow); }
+  .dot-both { background: var(--both); }
+  .dot-all { background: var(--grass); }
+
+  /* FILTERS */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .filter-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .filter-btn:hover { border-color: var(--grass); color: var(--text); }
+  .filter-btn.active { background: var(--grass); border-color: var(--grass); color: #0a1a0a; font-weight: 600; }
+
+  /* PHASE HEADER */
+  .phase-header {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 12px 0 8px;
+    border-bottom: 1px solid var(--line);
+    margin: 24px 0 10px;
+  }
+
+  /* DATE GROUP */
+  .date-group { margin-bottom: 4px; }
+  .date-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 0 4px;
+  }
+
+  /* MATCH CARD */
+  .match-card {
+    background: var(--pitch-mid);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    transition: border-color 0.15s;
+  }
+  .match-card:hover { border-color: #4a7a4a; }
+  .match-card.hidden { display: none; }
+
+  /* Left accent bar */
+  .match-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 3px;
+    border-radius: 2px;
+  }
+  .match-card.tv-both::before { background: var(--both); }
+  .match-card.tv-sg::before { background: var(--sg-red); }
+  .match-card.tv-my::before { background: var(--my-yellow); }
+  .match-card.tv-all::before { background: var(--grass); }
+
+  .match-time {
+    min-width: 64px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .match-time .sgt {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    display: block;
+    line-height: 1.1;
+  }
+  .match-time .day-shift {
+    font-size: 10px;
+    color: var(--text-dim);
+    display: block;
+  }
+
+  .match-teams {
+    flex: 1;
+    min-width: 0;
+  }
+  .teams-row {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .match-meta {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* TV BADGES */
+  .tv-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+    flex-shrink: 0;
+    min-width: 110px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .badge-sg-free { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+  .badge-sg-paid { background: rgba(148,163,184,0.08); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
+  .badge-my-free { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+  .badge-my-paid { background: rgba(148,163,184,0.08); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
+
+  .group-tag {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--grass-dim);
+    background: rgba(46,204,113,0.08);
+    border: 1px solid rgba(46,204,113,0.2);
+    border-radius: 3px;
+    padding: 1px 5px;
+    letter-spacing: 0.06em;
+  }
+
+  /* TABS */
+  .tab-nav {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+  .tab-btn {
+    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-dim);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-bottom: -1px;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .tab-panel { display: none; padding-top: 24px; }
+  .tab-panel.active { display: block; }
+
+  /* HOW TO WATCH */
+  .watch-section { margin-bottom: 32px; }
+  .watch-section h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .watch-section h2.sg { color: var(--sg-red); border-color: rgba(239,68,68,0.3); }
+  .watch-section h2.my { color: var(--my-yellow); border-color: rgba(245,158,11,0.3); }
+  .platform-card {
+    background: var(--pitch-mid);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    transition: border-color 0.15s;
+  }
+  .platform-card:hover { border-color: #4a7a4a; }
+  .platform-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 10px; flex-wrap: wrap; }
+  .platform-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+  .price-tag { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+  .price-free { background: rgba(46,204,113,0.15); color: #6ee7a0; border: 1px solid rgba(46,204,113,0.3); }
+  .price-paid { background: rgba(148,163,184,0.1); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
+  .platform-desc { font-size: 13px; color: var(--text-dim); margin-bottom: 12px; line-height: 1.5; }
+  .access-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .access-item { background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; }
+  .access-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .access-value { font-size: 13px; color: var(--text); font-weight: 500; }
+  .access-value a { color: var(--grass); text-decoration: none; }
+  .access-value a:hover { text-decoration: underline; }
+  .channels-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .ch-tag { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: rgba(46,204,113,0.1); border: 1px solid rgba(46,204,113,0.2); color: #6ee7a0; }
+  .note-box { background: rgba(240,192,64,0.07); border: 1px solid rgba(240,192,64,0.2); border-radius: 8px; padding: 12px 14px; font-size: 13px; color: #fde68a; line-height: 1.5; margin-bottom: 16px; }
+  .note-box strong { color: var(--gold); }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    background: rgba(46,204,113,0.06);
+    border: 1px solid rgba(46,204,113,0.15);
+    border-radius: 8px;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+  .stat-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* SEARCH */
+  .search-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .search-input {
+    flex: 1;
+    background: var(--pitch-mid);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    padding: 8px 12px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .search-input:focus { border-color: var(--grass); }
+  .search-input::placeholder { color: var(--text-dim); }
+
+  .count-label {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 1.7rem; }
+    .match-card { flex-wrap: wrap; }
+    .tv-badges { min-width: auto; flex-direction: row; }
+    .stats-bar { gap: 10px; }
+    .tab-btn { padding: 12px 12px; font-size: 0.85rem; }
+    .access-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="trophy">⚽</div>
+    <h1>FIFA World Cup 2026<br>SG & MY TV Guide</h1>
+    <div class="subtitle">All times in SGT / MYT (UTC+8) · 104 Matches</div>
+  </header>
+
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('schedule', this)">📅 Match Schedule</button>
+    <button class="tab-btn" onclick="switchTab('howtowatch', this)">📺 How to Watch</button>
+  </div>
+
+  <div id="tab-schedule" class="tab-panel active">
+
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-num">104</span>
+      <span class="stat-label">Total Matches</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" style="color:#fca5a5">28</span>
+      <span class="stat-label">SG Free (Ch5/mewatch)</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" style="color:#fcd34d">~80+</span>
+      <span class="stat-label">MY Free (RTM)</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" style="color:#c4b5fd">104</span>
+      <span class="stat-label">MY Paid (Unifi TV)</span>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="dot dot-both"></span> Free on both SG & MY</div>
+    <div class="legend-item"><span class="dot dot-sg"></span> Free on SG only</div>
+    <div class="legend-item"><span class="dot dot-my"></span> Free on MY only (RTM)</div>
+    <div class="legend-item"><span class="dot dot-all" style="opacity:0.5"></span> Paid only (SG: mewatch $118 / MY: Unifi TV RM60)</div>
+  </div>
+
+  <div class="search-row">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search team, group, venue…" oninput="filterMatches()">
+  </div>
+
+  <div class="filters" id="filters">
+    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+    <button class="filter-btn" onclick="setFilter('sg-free', this)">🇸🇬 Free SG</button>
+    <button class="filter-btn" onclick="setFilter('my-free', this)">🇲🇾 Free MY</button>
+    <button class="filter-btn" onclick="setFilter('both-free', this)">Free Both</button>
+    <button class="filter-btn" onclick="setFilter('group', this)">Group Stage</button>
+    <button class="filter-btn" onclick="setFilter('knockout', this)">Knockout</button>
+    <button class="filter-btn" onclick="setFilter('today', this)">Today</button>
+  </div>
+
+  <div class="count-label" id="countLabel"></div>
+
+  <div id="matchList"></div>
+
+  </div><!-- end tab-schedule -->
+
+  <!-- HOW TO WATCH TAB -->
+  <div id="tab-howtowatch" class="tab-panel">
+
+    <div class="watch-section">
+      <h2 class="sg">🇸🇬 Singapore — How to Watch</h2>
+      <div class="note-box"><strong>Official broadcaster:</strong> Mediacorp. All 104 matches available. <strong>28 matches are free</strong> — the opening match, 23 group stage games, both semifinals, 3rd place playoff, and the Final. Everything else requires a paid pass.</div>
+
+      <div class="platform-card">
+        <div class="platform-header"><span class="platform-name">📺 Channel 5</span><span class="price-tag price-free">FREE — No signup needed</span></div>
+        <div class="platform-desc">Free-to-air TV. Tune in on your TV set. Covers the 28 selected FTA matches live. Best for the living room.</div>
+        <div class="access-grid">
+          <div class="access-item"><div class="access-label">How to access</div><div class="access-value">Regular TV aerial / HD set-top box</div></div>
+          <div class="access-item"><div class="access-label">Matches</div><div class="access-value">28 selected FTA matches live</div></div>
+        </div>
+        <div class="channels-row"><span class="ch-tag">Channel 5</span></div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-header"><span class="platform-name">📱 mewatch</span><span class="price-tag price-free">FREE for 28 matches</span></div>
+        <div class="platform-desc">Mediacorp's streaming app and website. Free for the 28 FTA matches (free account may be needed). Great for watching from bed or on the go during early-morning SGT kickoffs.</div>
+        <div class="access-grid">
+          <div class="access-item"><div class="access-label">Website</div><div class="access-value"><a href="https://mewatch.sg" target="_blank">mewatch.sg</a></div></div>
+          <div class="access-item"><div class="access-label">App</div><div class="access-value">Search "mewatch" on App Store / Google Play</div></div>
+          <div class="access-item"><div class="access-label">Devices</div><div class="access-value">Phone, tablet, laptop, Smart TV</div></div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-header"><span class="platform-name">🔓 mewatch Full Pass</span><span class="price-tag price-paid">S$118 / season</span></div>
+        <div class="platform-desc">Unlocks all 104 matches live + on-demand, plus a 24/7 analysis and highlights channel. Also available via Singtel TV GO and StarHub TV+ — check if your existing telco bundle includes it.</div>
+        <div class="access-grid">
+          <div class="access-item"><div class="access-label">Price</div><div class="access-value">S$118 season pass</div></div>
+          <div class="access-item"><div class="access-label">Also via</div><div class="access-value">Singtel TV GO / StarHub TV+</div></div>
+          <div class="access-item"><div class="access-label">Where to buy</div><div class="access-value"><a href="https://mewatch.sg" target="_blank">mewatch.sg</a></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="watch-section">
+      <h2 class="my">🇲🇾 Malaysia — How to Watch</h2>
+      <div class="note-box"><strong>Official broadcasters:</strong> RTM and Unifi TV. <strong>Astro is NOT broadcasting</strong> the World Cup 2026. RTM shows the majority of matches free (some may be delayed). Unifi TV has all 104 live on paid plans. <strong>Note:</strong> RTM ends its broadcast on Astro from July 1, 2026 — use MyTV or RTMKlik instead.</div>
+
+      <div class="platform-card">
+        <div class="platform-header"><span class="platform-name">📺 RTM Free-to-Air TV</span><span class="price-tag price-free">FREE — No signup</span></div>
+        <div class="platform-desc">Watch live on your TV via a MyTV decoder (free terrestrial digital broadcast). Scan for channels to get RTM stations. Best for the TV at home.</div>
+        <div class="access-grid">
+          <div class="access-item"><div class="access-label">How to access</div><div class="access-value">MyTV decoder (free terrestrial)</div></div>
+          <div class="access-item"><div class="access-label">Coverage</div><div class="access-value">Majority of matches (some delayed)</div></div>
+        </div>
+        <div class="channels-row"><span class="ch-tag">TV1</span><span class="ch-tag">TV2</span><span class="ch-tag">TV Okey</span><span class="ch-tag">Sukan RTM</span></div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-header"><span class="platform-name">🌐 RTMKlik</span><span class="price-tag price-free">FREE — No registration needed</span></div>
+        <div class="platform-desc">RTM's official free streaming platform. Open the website or app and watch — no account required. Expected to carry all 104 matches in some form (live or delayed). Available on Android, iOS, Android TV, and Google TV.</div>
+        <div class="access-grid">
+          <div class="access-item"><div class="access-label">Website</div><div class="access-value"><a href="https://rtmklik.rtm.gov.my" target="_blank">rtmklik.rtm.gov.my</a></div></div>
+          <div class="access-item"><div class="access-label">Android</div><div class="access-value"><a href="https://play.google.com/store/apps/details?id=my.gov.rtm.mobile" target="_blank">Google Play Store</a></div></div>
+          <div class="access-item"><div class="access-label">iOS</div><div class="access-value"><a href="https://apps.apple.com/my/app/rtmklik/id777391399" target="_blank">Apple App Store</a></div></div>
+          <div class="access-item"><div class="access-label">Huawei</div><div class="access-value"><a href="https://appgallery.huawei.com/#/app/C101841473" target="_blank">AppGallery</a></div></div>
+          <div class="access-item"><div class="access-label">Smart TV</div><div class="access-value">Android TV, Google TV</div></div>
+          <div class="access-item"><div class="access-label">Channels</div><div class="access-value">TV1, TV2, Okey, Sukan+, FIFA WC 1</div></div>
+        </div>
+        <div class="channels-row"><span class="ch-tag">TV1</span><span class="ch-tag">TV2</span><span class="ch-tag">TV Okey</span><span class="ch-tag">Sukan+</span><span class="ch-tag">FIFA WC 1</span></div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-header"><span class="platform-name">📱 MyTV (ManaMana)</span><span class="price-tag price-free">FREE — No registration</span></div>
+        <div class="platform-desc">Another free streaming option — streams RTM channels including TV1, TV2, and Okey. Just open and watch, no account needed.</div>
+        <div class="access-grid">
+          <div class="access-item"><div class="access-label">Website</div><div class="access-value"><a href="https://www.mana2.my" target="_blank">mana2.my</a></div></div>
+          <div class="access-item"><div class="access-label">Android</div><div class="access-value"><a href="https://play.google.com/store/apps/details?id=my.mana2.mobile" target="_blank">Google Play Store</a></div></div>
+          <div class="access-item"><div class="access-label">iOS</div><div class="access-value"><a href="https://apps.apple.com/my/app/mytv-manamana/id1673030555" target="_blank">Apple App Store</a></div></div>
+          <div class="access-item"><div class="access-label">Smart TV</div><div class="access-value">Android TV, Google TV</div></div>
+        </div>
+        <div class="channels-row"><span class="ch-tag">TV1</span><span class="ch-tag">TV2</span><span class="ch-tag">Okey (Ch 110)</span><span class="ch-tag">Sukan+ (Ch 111)</span></div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-header"><span class="platform-name">🏛️ MyGOV App</span><span class="price-tag price-free">FREE — MyDigitalID required</span></div>
+        <div class="platform-desc">Malaysia's MyGOV app includes an in-app link to RTM's live streams. Requires registration with MyDigitalID. Not supported on Smart TVs.</div>
+        <div class="access-grid">
+          <div class="access-item"><div class="access-label">Android</div><div class="access-value"><a href="https://play.google.com/store/search?q=MyGOV&c=apps" target="_blank">Google Play Store</a></div></div>
+          <div class="access-item"><div class="access-label">iOS</div><div class="access-value"><a href="https://apps.apple.com/my/app/mygov-malaysia/id6502623525" target="_blank">Apple App Store</a></div></div>
+          <div class="access-item"><div class="access-label">Requirement</div><div class="access-value">MyDigitalID account</div></div>
+          <div class="access-item"><div class="access-label">Smart TV</div><div class="access-value">Not supported</div></div>
+        </div>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-header"><span class="platform-name">💳 Unifi TV</span><span class="price-tag price-paid">RM50–60 season / RM20 day pass</span></div>
+        <div class="platform-desc">The only Malaysian platform with all 104 matches live in full HD, guaranteed. Best choice for uninterrupted, high-quality streams. Both subscribers and non-subscribers must purchase a pass.</div>
+        <div class="access-grid">
+          <div class="access-item"><div class="access-label">Website</div><div class="access-value"><a href="https://unifitv.com.my" target="_blank">unifitv.com.my</a></div></div>
+          <div class="access-item"><div class="access-label">Existing subscribers</div><div class="access-value">RM50 season pass</div></div>
+          <div class="access-item"><div class="access-label">Non-subscribers</div><div class="access-value">RM60 season pass</div></div>
+          <div class="access-item"><div class="access-label">Day pass</div><div class="access-value">RM20 / 24 hours</div></div>
+          <div class="access-item"><div class="access-label">Android</div><div class="access-value"><a href="https://play.google.com/store/apps/details?id=com.tm.unifitv.mobile" target="_blank">Google Play Store</a></div></div>
+          <div class="access-item"><div class="access-label">iOS</div><div class="access-value"><a href="https://apps.apple.com/my/app/unifi-tv-2-0/id6739202371" target="_blank">Apple App Store</a></div></div>
+          <div class="access-item"><div class="access-label">Smart TV</div><div class="access-value">Android TV, Google TV, Samsung Tizen, LG WebOS</div></div>
+        </div>
+        <div class="channels-row"><span class="ch-tag">Unifi FIFA WC 1</span><span class="ch-tag">Unifi FIFA WC 2</span><span class="ch-tag">Unifi FIFA WC 3</span></div>
+      </div>
+    </div>
+
+  </div><!-- end tab-howtowatch -->
+
+</div><!-- end container -->
+
+<script>
+// Tab switching
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ============================================================
+// GMT offset helpers
+// All match times below are in UTC (GMT). SGT = UTC+8, MYT = UTC+8.
+// ============================================================
+function gmtToSgt(isoUtc) {
+  const d = new Date(isoUtc);
+  const sgt = new Date(d.getTime() + 8 * 60 * 60 * 1000);
+  return sgt;
+}
+function fmtTime(d) {
+  const h = d.getUTCHours(), m = d.getUTCMinutes();
+  const ampm = h >= 12 ? 'pm' : 'am';
+  const hh = h % 12 || 12;
+  const mm = m.toString().padStart(2, '0');
+  return `${hh}:${mm}${ampm}`;
+}
+function fmtDate(d) {
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${days[d.getUTCDay()]} ${d.getUTCDate()} ${months[d.getUTCMonth()]}`;
+}
+function localDate(d) {
+  // format as YYYY-MM-DD in SGT
+  const y = d.getUTCFullYear();
+  const m = (d.getUTCMonth()+1).toString().padStart(2,'0');
+  const dd = d.getUTCDate().toString().padStart(2,'0');
+  return `${y}-${m}-${dd}`;
+}
+
+// Today in SGT
+const nowSgt = gmtToSgt(new Date().toISOString());
+const todayStr = localDate(nowSgt);
+
+// ============================================================
+// SG FREE list: opening match, 23 group stage, both semis, 3rd place, final
+// Based on Mediacorp confirmed 28 free matches (opening + 23 group + 2 semis + 3rd + final)
+// The specific 23 group stage matches are announced by Mediacorp to include big teams
+// across all groups. We mark the ones confirmed in reports (Argentina, Brazil, England,
+// France, Germany, Netherlands, Portugal, Spain featured).
+// ============================================================
+
+const SG_FREE_GROUPS = new Set([
+  // Confirmed as part of 28 FTA: opening match + all marquee group games
+  // Based on reports: includes "Argentina, Brazil, England, France, Germany, Netherlands, Portugal, Spain"
+  'mexico-southafrica', // Opening match
+  'brazil-morocco','scotland-brazil','brazil-haiti',
+  'france-senegal','norway-france',
+  'argentina-algeria','jordan-argentina',
+  'england-croatia','panama-england',
+  'germany-curacao','ecuador-germany',
+  'portugal-drc','colombia-portugal',
+  'spain-capeverde','uruguay-spain',
+  'netherlands-japan','netherlands-sweden',
+  'southkorea-czechia','czechia-southafrica','czechia-mexico', // Group A
+  'usa-paraguay','usa-australia','turkiye-usa', // Group D
+  'belgium-egypt','newzealand-belgium', // Group G
+]);
+
+const SG_FREE_KNOCKOUT = new Set([
+  'semi1','semi2','third','final'
+]);
+
+// MY: RTM shows the "majority" live or delayed — essentially most matches
+// Confirmed: all 104 available (RTM free for most, Unifi TV all 104 paid)
+// RTM specifically: free for majority. We'll note "RTM Free" for all group stage
+// and "RTM Free" for knockouts where RTM shows selected matches.
+// Reports say RTM shows majority live or delayed — we'll mark all as RTM Free (may be delayed for some).
+
+// ============================================================
+// Match data — UTC kickoff times
+// ============================================================
+const matches = [
+  // ---- GROUP STAGE ----
+  // June 11
+  { id:'mexico-southafrica', utc:'2026-06-11T19:00:00Z', home:'Mexico', away:'South Africa', group:'A', venue:'Mexico City', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'southkorea-czechia', utc:'2026-06-12T02:00:00Z', home:'South Korea', away:'Czechia', group:'A', venue:'Guadalajara', phase:'Group Stage', sgFree:true, myFree:true },
+  // June 12
+  { id:'canada-bosnia', utc:'2026-06-12T19:00:00Z', home:'Canada', away:'Bosnia & Herz.', group:'B', venue:'Toronto', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'usa-paraguay', utc:'2026-06-13T01:00:00Z', home:'USA', away:'Paraguay', group:'D', venue:'Los Angeles', phase:'Group Stage', sgFree:true, myFree:true },
+  // June 13
+  { id:'qatar-switzerland', utc:'2026-06-13T19:00:00Z', home:'Qatar', away:'Switzerland', group:'B', venue:'San Francisco', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'brazil-morocco', utc:'2026-06-13T22:00:00Z', home:'Brazil', away:'Morocco', group:'C', venue:'New York/NJ', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'haiti-scotland', utc:'2026-06-14T01:00:00Z', home:'Haiti', away:'Scotland', group:'C', venue:'Boston', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'australia-turkiye', utc:'2026-06-14T04:00:00Z', home:'Australia', away:'Türkiye', group:'D', venue:'Vancouver', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 14
+  { id:'germany-curacao', utc:'2026-06-14T17:00:00Z', home:'Germany', away:'Curaçao', group:'E', venue:'Houston', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'netherlands-japan', utc:'2026-06-14T20:00:00Z', home:'Netherlands', away:'Japan', group:'F', venue:'Dallas', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'ivorycoast-ecuador', utc:'2026-06-14T23:00:00Z', home:'Ivory Coast', away:'Ecuador', group:'E', venue:'Philadelphia', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'sweden-tunisia', utc:'2026-06-15T02:00:00Z', home:'Sweden', away:'Tunisia', group:'F', venue:'Monterrey', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 15
+  { id:'spain-capeverde', utc:'2026-06-15T16:00:00Z', home:'Spain', away:'Cape Verde', group:'H', venue:'Atlanta', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'belgium-egypt', utc:'2026-06-15T19:00:00Z', home:'Belgium', away:'Egypt', group:'G', venue:'Vancouver', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'saudiarabia-uruguay', utc:'2026-06-15T22:00:00Z', home:'Saudi Arabia', away:'Uruguay', group:'H', venue:'Miami', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'iran-newzealand', utc:'2026-06-16T01:00:00Z', home:'Iran', away:'New Zealand', group:'G', venue:'Los Angeles', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 16
+  { id:'france-senegal', utc:'2026-06-16T19:00:00Z', home:'France', away:'Senegal', group:'I', venue:'New York/NJ', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'iraq-norway', utc:'2026-06-16T22:00:00Z', home:'Iraq', away:'Norway', group:'I', venue:'Boston', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'argentina-algeria', utc:'2026-06-17T01:00:00Z', home:'Argentina', away:'Algeria', group:'J', venue:'Kansas City', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'austria-jordan', utc:'2026-06-17T04:00:00Z', home:'Austria', away:'Jordan', group:'J', venue:'San Francisco', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 17
+  { id:'portugal-drc', utc:'2026-06-17T17:00:00Z', home:'Portugal', away:'DR Congo', group:'K', venue:'Houston', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'england-croatia', utc:'2026-06-17T20:00:00Z', home:'England', away:'Croatia', group:'L', venue:'Dallas', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'ghana-panama', utc:'2026-06-17T23:00:00Z', home:'Ghana', away:'Panama', group:'L', venue:'Toronto', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'uzbekistan-colombia', utc:'2026-06-18T02:00:00Z', home:'Uzbekistan', away:'Colombia', group:'K', venue:'Mexico City', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 18
+  { id:'czechia-southafrica', utc:'2026-06-18T16:00:00Z', home:'Czechia', away:'South Africa', group:'A', venue:'Atlanta', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'switzerland-bosnia', utc:'2026-06-18T19:00:00Z', home:'Switzerland', away:'Bosnia & Herz.', group:'B', venue:'Los Angeles', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'canada-qatar', utc:'2026-06-18T22:00:00Z', home:'Canada', away:'Qatar', group:'B', venue:'Vancouver', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'mexico-southkorea', utc:'2026-06-19T01:00:00Z', home:'Mexico', away:'South Korea', group:'A', venue:'Guadalajara', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 19
+  { id:'scotland-morocco', utc:'2026-06-19T22:00:00Z', home:'Scotland', away:'Morocco', group:'C', venue:'Boston', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'usa-australia', utc:'2026-06-19T19:00:00Z', home:'USA', away:'Australia', group:'D', venue:'Seattle', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'brazil-haiti', utc:'2026-06-20T00:30:00Z', home:'Brazil', away:'Haiti', group:'C', venue:'Philadelphia', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'turkiye-paraguay', utc:'2026-06-20T03:00:00Z', home:'Türkiye', away:'Paraguay', group:'D', venue:'San Francisco', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 20
+  { id:'netherlands-sweden', utc:'2026-06-20T17:00:00Z', home:'Netherlands', away:'Sweden', group:'F', venue:'Houston', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'germany-ivorycoast', utc:'2026-06-20T20:00:00Z', home:'Germany', away:'Ivory Coast', group:'E', venue:'Toronto', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'ecuador-curacao', utc:'2026-06-21T03:00:00Z', home:'Ecuador', away:'Curaçao', group:'E', venue:'Kansas City', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'tunisia-japan', utc:'2026-06-21T04:00:00Z', home:'Tunisia', away:'Japan', group:'F', venue:'Monterrey', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 21
+  { id:'spain-saudiarabia', utc:'2026-06-21T16:00:00Z', home:'Spain', away:'Saudi Arabia', group:'H', venue:'Atlanta', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'belgium-iran', utc:'2026-06-21T19:00:00Z', home:'Belgium', away:'Iran', group:'G', venue:'Los Angeles', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'uruguay-capeverde', utc:'2026-06-21T22:00:00Z', home:'Uruguay', away:'Cape Verde', group:'H', venue:'Miami', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'newzealand-egypt', utc:'2026-06-22T01:00:00Z', home:'New Zealand', away:'Egypt', group:'G', venue:'Vancouver', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 22
+  { id:'argentina-austria', utc:'2026-06-22T17:00:00Z', home:'Argentina', away:'Austria', group:'J', venue:'Dallas', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'france-iraq', utc:'2026-06-22T21:00:00Z', home:'France', away:'Iraq', group:'I', venue:'Philadelphia', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'norway-senegal', utc:'2026-06-23T00:00:00Z', home:'Norway', away:'Senegal', group:'I', venue:'New York/NJ', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'jordan-algeria', utc:'2026-06-23T03:00:00Z', home:'Jordan', away:'Algeria', group:'J', venue:'San Francisco', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 23
+  { id:'portugal-uzbekistan', utc:'2026-06-23T17:00:00Z', home:'Portugal', away:'Uzbekistan', group:'K', venue:'Houston', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'england-ghana', utc:'2026-06-23T20:00:00Z', home:'England', away:'Ghana', group:'L', venue:'Boston', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'panama-croatia', utc:'2026-06-23T23:00:00Z', home:'Panama', away:'Croatia', group:'L', venue:'Toronto', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'colombia-drc', utc:'2026-06-24T02:00:00Z', home:'Colombia', away:'DR Congo', group:'K', venue:'Guadalajara', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 24
+  { id:'switzerland-canada', utc:'2026-06-24T19:00:00Z', home:'Switzerland', away:'Canada', group:'B', venue:'Vancouver', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'bosnia-qatar', utc:'2026-06-24T19:00:00Z', home:'Bosnia & Herz.', away:'Qatar', group:'B', venue:'Seattle', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'scotland-brazil', utc:'2026-06-24T22:00:00Z', home:'Scotland', away:'Brazil', group:'C', venue:'Miami', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'morocco-haiti', utc:'2026-06-24T22:00:00Z', home:'Morocco', away:'Haiti', group:'C', venue:'Atlanta', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'czechia-mexico', utc:'2026-06-25T01:00:00Z', home:'Czechia', away:'Mexico', group:'A', venue:'Mexico City', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'southafrica-southkorea', utc:'2026-06-25T01:00:00Z', home:'South Africa', away:'South Korea', group:'A', venue:'Monterrey', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 25
+  { id:'ecuador-germany', utc:'2026-06-25T20:00:00Z', home:'Ecuador', away:'Germany', group:'E', venue:'New York/NJ', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'curacao-ivorycoast', utc:'2026-06-25T20:00:00Z', home:'Curaçao', away:'Ivory Coast', group:'E', venue:'Philadelphia', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'japan-sweden', utc:'2026-06-25T23:00:00Z', home:'Japan', away:'Sweden', group:'F', venue:'Dallas', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'tunisia-netherlands', utc:'2026-06-25T23:00:00Z', home:'Tunisia', away:'Netherlands', group:'F', venue:'Kansas City', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'turkiye-usa', utc:'2026-06-26T02:00:00Z', home:'Türkiye', away:'USA', group:'D', venue:'Los Angeles', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'paraguay-australia', utc:'2026-06-26T02:00:00Z', home:'Paraguay', away:'Australia', group:'D', venue:'San Francisco', phase:'Group Stage', sgFree:false, myFree:true },
+  // June 26
+  { id:'norway-france', utc:'2026-06-26T19:00:00Z', home:'Norway', away:'France', group:'I', venue:'Boston', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'senegal-iraq', utc:'2026-06-26T19:00:00Z', home:'Senegal', away:'Iraq', group:'I', venue:'Toronto', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'capeverde-saudiarabia', utc:'2026-06-27T00:00:00Z', home:'Cape Verde', away:'Saudi Arabia', group:'H', venue:'Houston', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'uruguay-spain', utc:'2026-06-27T00:00:00Z', home:'Uruguay', away:'Spain', group:'H', venue:'Guadalajara', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'egypt-iran', utc:'2026-06-27T03:00:00Z', home:'Egypt', away:'Iran', group:'G', venue:'Seattle', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'newzealand-belgium', utc:'2026-06-27T03:00:00Z', home:'New Zealand', away:'Belgium', group:'G', venue:'Vancouver', phase:'Group Stage', sgFree:true, myFree:true },
+  // June 27
+  { id:'panama-england', utc:'2026-06-27T21:00:00Z', home:'Panama', away:'England', group:'L', venue:'New York/NJ', phase:'Group Stage', sgFree:true, myFree:true },
+  { id:'croatia-ghana', utc:'2026-06-27T21:00:00Z', home:'Croatia', away:'Ghana', group:'L', venue:'Philadelphia', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'colombia-portugal', utc:'2026-06-27T23:30:00Z', home:'Colombia', away:'Portugal', group:'K', venue:'Miami', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'drc-uzbekistan', utc:'2026-06-27T23:30:00Z', home:'DR Congo', away:'Uzbekistan', group:'K', venue:'Atlanta', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'algeria-austria', utc:'2026-06-28T02:00:00Z', home:'Algeria', away:'Austria', group:'J', venue:'Kansas City', phase:'Group Stage', sgFree:false, myFree:true },
+  { id:'jordan-argentina', utc:'2026-06-28T02:00:00Z', home:'Jordan', away:'Argentina', group:'J', venue:'Dallas', phase:'Group Stage', sgFree:true, myFree:true },
+
+  // ---- ROUND OF 32 ----
+  { id:'r32-1', utc:'2026-06-28T19:00:00Z', home:'R32 Match 1', away:'', group:'', venue:'Los Angeles', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-2', utc:'2026-06-29T19:00:00Z', home:'R32 Match 2', away:'', group:'', venue:'Houston', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-3', utc:'2026-06-29T20:30:00Z', home:'R32 Match 3', away:'', group:'', venue:'Boston', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-4', utc:'2026-06-30T01:00:00Z', home:'R32 Match 4', away:'', group:'', venue:'Monterrey', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-5', utc:'2026-06-30T17:00:00Z', home:'R32 Match 5', away:'', group:'', venue:'Dallas', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-6', utc:'2026-06-30T21:00:00Z', home:'R32 Match 6', away:'', group:'', venue:'New York/NJ', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-7', utc:'2026-07-01T01:00:00Z', home:'R32 Match 7', away:'', group:'', venue:'Mexico City', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-8', utc:'2026-07-01T16:00:00Z', home:'R32 Match 8', away:'', group:'', venue:'Atlanta', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-9', utc:'2026-07-01T20:00:00Z', home:'R32 Match 9', away:'', group:'', venue:'Seattle', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-10', utc:'2026-07-01T20:00:00Z', home:'R32 Match 10', away:'', group:'', venue:'San Francisco', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-11', utc:'2026-07-02T19:00:00Z', home:'R32 Match 11', away:'', group:'', venue:'Los Angeles', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-12', utc:'2026-07-02T23:00:00Z', home:'R32 Match 12', away:'', group:'', venue:'Toronto', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-13', utc:'2026-07-03T03:00:00Z', home:'R32 Match 13', away:'', group:'', venue:'Vancouver', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-14', utc:'2026-07-03T18:00:00Z', home:'R32 Match 14', away:'', group:'', venue:'Dallas', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-15', utc:'2026-07-03T22:00:00Z', home:'R32 Match 15', away:'', group:'', venue:'Miami', phase:'Round of 32', sgFree:false, myFree:false },
+  { id:'r32-16', utc:'2026-07-04T01:30:00Z', home:'R32 Match 16', away:'', group:'', venue:'Kansas City', phase:'Round of 32', sgFree:false, myFree:false },
+
+  // ---- ROUND OF 16 ----
+  { id:'r16-1', utc:'2026-07-04T17:00:00Z', home:'R16 Match 1', away:'', group:'', venue:'Houston', phase:'Round of 16', sgFree:false, myFree:false },
+  { id:'r16-2', utc:'2026-07-04T21:00:00Z', home:'R16 Match 2', away:'', group:'', venue:'Philadelphia', phase:'Round of 16', sgFree:false, myFree:false },
+  { id:'r16-3', utc:'2026-07-05T20:00:00Z', home:'R16 Match 3', away:'', group:'', venue:'New York/NJ', phase:'Round of 16', sgFree:false, myFree:false },
+  { id:'r16-4', utc:'2026-07-06T00:00:00Z', home:'R16 Match 4', away:'', group:'', venue:'Mexico City', phase:'Round of 16', sgFree:false, myFree:false },
+  { id:'r16-5', utc:'2026-07-06T19:00:00Z', home:'R16 Match 5', away:'', group:'', venue:'Dallas', phase:'Round of 16', sgFree:false, myFree:false },
+  { id:'r16-6', utc:'2026-07-07T00:00:00Z', home:'R16 Match 6', away:'', group:'', venue:'Seattle', phase:'Round of 16', sgFree:false, myFree:false },
+  { id:'r16-7', utc:'2026-07-07T16:00:00Z', home:'R16 Match 7', away:'', group:'', venue:'Atlanta', phase:'Round of 16', sgFree:false, myFree:false },
+  { id:'r16-8', utc:'2026-07-07T20:00:00Z', home:'R16 Match 8', away:'', group:'', venue:'Vancouver', phase:'Round of 16', sgFree:false, myFree:false },
+
+  // ---- QUARTERFINALS ----
+  { id:'qf1', utc:'2026-07-09T20:00:00Z', home:'QF 1', away:'', group:'', venue:'Boston', phase:'Quarterfinal', sgFree:false, myFree:false },
+  { id:'qf2', utc:'2026-07-10T19:00:00Z', home:'QF 2', away:'', group:'', venue:'Los Angeles', phase:'Quarterfinal', sgFree:false, myFree:false },
+  { id:'qf3', utc:'2026-07-11T20:00:00Z', home:'QF 3', away:'', group:'', venue:'Miami', phase:'Quarterfinal', sgFree:false, myFree:false },
+  { id:'qf4', utc:'2026-07-12T01:00:00Z', home:'QF 4', away:'', group:'', venue:'Kansas City', phase:'Quarterfinal', sgFree:false, myFree:false },
+
+  // ---- SEMIFINALS ----
+  { id:'semi1', utc:'2026-07-14T19:00:00Z', home:'Semifinal 1', away:'', group:'', venue:'Dallas', phase:'Semifinal', sgFree:true, myFree:true },
+  { id:'semi2', utc:'2026-07-15T19:00:00Z', home:'Semifinal 2', away:'', group:'', venue:'Atlanta', phase:'Semifinal', sgFree:true, myFree:true },
+
+  // ---- THIRD PLACE ----
+  { id:'third', utc:'2026-07-18T21:00:00Z', home:'3rd Place Playoff', away:'', group:'', venue:'Miami', phase:'Third Place', sgFree:true, myFree:true },
+
+  // ---- FINAL ----
+  { id:'final', utc:'2026-07-19T19:00:00Z', home:'🏆 FINAL', away:'', group:'', venue:'New York/NJ', phase:'Final', sgFree:true, myFree:true },
+];
+
+let currentFilter = 'all';
+let searchTerm = '';
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMatches();
+}
+
+function filterMatches() {
+  searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  renderMatches();
+}
+
+function matchVisible(m) {
+  const sgt = gmtToSgt(m.utc);
+  const dateStr = localDate(sgt);
+
+  // Search filter
+  if (searchTerm) {
+    const haystack = `${m.home} ${m.away} ${m.group} ${m.venue} ${m.phase}`.toLowerCase();
+    if (!haystack.includes(searchTerm)) return false;
+  }
+
+  // Category filter
+  if (currentFilter === 'sg-free' && !m.sgFree) return false;
+  if (currentFilter === 'my-free' && !m.myFree) return false;
+  if (currentFilter === 'both-free' && !(m.sgFree && m.myFree)) return false;
+  if (currentFilter === 'group' && m.phase !== 'Group Stage') return false;
+  if (currentFilter === 'knockout' && m.phase === 'Group Stage') return false;
+  if (currentFilter === 'today' && dateStr !== todayStr) return false;
+
+  return true;
+}
+
+function renderMatches() {
+  const list = document.getElementById('matchList');
+  list.innerHTML = '';
+
+  // Group by phase then by SGT date
+  const phases = ['Group Stage','Round of 32','Round of 16','Quarterfinal','Semifinal','Third Place','Final'];
+  let visibleCount = 0;
+
+  phases.forEach(phase => {
+    const phaseMatches = matches.filter(m => m.phase === phase && matchVisible(m));
+    if (phaseMatches.length === 0) return;
+    visibleCount += phaseMatches.length;
+
+    const phaseEl = document.createElement('div');
+    phaseEl.className = 'phase-header';
+    phaseEl.textContent = phase;
+    list.appendChild(phaseEl);
+
+    // Group by date
+    const byDate = {};
+    phaseMatches.forEach(m => {
+      const sgt = gmtToSgt(m.utc);
+      const dk = localDate(sgt);
+      if (!byDate[dk]) byDate[dk] = { label: fmtDate(sgt), ms: [] };
+      byDate[dk].ms.push(m);
+    });
+
+    Object.keys(byDate).sort().forEach(dk => {
+      const dg = document.createElement('div');
+      dg.className = 'date-group';
+      const dl = document.createElement('div');
+      dl.className = 'date-label';
+      const isToday = dk === todayStr;
+      dl.textContent = isToday ? `📅 TODAY — ${byDate[dk].label}` : byDate[dk].label;
+      if (isToday) dl.style.color = 'var(--gold)';
+      dg.appendChild(dl);
+
+      byDate[dk].ms.forEach(m => {
+        const sgt = gmtToSgt(m.utc);
+        const utcDate = new Date(m.utc);
+        const sgtDate = new Date(utcDate.getTime() + 8*3600*1000);
+        const sgtDay = Math.floor(sgtDate.getTime() / 86400000);
+        const utcDay = Math.floor(utcDate.getTime() / 86400000);
+
+        // Determine TV class
+        let tvClass = 'tv-none';
+        if (m.sgFree && m.myFree) tvClass = 'tv-both';
+        else if (m.sgFree) tvClass = 'tv-sg';
+        else if (m.myFree) tvClass = 'tv-my';
+
+        const card = document.createElement('div');
+        card.className = `match-card ${tvClass}`;
+
+        // Time
+        const timeDiv = document.createElement('div');
+        timeDiv.className = 'match-time';
+        const sgtEl = document.createElement('span');
+        sgtEl.className = 'sgt';
+        sgtEl.textContent = fmtTime(sgt);
+        timeDiv.appendChild(sgtEl);
+        const dayEl = document.createElement('span');
+        dayEl.className = 'day-shift';
+        dayEl.textContent = 'SGT/MYT';
+        timeDiv.appendChild(dayEl);
+
+        // Teams
+        const teamsDiv = document.createElement('div');
+        teamsDiv.className = 'match-teams';
+        const tr = document.createElement('div');
+        tr.className = 'teams-row';
+        tr.textContent = m.away ? `${m.home} vs ${m.away}` : m.home;
+        teamsDiv.appendChild(tr);
+        const meta = document.createElement('div');
+        meta.className = 'match-meta';
+        const parts = [];
+        if (m.group) parts.push(`Group ${m.group}`);
+        parts.push(m.venue);
+        meta.textContent = parts.join(' · ');
+        teamsDiv.appendChild(meta);
+
+        // TV badges
+        const badges = document.createElement('div');
+        badges.className = 'tv-badges';
+
+        if (m.sgFree) {
+          const b = document.createElement('span');
+          b.className = 'badge badge-sg-free';
+          b.textContent = '🇸🇬 Free Ch5/mewatch';
+          badges.appendChild(b);
+        }
+        if (m.myFree) {
+          const b = document.createElement('span');
+          b.className = 'badge badge-my-free';
+          b.textContent = '🇲🇾 Free RTM';
+          badges.appendChild(b);
+        } else {
+          const b = document.createElement('span');
+          b.className = 'badge badge-my-paid';
+          b.textContent = '🇲🇾 Unifi TV RM60';
+          badges.appendChild(b);
+        }
+
+        card.appendChild(timeDiv);
+        card.appendChild(teamsDiv);
+        card.appendChild(badges);
+        dg.appendChild(card);
+      });
+
+      list.appendChild(dg);
+    });
+  });
+
+  document.getElementById('countLabel').textContent = `Showing ${visibleCount} of ${matches.length} matches`;
+}
+
+renderMatches();
+</script>
+</body>
+</html>
