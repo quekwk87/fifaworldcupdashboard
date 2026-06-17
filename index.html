@@ -380,13 +380,81 @@
     margin-bottom: 8px;
   }
 
+  /* Small screens & landscape phones */
   @media (max-width: 600px) {
     h1 { font-size: 1.7rem; }
     .match-card { flex-wrap: wrap; }
-    .tv-badges { min-width: auto; flex-direction: row; }
+    /* Push badges to their own row so teams always get full width */
+    .tv-badges {
+      width: 100%;
+      min-width: 0;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 4px;
+    }
     .stats-bar { gap: 10px; }
     .tab-btn { padding: 12px 12px; font-size: 0.85rem; }
     .access-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Portrait phones (≤480px) */
+  @media (max-width: 480px) {
+    .container { padding: 10px 10px 40px; }
+
+    header { padding: 20px 0 14px; }
+    .trophy { font-size: 28px; margin-bottom: 6px; }
+    h1 { font-size: 1.35rem; }
+    .subtitle { font-size: 11px; }
+
+    /* Stats: 2-column grid */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 10px 12px;
+    }
+    .stat { background: rgba(0,0,0,0.15); border-radius: 6px; padding: 8px 6px; }
+    .stat-num { font-size: 1.35rem; }
+    .stat-label { font-size: 9px; }
+
+    /* Legend: tighter */
+    .legend { gap: 8px; padding: 10px 12px; }
+    .legend-item { font-size: 11px; }
+
+    /* Tabs */
+    .tab-btn { padding: 10px 8px; font-size: 0.75rem; letter-spacing: 0.03em; }
+
+    /* Filters */
+    .filter-btn { padding: 5px 10px; font-size: 11px; }
+
+    /* Match cards — time+teams on top, badges full-width below */
+    .match-card { padding: 10px 10px 10px 14px; gap: 6px; }
+    .match-time { min-width: 52px; }
+    .match-time .sgt { font-size: 1.1rem; }
+    .match-time .day-shift { font-size: 9px; }
+    .teams-row { font-size: 1rem; }
+    .match-meta { font-size: 10px; }
+    .tv-badges {
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      min-width: 0;
+      gap: 4px;
+    }
+    .badge { font-size: 10px; padding: 2px 6px; }
+
+    /* How to Watch */
+    .platform-card { padding: 12px 12px; }
+    .platform-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .platform-name { font-size: 1rem; }
+    .price-tag { font-size: 11px; }
+    .platform-desc { font-size: 12px; }
+    .note-box { font-size: 12px; padding: 10px 12px; }
+    .access-label { font-size: 9px; }
+    .access-value { font-size: 12px; }
+    .watch-section h2 { font-size: 1.2rem; }
   }
 </style>
 </head>
