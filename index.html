@@ -384,7 +384,15 @@
   @media (max-width: 600px) {
     h1 { font-size: 1.7rem; }
     .match-card { flex-wrap: wrap; }
-    .tv-badges { min-width: auto; flex-direction: row; flex-wrap: wrap; }
+    /* Push badges to their own row so teams always get full width */
+    .tv-badges {
+      width: 100%;
+      min-width: 0;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 4px;
+    }
     .stats-bar { gap: 10px; }
     .tab-btn { padding: 12px 12px; font-size: 0.85rem; }
     .access-grid { grid-template-columns: 1fr; }
