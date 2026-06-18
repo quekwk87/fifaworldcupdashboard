@@ -85,34 +85,6 @@
     text-transform: uppercase;
   }
 
-  /* LEGEND */
-  .legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-    background: var(--pitch-mid);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 14px;
-  }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--text-dim);
-  }
-  .dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .dot-sg { background: var(--sg-red); }
-  .dot-my { background: var(--my-yellow); }
-  .dot-both { background: var(--both); }
-  .dot-all { background: var(--grass); }
-
   /* FILTERS */
   .filters {
     display: flex;
@@ -330,28 +302,6 @@
   .note-box { background: rgba(240,192,64,0.07); border: 1px solid rgba(240,192,64,0.2); border-radius: 8px; padding: 12px 14px; font-size: 13px; color: #fde68a; line-height: 1.5; margin-bottom: 16px; }
   .note-box strong { color: var(--gold); }
 
-  /* STATS BAR */
-  .stats-bar {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    padding: 12px 16px;
-    background: rgba(46,204,113,0.06);
-    border: 1px solid rgba(46,204,113,0.15);
-    border-radius: 8px;
-  }
-  .stat { text-align: center; }
-  .stat-num {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--gold);
-    display: block;
-    line-height: 1;
-  }
-  .stat-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
-
   /* SEARCH */
   .search-row {
     display: flex;
@@ -373,12 +323,50 @@
   .search-input:focus { border-color: var(--grass); }
   .search-input::placeholder { color: var(--text-dim); }
 
-  .count-label {
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 12px;
-    margin-bottom: 8px;
+  /* SCORE DISPLAY */
+  .status-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    line-height: 1.2;
   }
+  .status-ft { color: var(--text-dim); }
+  .status-live { color: var(--grass); }
+  .status-ht { color: var(--my-yellow); }
+  .match-score {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--gold);
+    display: block;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+  .live-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--grass);
+    border-radius: 50%;
+    margin-right: 3px;
+    vertical-align: middle;
+    animation: blink 1s ease-in-out infinite;
+  }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+  /* FILTERS FOOTER — sticky bar below the match list */
+  .filters-footer {
+    position: sticky;
+    bottom: 0;
+    background: var(--pitch);
+    border-top: 1px solid var(--border);
+    padding: 10px 0 14px;
+    z-index: 10;
+    margin-top: 12px;
+  }
+  .filters-footer .search-row { margin-bottom: 10px; }
+  .filters-footer .filters { margin-bottom: 0; }
 
   /* Small screens & landscape phones */
   @media (max-width: 600px) {
@@ -406,21 +394,6 @@
     .trophy { font-size: 28px; margin-bottom: 6px; }
     h1 { font-size: 1.35rem; }
     .subtitle { font-size: 11px; }
-
-    /* Stats: 2-column grid */
-    .stats-bar {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      padding: 10px 12px;
-    }
-    .stat { background: rgba(0,0,0,0.15); border-radius: 6px; padding: 8px 6px; }
-    .stat-num { font-size: 1.35rem; }
-    .stat-label { font-size: 9px; }
-
-    /* Legend: tighter */
-    .legend { gap: 8px; padding: 10px 12px; }
-    .legend-item { font-size: 11px; }
 
     /* Tabs */
     .tab-btn { padding: 10px 8px; font-size: 0.75rem; letter-spacing: 0.03em; }
@@ -474,49 +447,22 @@
 
   <div id="tab-schedule" class="tab-panel active">
 
-  <div class="stats-bar">
-    <div class="stat">
-      <span class="stat-num">104</span>
-      <span class="stat-label">Total Matches</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num" style="color:#fca5a5">28</span>
-      <span class="stat-label">SG Free (Ch5/mewatch)</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num" style="color:#fcd34d">~80+</span>
-      <span class="stat-label">MY Free (RTM)</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num" style="color:#c4b5fd">104</span>
-      <span class="stat-label">MY Paid (Unifi TV)</span>
-    </div>
-  </div>
-
-  <div class="legend">
-    <div class="legend-item"><span class="dot dot-both"></span> Free on both SG & MY</div>
-    <div class="legend-item"><span class="dot dot-sg"></span> Free on SG only</div>
-    <div class="legend-item"><span class="dot dot-my"></span> Free on MY only (RTM)</div>
-    <div class="legend-item"><span class="dot dot-all" style="opacity:0.5"></span> Paid only (SG: mewatch $118 / MY: Unifi TV RM60)</div>
-  </div>
-
-  <div class="search-row">
-    <input type="text" class="search-input" id="searchInput" placeholder="Search team, group, venue…" oninput="filterMatches()">
-  </div>
-
-  <div class="filters" id="filters">
-    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
-    <button class="filter-btn" onclick="setFilter('sg-free', this)">🇸🇬 Free SG</button>
-    <button class="filter-btn" onclick="setFilter('my-free', this)">🇲🇾 Free MY</button>
-    <button class="filter-btn" onclick="setFilter('both-free', this)">Free Both</button>
-    <button class="filter-btn" onclick="setFilter('group', this)">Group Stage</button>
-    <button class="filter-btn" onclick="setFilter('knockout', this)">Knockout</button>
-    <button class="filter-btn" onclick="setFilter('today', this)">Today</button>
-  </div>
-
-  <div class="count-label" id="countLabel"></div>
-
   <div id="matchList"></div>
+
+  <div class="filters-footer">
+    <div class="search-row">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search team, group, venue…" oninput="filterMatches()">
+    </div>
+    <div class="filters" id="filters">
+      <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+      <button class="filter-btn" onclick="setFilter('sg-free', this)">🇸🇬 Free SG</button>
+      <button class="filter-btn" onclick="setFilter('my-free', this)">🇲🇾 Free MY</button>
+      <button class="filter-btn" onclick="setFilter('both-free', this)">Free Both</button>
+      <button class="filter-btn" onclick="setFilter('group', this)">Group Stage</button>
+      <button class="filter-btn" onclick="setFilter('knockout', this)">Knockout</button>
+      <button class="filter-btn" onclick="setFilter('today', this)">Today</button>
+    </div>
+  </div>
 
   </div><!-- end tab-schedule -->
 
@@ -630,6 +576,69 @@
 </div><!-- end container -->
 
 <script>
+// ============================================================
+// Live scores — football-data.org free tier
+// Register free at https://www.football-data.org/client/register
+// Then paste your key below.
+// ============================================================
+const FD_API_KEY = ''; // ← paste your football-data.org API key here
+
+const resultsMap = new Map();
+
+const TEAM_NORM_MAP = {
+  'united states': 'usa',
+  'korea republic': 'southkorea',
+  'cote divoire': 'ivorycoast',
+  'ivory coast': 'ivorycoast',
+  'bosnia and herzegovina': 'bosniaherz',
+  'democratic republic of the congo': 'drcongo',
+  'dr congo': 'drcongo',
+  'turkey': 'turkiye',
+  'cape verde': 'capeverde',
+  'new zealand': 'newzealand',
+  'south africa': 'southafrica',
+  'south korea': 'southkorea',
+  'saudi arabia': 'saudiarabia',
+};
+
+function normTeam(name) {
+  const s = name.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z ]/g, '').trim();
+  return (TEAM_NORM_MAP[s] || s).replace(/\s+/g, '');
+}
+
+function resultKey(utc, home) {
+  return `${utc}__${normTeam(home)}`;
+}
+
+async function fetchResults() {
+  if (!FD_API_KEY) return;
+  try {
+    const res = await fetch(
+      'https://api.football-data.org/v4/competitions/WC/matches?season=2026',
+      { headers: { 'X-Auth-Token': FD_API_KEY } }
+    );
+    if (!res.ok) return;
+    const data = await res.json();
+    data.matches.forEach(m => {
+      if (!['FINISHED', 'IN_PLAY', 'PAUSED'].includes(m.status)) return;
+      const sc = m.score;
+      const homeScore = sc.fullTime?.home ?? sc.regularTime?.home ?? null;
+      const awayScore = sc.fullTime?.away ?? sc.regularTime?.away ?? null;
+      if (homeScore === null) return;
+      resultsMap.set(resultKey(m.utcDate, m.homeTeam.name), {
+        status: m.status,
+        homeScore,
+        awayScore,
+      });
+    });
+    renderMatches();
+  } catch (e) {
+    console.warn('Could not load scores:', e);
+  }
+}
+
 // Tab switching
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -935,17 +944,37 @@ function renderMatches() {
         const card = document.createElement('div');
         card.className = `match-card ${tvClass}`;
 
-        // Time
+        // Time / Score
         const timeDiv = document.createElement('div');
         timeDiv.className = 'match-time';
-        const sgtEl = document.createElement('span');
-        sgtEl.className = 'sgt';
-        sgtEl.textContent = fmtTime(sgt);
-        timeDiv.appendChild(sgtEl);
-        const dayEl = document.createElement('span');
-        dayEl.className = 'day-shift';
-        dayEl.textContent = 'SGT/MYT';
-        timeDiv.appendChild(dayEl);
+        const result = resultsMap.get(resultKey(m.utc, m.home));
+        if (result) {
+          const statusEl = document.createElement('span');
+          if (result.status === 'FINISHED') {
+            statusEl.className = 'status-label status-ft';
+            statusEl.textContent = 'FT';
+          } else if (result.status === 'PAUSED') {
+            statusEl.className = 'status-label status-ht';
+            statusEl.textContent = 'HT';
+          } else {
+            statusEl.className = 'status-label status-live';
+            statusEl.innerHTML = '<span class="live-dot"></span>LIVE';
+          }
+          timeDiv.appendChild(statusEl);
+          const scoreEl = document.createElement('span');
+          scoreEl.className = 'match-score';
+          scoreEl.textContent = `${result.homeScore} – ${result.awayScore}`;
+          timeDiv.appendChild(scoreEl);
+        } else {
+          const sgtEl = document.createElement('span');
+          sgtEl.className = 'sgt';
+          sgtEl.textContent = fmtTime(sgt);
+          timeDiv.appendChild(sgtEl);
+          const dayEl = document.createElement('span');
+          dayEl.className = 'day-shift';
+          dayEl.textContent = 'SGT/MYT';
+          timeDiv.appendChild(dayEl);
+        }
 
         // Teams
         const teamsDiv = document.createElement('div');
@@ -994,12 +1023,12 @@ function renderMatches() {
     });
   });
 
-  document.getElementById('countLabel').textContent = `Showing ${visibleCount} of ${matches.length} matches`;
 }
 
-// Default to Today filter on load
+// Default to Today filter on load, then fetch live scores
 const todayBtn = document.querySelector('.filter-btn:last-child');
 setFilter('today', todayBtn);
+fetchResults();
 </script>
 </body>
 </html>
