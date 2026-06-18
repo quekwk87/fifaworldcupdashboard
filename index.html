@@ -323,6 +323,38 @@
   .search-input:focus { border-color: var(--grass); }
   .search-input::placeholder { color: var(--text-dim); }
 
+  /* SCORE DISPLAY */
+  .status-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    line-height: 1.2;
+  }
+  .status-ft { color: var(--text-dim); }
+  .status-live { color: var(--grass); }
+  .status-ht { color: var(--my-yellow); }
+  .match-score {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--gold);
+    display: block;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+  .live-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--grass);
+    border-radius: 50%;
+    margin-right: 3px;
+    vertical-align: middle;
+    animation: blink 1s ease-in-out infinite;
+  }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
   /* FILTERS FOOTER — sticky bar below the match list */
   .filters-footer {
     position: sticky;
@@ -544,6 +576,69 @@
 </div><!-- end container -->
 
 <script>
+// ============================================================
+// Live scores — football-data.org free tier
+// Register free at https://www.football-data.org/client/register
+// Then paste your key below.
+// ============================================================
+const FD_API_KEY = ''; // ← paste your football-data.org API key here
+
+const resultsMap = new Map();
+
+const TEAM_NORM_MAP = {
+  'united states': 'usa',
+  'korea republic': 'southkorea',
+  'cote divoire': 'ivorycoast',
+  'ivory coast': 'ivorycoast',
+  'bosnia and herzegovina': 'bosniaherz',
+  'democratic republic of the congo': 'drcongo',
+  'dr congo': 'drcongo',
+  'turkey': 'turkiye',
+  'cape verde': 'capeverde',
+  'new zealand': 'newzealand',
+  'south africa': 'southafrica',
+  'south korea': 'southkorea',
+  'saudi arabia': 'saudiarabia',
+};
+
+function normTeam(name) {
+  const s = name.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z ]/g, '').trim();
+  return (TEAM_NORM_MAP[s] || s).replace(/\s+/g, '');
+}
+
+function resultKey(utc, home) {
+  return `${utc}__${normTeam(home)}`;
+}
+
+async function fetchResults() {
+  if (!FD_API_KEY) return;
+  try {
+    const res = await fetch(
+      'https://api.football-data.org/v4/competitions/WC/matches?season=2026',
+      { headers: { 'X-Auth-Token': FD_API_KEY } }
+    );
+    if (!res.ok) return;
+    const data = await res.json();
+    data.matches.forEach(m => {
+      if (!['FINISHED', 'IN_PLAY', 'PAUSED'].includes(m.status)) return;
+      const sc = m.score;
+      const homeScore = sc.fullTime?.home ?? sc.regularTime?.home ?? null;
+      const awayScore = sc.fullTime?.away ?? sc.regularTime?.away ?? null;
+      if (homeScore === null) return;
+      resultsMap.set(resultKey(m.utcDate, m.homeTeam.name), {
+        status: m.status,
+        homeScore,
+        awayScore,
+      });
+    });
+    renderMatches();
+  } catch (e) {
+    console.warn('Could not load scores:', e);
+  }
+}
+
 // Tab switching
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -849,17 +944,37 @@ function renderMatches() {
         const card = document.createElement('div');
         card.className = `match-card ${tvClass}`;
 
-        // Time
+        // Time / Score
         const timeDiv = document.createElement('div');
         timeDiv.className = 'match-time';
-        const sgtEl = document.createElement('span');
-        sgtEl.className = 'sgt';
-        sgtEl.textContent = fmtTime(sgt);
-        timeDiv.appendChild(sgtEl);
-        const dayEl = document.createElement('span');
-        dayEl.className = 'day-shift';
-        dayEl.textContent = 'SGT/MYT';
-        timeDiv.appendChild(dayEl);
+        const result = resultsMap.get(resultKey(m.utc, m.home));
+        if (result) {
+          const statusEl = document.createElement('span');
+          if (result.status === 'FINISHED') {
+            statusEl.className = 'status-label status-ft';
+            statusEl.textContent = 'FT';
+          } else if (result.status === 'PAUSED') {
+            statusEl.className = 'status-label status-ht';
+            statusEl.textContent = 'HT';
+          } else {
+            statusEl.className = 'status-label status-live';
+            statusEl.innerHTML = '<span class="live-dot"></span>LIVE';
+          }
+          timeDiv.appendChild(statusEl);
+          const scoreEl = document.createElement('span');
+          scoreEl.className = 'match-score';
+          scoreEl.textContent = `${result.homeScore} – ${result.awayScore}`;
+          timeDiv.appendChild(scoreEl);
+        } else {
+          const sgtEl = document.createElement('span');
+          sgtEl.className = 'sgt';
+          sgtEl.textContent = fmtTime(sgt);
+          timeDiv.appendChild(sgtEl);
+          const dayEl = document.createElement('span');
+          dayEl.className = 'day-shift';
+          dayEl.textContent = 'SGT/MYT';
+          timeDiv.appendChild(dayEl);
+        }
 
         // Teams
         const teamsDiv = document.createElement('div');
@@ -910,9 +1025,10 @@ function renderMatches() {
 
 }
 
-// Default to Today filter on load
+// Default to Today filter on load, then fetch live scores
 const todayBtn = document.querySelector('.filter-btn:last-child');
 setFilter('today', todayBtn);
+fetchResults();
 </script>
 </body>
 </html>
