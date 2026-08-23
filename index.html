@@ -798,8 +798,9 @@ async function fetchWeekMatches() {
   const to = isoDate(end);
 
   try {
+    const apiEndpoint = `https://api.football-data.org/v4/competitions/PL/matches?dateFrom=${from}&dateTo=${to}`;
     const res = await fetch(
-      `https://api.football-data.org/v4/competitions/PL/matches?dateFrom=${from}&dateTo=${to}`,
+      `https://corsproxy.io/?url=${encodeURIComponent(apiEndpoint)}`,
       { headers: { 'X-Auth-Token': apiKey } }
     );
     if (!res.ok) {
