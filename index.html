@@ -471,6 +471,71 @@
     .access-value { font-size: 12px; }
     .watch-section h2 { font-size: 1.2rem; }
   }
+
+  /* API key entry panel */
+  .key-panel {
+    background: var(--pitch-mid);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .key-panel p { margin: 0 0 10px; }
+  .key-panel a { color: var(--grass); }
+  .key-row { display: flex; gap: 8px; align-items: center; }
+  .key-input {
+    flex: 1;
+    min-width: 0;
+    background: var(--pitch-dark);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 13px;
+    padding: 8px 10px;
+    outline: none;
+    font-family: monospace;
+  }
+  .key-input:focus { border-color: var(--grass); }
+  .key-save-btn {
+    background: var(--grass);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 8px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .key-save-btn:hover { opacity: 0.85; }
+  .key-saved-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: var(--pitch-mid);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+  .key-saved-bar span { color: var(--grass); }
+  .key-clear-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-dim);
+    font-size: 11px;
+    padding: 3px 8px;
+    cursor: pointer;
+  }
+  .key-clear-btn:hover { border-color: #e55; color: var(--text); }
 </style>
 </head>
 <body>
@@ -481,6 +546,19 @@
     <h1>Premier League</h1>
     <div class="subtitle">All times in SGT / MYT (UTC+8) · 2026/27 Season</div>
   </header>
+
+  <div id="keyPanel" class="key-panel">
+    <p>To load fixtures, enter your free <a href="https://www.football-data.org/client/register" target="_blank">football-data.org API key</a>. It is saved in your browser — you only need to enter it once.</p>
+    <div class="key-row">
+      <input type="text" class="key-input" id="keyInput" placeholder="Paste API key here…" onkeydown="if(event.key==='Enter')saveKey()">
+      <button class="key-save-btn" onclick="saveKey()">Save</button>
+    </div>
+  </div>
+
+  <div id="keySavedBar" class="key-saved-bar" style="display:none">
+    <span>&#10003; API key saved</span>
+    <button class="key-clear-btn" onclick="clearKey()">Change key</button>
+  </div>
 
   <div class="week-nav">
     <button class="week-btn" onclick="changeWeek(-1)">‹ Prev</button>
@@ -614,7 +692,38 @@
 // Register free at https://www.football-data.org/client/register
 // Then paste your key below.
 // ============================================================
-const FD_API_KEY = '0b88f65c9bb843d1aa652c79256bb280'; // ← paste your football-data.org API key here
+const FD_API_KEY = ''; // fallback — set here or use the in-page key panel
+
+function getApiKey() {
+  try { return FD_API_KEY || localStorage.getItem('fd_api_key') || ''; } catch(e) { return FD_API_KEY; }
+}
+
+function saveKey() {
+  const val = (document.getElementById('keyInput').value || '').trim();
+  if (!val) return;
+  try { localStorage.setItem('fd_api_key', val); } catch(e) {}
+  document.getElementById('keyPanel').style.display = 'none';
+  document.getElementById('keySavedBar').style.display = 'flex';
+  fetchWeekMatches();
+}
+
+function clearKey() {
+  try { localStorage.removeItem('fd_api_key'); } catch(e) {}
+  document.getElementById('keyInput').value = '';
+  document.getElementById('keySavedBar').style.display = 'none';
+  document.getElementById('keyPanel').style.display = '';
+}
+
+function initKeyPanel() {
+  const key = getApiKey();
+  if (key) {
+    document.getElementById('keyPanel').style.display = 'none';
+    document.getElementById('keySavedBar').style.display = 'flex';
+  } else {
+    document.getElementById('keyPanel').style.display = '';
+    document.getElementById('keySavedBar').style.display = 'none';
+  }
+}
 
 let weekOffset = 0;
 let allMatches = [];
@@ -678,8 +787,9 @@ async function fetchWeekMatches() {
   list.innerHTML = '<div class="loading-msg">Loading fixtures…</div>';
   updateWeekLabel();
 
-  if (!FD_API_KEY) {
-    list.innerHTML = `<div class="api-notice">⚠️ To see live fixtures and results, add your free <a href="https://www.football-data.org/client/register" target="_blank">football-data.org API key</a>.<br>Open this file and set <code>FD_API_KEY</code> near the top of the script.</div>`;
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    list.innerHTML = '<div class="loading-msg">Enter your API key above to load fixtures.</div>';
     return;
   }
 
@@ -690,7 +800,7 @@ async function fetchWeekMatches() {
   try {
     const res = await fetch(
       `https://api.football-data.org/v4/competitions/PL/matches?dateFrom=${from}&dateTo=${to}`,
-      { headers: { 'X-Auth-Token': FD_API_KEY } }
+      { headers: { 'X-Auth-Token': apiKey } }
     );
     if (!res.ok) {
       list.innerHTML = `<div class="api-notice">API error ${res.status} — check your API key.</div>`;
@@ -836,6 +946,7 @@ function renderMatches() {
   });
 }
 
+initKeyPanel();
 fetchWeekMatches();
 </script>
 </body>
