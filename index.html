@@ -536,6 +536,94 @@
     cursor: pointer;
   }
   .key-clear-btn:hover { border-color: #e55; color: var(--text); }
+
+  /* Highlights button on finished match cards */
+  .highlights-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-dim);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .highlights-btn:hover { border-color: var(--grass); color: var(--text); }
+  .highlights-btn:disabled { opacity: 0.5; cursor: default; }
+
+  /* YouTube modal */
+  .yt-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+  .yt-modal.open { display: flex; }
+  .yt-modal-inner {
+    width: 100%;
+    max-width: 760px;
+    background: var(--pitch-dark);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .yt-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .yt-modal-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+  .yt-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 2px 6px;
+  }
+  .yt-close-btn:hover { color: var(--text); }
+  .yt-video-wrap {
+    position: relative;
+    padding-bottom: 56.25%;
+    background: #000;
+  }
+  .yt-video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .yt-status {
+    padding: 28px 20px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .yt-status a { color: var(--grass); }
+  .yt-status p { margin: 0 0 6px; }
+  .yt-key-row { display: flex; gap: 8px; margin-top: 12px; justify-content: center; }
 </style>
 </head>
 <body>
@@ -685,6 +773,18 @@
 
 </div><!-- end container -->
 
+<div id="ytModal" class="yt-modal" onclick="if(event.target===this)closeYtModal()">
+  <div class="yt-modal-inner">
+    <div class="yt-modal-header">
+      <span class="yt-modal-title" id="ytModalTitle">Highlights</span>
+      <button class="yt-close-btn" onclick="closeYtModal()">&#x2715;</button>
+    </div>
+    <div class="yt-video-wrap" id="ytVideoWrap" style="display:none">
+      <iframe id="ytIframe" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    </div>
+    <div class="yt-status" id="ytStatus"></div>
+  </div>
+</div>
 
 <script>
 // ============================================================
@@ -722,6 +822,89 @@ function initKeyPanel() {
   } else {
     document.getElementById('keyPanel').style.display = '';
     document.getElementById('keySavedBar').style.display = 'none';
+  }
+}
+
+// ---- YouTube highlights ----
+const PL_CHANNEL_ID = 'UCqjwF8rxRsotnojmQT-Yybg'; // Premier League official channel
+const ytCache = {};
+
+function getYtKey() {
+  try { return localStorage.getItem('yt_api_key') || ''; } catch(e) { return ''; }
+}
+
+function saveYtKey() {
+  const val = (document.getElementById('ytKeyInput').value || '').trim();
+  if (!val) return;
+  try { localStorage.setItem('yt_api_key', val); } catch(e) {}
+  const pending = document.getElementById('ytModal').dataset.pending;
+  if (pending) {
+    const parts = pending.split('||');
+    loadHighlight(parts[0], parts[1], parts[2]);
+  }
+}
+
+function showYtModal(title, matchKey, home, away) {
+  document.getElementById('ytModalTitle').textContent = title;
+  document.getElementById('ytModal').dataset.pending = `${matchKey}||${home}||${away}`;
+  document.getElementById('ytModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeYtModal() {
+  document.getElementById('ytModal').classList.remove('open');
+  document.getElementById('ytIframe').src = '';
+  document.getElementById('ytVideoWrap').style.display = 'none';
+  document.getElementById('ytStatus').innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+function showYtVideo(videoId) {
+  document.getElementById('ytStatus').innerHTML = '';
+  document.getElementById('ytVideoWrap').style.display = '';
+  document.getElementById('ytIframe').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+}
+
+async function loadHighlight(matchKey, homeTeam, awayTeam) {
+  const title = `${homeTeam} vs ${awayTeam} Highlights`;
+  showYtModal(title, matchKey, homeTeam, awayTeam);
+
+  const ytKey = getYtKey();
+  if (!ytKey) {
+    document.getElementById('ytStatus').innerHTML = `
+      <p>To show highlights, enter your free <a href="https://console.cloud.google.com/" target="_blank">YouTube Data API v3</a> key.</p>
+      <p style="font-size:11px">Google Cloud Console &#8594; Enable <strong>YouTube Data API v3</strong> &#8594; Create API Key</p>
+      <div class="yt-key-row">
+        <input type="text" class="key-input" id="ytKeyInput" placeholder="Paste YouTube API key…" style="max-width:260px" onkeydown="if(event.key==='Enter')saveYtKey()">
+        <button class="key-save-btn" onclick="saveYtKey()">Save</button>
+      </div>`;
+    return;
+  }
+
+  if (ytCache[matchKey]) { showYtVideo(ytCache[matchKey]); return; }
+
+  document.getElementById('ytVideoWrap').style.display = 'none';
+  document.getElementById('ytStatus').textContent = 'Searching for highlights…';
+
+  try {
+    const q = encodeURIComponent(`${homeTeam} ${awayTeam} highlights`);
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${PL_CHANNEL_ID}&q=${q}&type=video&maxResults=1&order=relevance&key=${ytKey}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.error) {
+      document.getElementById('ytStatus').textContent = `YouTube API error: ${data.error.message}`;
+      return;
+    }
+    if (!data.items || data.items.length === 0) {
+      document.getElementById('ytStatus').textContent = 'No highlights found yet — check back after the match.';
+      return;
+    }
+    const videoId = data.items[0].id.videoId;
+    ytCache[matchKey] = videoId;
+    showYtVideo(videoId);
+  } catch(e) {
+    document.getElementById('ytStatus').textContent = 'Could not load highlights — check console for details.';
+    console.warn(e);
   }
 }
 
@@ -937,6 +1120,15 @@ function renderMatches() {
       if (m.venue) parts.push(m.venue);
       meta.textContent = parts.join(' · ');
       teamsDiv.appendChild(meta);
+
+      if (isFinished) {
+        const hlBtn = document.createElement('button');
+        hlBtn.className = 'highlights-btn';
+        hlBtn.innerHTML = '&#9654; Highlights';
+        const matchKey = `${m.matchday}-${m.homeTeam.id}-${m.awayTeam.id}`;
+        hlBtn.onclick = () => loadHighlight(matchKey, m.homeTeam.name, m.awayTeam.name);
+        meta.appendChild(hlBtn);
+      }
 
       card.appendChild(timeDiv);
       card.appendChild(teamsDiv);
