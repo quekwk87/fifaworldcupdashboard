@@ -536,6 +536,18 @@
     cursor: pointer;
   }
   .key-clear-btn:hover { border-color: #e55; color: var(--text); }
+  .link-btn {
+    background: transparent; border: none; color: var(--grass);
+    font-size: 13px; cursor: pointer; padding: 0; text-decoration: underline;
+  }
+  .worker-code {
+    background: var(--pitch-dark); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text-dim); font-family: monospace; font-size: 11px;
+    line-height: 1.6; margin: 8px 0; overflow-x: auto; padding: 10px 12px;
+    white-space: pre;
+  }
+  .setup-steps { margin: 8px 0 10px 16px; padding: 0; font-size: 12px; line-height: 1.9; }
+  .setup-steps code { background: var(--pitch-dark); padding: 1px 5px; border-radius: 3px; color: var(--gold); font-size: 11px; }
 
   /* Highlights button on finished match cards */
   .highlights-btn {
@@ -636,16 +648,41 @@
   </header>
 
   <div id="keyPanel" class="key-panel">
-    <p>To load fixtures, enter your free <a href="https://www.football-data.org/client/register" target="_blank">football-data.org API key</a>. It is saved in your browser — you only need to enter it once.</p>
-    <div class="key-row">
-      <input type="text" class="key-input" id="keyInput" placeholder="Paste API key here…" onkeydown="if(event.key==='Enter')saveKey()">
-      <button class="key-save-btn" onclick="saveKey()">Save</button>
+    <p>Fixtures need a free Cloudflare Worker proxy to work around browser security restrictions.
+    <button class="link-btn" onclick="document.getElementById('setupGuide').hidden=!document.getElementById('setupGuide').hidden">How to set up (2 min) &#9660;</button></p>
+    <div id="setupGuide" hidden>
+      <ol class="setup-steps">
+        <li>Sign up free at <a href="https://workers.cloudflare.com" target="_blank">workers.cloudflare.com</a></li>
+        <li>Create a new Worker and paste the code below into the editor</li>
+        <li>Go to <strong>Settings → Variables</strong> and add a variable:<br>Name: <code>FD_API_KEY</code> &nbsp; Value: your football-data.org key (mark as secret)</li>
+        <li>Click <strong>Deploy</strong>, then copy the <code>*.workers.dev</code> URL</li>
+        <li>Paste the URL into the box below</li>
+      </ol>
+      <pre class="worker-code">export default {
+  async fetch(request, env) {
+    if (request.method === 'OPTIONS')
+      return new Response(null, { headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, OPTIONS' } });
+    const { searchParams } = new URL(request.url);
+    const res = await fetch(
+      `https://api.football-data.org/v4/competitions/PL/matches?dateFrom=${searchParams.get('dateFrom')}&dateTo=${searchParams.get('dateTo')}`,
+      { headers: { 'X-Auth-Token': env.FD_API_KEY } }
+    );
+    return new Response(await res.text(), { status: res.status,
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
+  }
+};</pre>
+    </div>
+    <div class="key-row" style="margin-top:10px">
+      <input type="text" class="key-input" id="proxyUrlInput" placeholder="https://your-worker.workers.dev" onkeydown="if(event.key==='Enter')saveProxyUrl()">
+      <button class="key-save-btn" onclick="saveProxyUrl()">Save</button>
     </div>
   </div>
 
   <div id="keySavedBar" class="key-saved-bar" style="display:none">
-    <span>&#10003; API key saved</span>
-    <button class="key-clear-btn" onclick="clearKey()">Change key</button>
+    <span>&#10003; Proxy connected</span>
+    <button class="key-clear-btn" onclick="clearProxyUrl()">Change</button>
   </div>
 
   <div class="week-nav">
@@ -792,31 +829,28 @@
 // Register free at https://www.football-data.org/client/register
 // Then paste your key below.
 // ============================================================
-const FD_API_KEY = ''; // fallback — set here or use the in-page key panel
-
-function getApiKey() {
-  try { return FD_API_KEY || localStorage.getItem('fd_api_key') || ''; } catch(e) { return FD_API_KEY; }
+function getProxyUrl() {
+  try { return localStorage.getItem('pl_proxy_url') || ''; } catch(e) { return ''; }
 }
 
-function saveKey() {
-  const val = (document.getElementById('keyInput').value || '').trim();
+function saveProxyUrl() {
+  const val = (document.getElementById('proxyUrlInput').value || '').trim().replace(/\/$/, '');
   if (!val) return;
-  try { localStorage.setItem('fd_api_key', val); } catch(e) {}
+  try { localStorage.setItem('pl_proxy_url', val); } catch(e) {}
   document.getElementById('keyPanel').style.display = 'none';
   document.getElementById('keySavedBar').style.display = 'flex';
   fetchWeekMatches();
 }
 
-function clearKey() {
-  try { localStorage.removeItem('fd_api_key'); } catch(e) {}
-  document.getElementById('keyInput').value = '';
+function clearProxyUrl() {
+  try { localStorage.removeItem('pl_proxy_url'); } catch(e) {}
+  document.getElementById('proxyUrlInput').value = '';
   document.getElementById('keySavedBar').style.display = 'none';
   document.getElementById('keyPanel').style.display = '';
 }
 
 function initKeyPanel() {
-  const key = getApiKey();
-  if (key) {
+  if (getProxyUrl()) {
     document.getElementById('keyPanel').style.display = 'none';
     document.getElementById('keySavedBar').style.display = 'flex';
   } else {
@@ -970,9 +1004,9 @@ async function fetchWeekMatches() {
   list.innerHTML = '<div class="loading-msg">Loading fixtures…</div>';
   updateWeekLabel();
 
-  const apiKey = getApiKey();
-  if (!apiKey) {
-    list.innerHTML = '<div class="loading-msg">Enter your API key above to load fixtures.</div>';
+  const proxyUrl = getProxyUrl();
+  if (!proxyUrl) {
+    list.innerHTML = '<div class="loading-msg">Set up your proxy above to load fixtures.</div>';
     return;
   }
 
@@ -981,11 +1015,7 @@ async function fetchWeekMatches() {
   const to = isoDate(end);
 
   try {
-    const apiEndpoint = `https://api.football-data.org/v4/competitions/PL/matches?dateFrom=${from}&dateTo=${to}`;
-    const res = await fetch(
-      `https://corsproxy.io/?url=${encodeURIComponent(apiEndpoint)}`,
-      { headers: { 'X-Auth-Token': apiKey } }
-    );
+    const res = await fetch(`${proxyUrl}?dateFrom=${from}&dateTo=${to}`);
     if (!res.ok) {
       list.innerHTML = `<div class="api-notice">API error ${res.status} — check your API key.</div>`;
       return;
