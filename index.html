@@ -589,6 +589,36 @@
   .yt-status a { color: var(--grass); }
   .yt-status p { margin: 0 0 6px; }
   .yt-key-row { display: flex; gap: 8px; margin-top: 12px; justify-content: center; }
+
+  /* Highlights results list */
+  .yt-results { display: flex; flex-direction: column; max-height: 420px; overflow-y: auto; }
+  .yt-result-item {
+    display: flex; gap: 10px; padding: 10px 14px; cursor: pointer;
+    border-bottom: 1px solid var(--border); transition: background 0.12s;
+    align-items: flex-start;
+  }
+  .yt-result-item:last-child { border-bottom: none; }
+  .yt-result-item:hover { background: var(--pitch-mid); }
+  .yt-result-thumb {
+    width: 110px; min-width: 110px; border-radius: 4px;
+    aspect-ratio: 16/9; object-fit: cover;
+  }
+  .yt-result-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .yt-result-channel { font-size: 10px; color: var(--grass); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+  .yt-result-title { font-size: 13px; color: var(--text); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .yt-back-bar { padding: 8px 14px; border-top: 1px solid var(--border); }
+  .yt-back-btn {
+    background: transparent; border: 1px solid var(--border); border-radius: 4px;
+    color: var(--text-dim); font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 4px 10px; cursor: pointer;
+  }
+  .yt-back-btn:hover { border-color: var(--grass); color: var(--text); }
+
+  @media (max-width: 480px) {
+    .yt-result-thumb { width: 80px; min-width: 80px; }
+    .yt-result-title { font-size: 12px; }
+  }
 </style>
 </head>
 <body>
@@ -731,10 +761,14 @@
       <span class="yt-modal-title" id="ytModalTitle">Highlights</span>
       <button class="yt-close-btn" onclick="closeYtModal()">&#x2715;</button>
     </div>
+    <div class="yt-results" id="ytResultsList" style="display:none"></div>
     <div class="yt-video-wrap" id="ytVideoWrap" style="display:none">
       <iframe id="ytIframe" allowfullscreen allow="autoplay; encrypted-media"></iframe>
     </div>
     <div class="yt-status" id="ytStatus"></div>
+    <div class="yt-back-bar" id="ytBackBar" style="display:none">
+      <button class="yt-back-btn" onclick="showYtResults()">&#8592; Back to results</button>
+    </div>
   </div>
 </div>
 
@@ -747,7 +781,7 @@
 const PROXY_URL = 'https://silent-mode-cf93.quekwk.workers.dev';
 
 // ---- YouTube highlights ----
-const ytCache = {};
+const ytCache = {}; // matchKey → array of result items
 
 function showYtModal(title) {
   document.getElementById('ytModalTitle').textContent = title;
@@ -759,22 +793,55 @@ function closeYtModal() {
   document.getElementById('ytModal').classList.remove('open');
   document.getElementById('ytIframe').src = '';
   document.getElementById('ytVideoWrap').style.display = 'none';
+  document.getElementById('ytResultsList').style.display = 'none';
   document.getElementById('ytStatus').innerHTML = '';
+  document.getElementById('ytBackBar').style.display = 'none';
   document.body.style.overflow = '';
 }
 
-function showYtVideo(videoId) {
+function showYtResults(items) {
+  const list = document.getElementById('ytResultsList');
+  const cachedItems = items || list._items;
+  if (!cachedItems) return;
+  list._items = cachedItems;
+
+  list.innerHTML = '';
+  cachedItems.forEach(item => {
+    const thumb = item.snippet.thumbnails?.medium?.url || item.snippet.thumbnails?.default?.url || '';
+    const el = document.createElement('div');
+    el.className = 'yt-result-item';
+    el.innerHTML = `
+      ${thumb ? `<img class="yt-result-thumb" src="${thumb}" alt="" loading="lazy">` : ''}
+      <div class="yt-result-info">
+        <div class="yt-result-channel">${item.snippet.channelTitle}</div>
+        <div class="yt-result-title">${item.snippet.title}</div>
+      </div>`;
+    el.onclick = () => playYtVideo(item.id.videoId);
+    list.appendChild(el);
+  });
+
+  list.style.display = 'flex';
+  document.getElementById('ytVideoWrap').style.display = 'none';
+  document.getElementById('ytBackBar').style.display = 'none';
+  document.getElementById('ytStatus').innerHTML = '';
+}
+
+function playYtVideo(videoId) {
+  document.getElementById('ytResultsList').style.display = 'none';
   document.getElementById('ytStatus').innerHTML = '';
   document.getElementById('ytVideoWrap').style.display = '';
   document.getElementById('ytIframe').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  document.getElementById('ytBackBar').style.display = '';
 }
 
 async function loadHighlight(matchKey, homeTeam, awayTeam, matchDate) {
   showYtModal(`${homeTeam} vs ${awayTeam} Highlights`);
 
-  if (ytCache[matchKey]) { showYtVideo(ytCache[matchKey]); return; }
+  if (ytCache[matchKey]) { showYtResults(ytCache[matchKey]); return; }
 
+  document.getElementById('ytResultsList').style.display = 'none';
   document.getElementById('ytVideoWrap').style.display = 'none';
+  document.getElementById('ytBackBar').style.display = 'none';
   document.getElementById('ytStatus').textContent = 'Searching for highlights…';
 
   try {
@@ -790,9 +857,8 @@ async function loadHighlight(matchKey, homeTeam, awayTeam, matchDate) {
       document.getElementById('ytStatus').textContent = 'No highlights found yet — check back after the match.';
       return;
     }
-    const videoId = data.items[0].id.videoId;
-    ytCache[matchKey] = videoId;
-    showYtVideo(videoId);
+    ytCache[matchKey] = data.items;
+    showYtResults(data.items);
   } catch(e) {
     document.getElementById('ytStatus').textContent = 'Could not load highlights — check console for details.';
     console.warn(e);
