@@ -769,7 +769,7 @@ function showYtVideo(videoId) {
   document.getElementById('ytIframe').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
 }
 
-async function loadHighlight(matchKey, homeTeam, awayTeam) {
+async function loadHighlight(matchKey, homeTeam, awayTeam, matchDate) {
   showYtModal(`${homeTeam} vs ${awayTeam} Highlights`);
 
   if (ytCache[matchKey]) { showYtVideo(ytCache[matchKey]); return; }
@@ -779,7 +779,7 @@ async function loadHighlight(matchKey, homeTeam, awayTeam) {
 
   try {
     const res = await fetch(
-      `${PROXY_URL}/highlights?home=${encodeURIComponent(homeTeam)}&away=${encodeURIComponent(awayTeam)}`
+      `${PROXY_URL}/highlights?home=${encodeURIComponent(homeTeam)}&away=${encodeURIComponent(awayTeam)}&date=${encodeURIComponent(matchDate)}`
     );
     const data = await res.json();
     if (data.error) {
@@ -1007,7 +1007,7 @@ function renderMatches() {
         hlBtn.className = 'highlights-btn';
         hlBtn.innerHTML = '&#9654; Highlights';
         const matchKey = `${m.matchday}-${m.homeTeam.id}-${m.awayTeam.id}`;
-        hlBtn.onclick = () => loadHighlight(matchKey, m.homeTeam.name, m.awayTeam.name);
+        hlBtn.onclick = () => loadHighlight(matchKey, m.homeTeam.name, m.awayTeam.name, m.utcDate);
         meta.appendChild(hlBtn);
       }
 
