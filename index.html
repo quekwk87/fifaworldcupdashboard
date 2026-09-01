@@ -472,20 +472,7 @@
     .watch-section h2 { font-size: 1.2rem; }
   }
 
-  /* API key entry panel */
-  .key-panel {
-    background: var(--pitch-mid);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-    font-size: 13px;
-    color: var(--text-dim);
-    line-height: 1.6;
-  }
-  .key-panel p { margin: 0 0 10px; }
-  .key-panel a { color: var(--grass); }
-  .key-row { display: flex; gap: 8px; align-items: center; }
+  /* YouTube key input (shared styles) */
   .key-input {
     flex: 1;
     min-width: 0;
@@ -514,40 +501,6 @@
     flex-shrink: 0;
   }
   .key-save-btn:hover { opacity: 0.85; }
-  .key-saved-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    background: var(--pitch-mid);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    margin-bottom: 16px;
-    font-size: 12px;
-  }
-  .key-saved-bar span { color: var(--grass); }
-  .key-clear-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    color: var(--text-dim);
-    font-size: 11px;
-    padding: 3px 8px;
-    cursor: pointer;
-  }
-  .key-clear-btn:hover { border-color: #e55; color: var(--text); }
-  .link-btn {
-    background: transparent; border: none; color: var(--grass);
-    font-size: 13px; cursor: pointer; padding: 0; text-decoration: underline;
-  }
-  .worker-code {
-    background: var(--pitch-dark); border: 1px solid var(--border); border-radius: 6px;
-    color: var(--text-dim); font-family: monospace; font-size: 11px;
-    line-height: 1.6; margin: 8px 0; overflow-x: auto; padding: 10px 12px;
-    white-space: pre;
-  }
-  .setup-steps { margin: 8px 0 10px 16px; padding: 0; font-size: 12px; line-height: 1.9; }
-  .setup-steps code { background: var(--pitch-dark); padding: 1px 5px; border-radius: 3px; color: var(--gold); font-size: 11px; }
 
   /* Highlights button on finished match cards */
   .highlights-btn {
@@ -646,44 +599,6 @@
     <h1>Premier League</h1>
     <div class="subtitle">All times in SGT / MYT (UTC+8) · 2026/27 Season</div>
   </header>
-
-  <div id="keyPanel" class="key-panel">
-    <p>Fixtures need a free Cloudflare Worker proxy to work around browser security restrictions.
-    <button class="link-btn" onclick="document.getElementById('setupGuide').hidden=!document.getElementById('setupGuide').hidden">How to set up (2 min) &#9660;</button></p>
-    <div id="setupGuide" hidden>
-      <ol class="setup-steps">
-        <li>Sign up free at <a href="https://workers.cloudflare.com" target="_blank">workers.cloudflare.com</a></li>
-        <li>Create a new Worker and paste the code below into the editor</li>
-        <li>Go to <strong>Settings → Variables</strong> and add a variable:<br>Name: <code>FD_API_KEY</code> &nbsp; Value: your football-data.org key (mark as secret)</li>
-        <li>Click <strong>Deploy</strong>, then copy the <code>*.workers.dev</code> URL</li>
-        <li>Paste the URL into the box below</li>
-      </ol>
-      <pre class="worker-code">export default {
-  async fetch(request, env) {
-    if (request.method === 'OPTIONS')
-      return new Response(null, { headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, OPTIONS' } });
-    const { searchParams } = new URL(request.url);
-    const res = await fetch(
-      `https://api.football-data.org/v4/competitions/PL/matches?dateFrom=${searchParams.get('dateFrom')}&dateTo=${searchParams.get('dateTo')}`,
-      { headers: { 'X-Auth-Token': env.FD_API_KEY } }
-    );
-    return new Response(await res.text(), { status: res.status,
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
-  }
-};</pre>
-    </div>
-    <div class="key-row" style="margin-top:10px">
-      <input type="text" class="key-input" id="proxyUrlInput" placeholder="https://your-worker.workers.dev" onkeydown="if(event.key==='Enter')saveProxyUrl()">
-      <button class="key-save-btn" onclick="saveProxyUrl()">Save</button>
-    </div>
-  </div>
-
-  <div id="keySavedBar" class="key-saved-bar" style="display:none">
-    <span>&#10003; Proxy connected</span>
-    <button class="key-clear-btn" onclick="clearProxyUrl()">Change</button>
-  </div>
 
   <div class="week-nav">
     <button class="week-btn" onclick="changeWeek(-1)">‹ Prev</button>
@@ -829,35 +744,7 @@
 // Register free at https://www.football-data.org/client/register
 // Then paste your key below.
 // ============================================================
-function getProxyUrl() {
-  try { return localStorage.getItem('pl_proxy_url') || ''; } catch(e) { return ''; }
-}
-
-function saveProxyUrl() {
-  const val = (document.getElementById('proxyUrlInput').value || '').trim().replace(/\/$/, '');
-  if (!val) return;
-  try { localStorage.setItem('pl_proxy_url', val); } catch(e) {}
-  document.getElementById('keyPanel').style.display = 'none';
-  document.getElementById('keySavedBar').style.display = 'flex';
-  fetchWeekMatches();
-}
-
-function clearProxyUrl() {
-  try { localStorage.removeItem('pl_proxy_url'); } catch(e) {}
-  document.getElementById('proxyUrlInput').value = '';
-  document.getElementById('keySavedBar').style.display = 'none';
-  document.getElementById('keyPanel').style.display = '';
-}
-
-function initKeyPanel() {
-  if (getProxyUrl()) {
-    document.getElementById('keyPanel').style.display = 'none';
-    document.getElementById('keySavedBar').style.display = 'flex';
-  } else {
-    document.getElementById('keyPanel').style.display = '';
-    document.getElementById('keySavedBar').style.display = 'none';
-  }
-}
+const PROXY_URL = 'https://silent-mode-cf93.quekwk.workers.dev';
 
 // ---- YouTube highlights ----
 const PL_CHANNEL_ID = 'UCqjwF8rxRsotnojmQT-Yybg'; // Premier League official channel
@@ -1004,18 +891,12 @@ async function fetchWeekMatches() {
   list.innerHTML = '<div class="loading-msg">Loading fixtures…</div>';
   updateWeekLabel();
 
-  const proxyUrl = getProxyUrl();
-  if (!proxyUrl) {
-    list.innerHTML = '<div class="loading-msg">Set up your proxy above to load fixtures.</div>';
-    return;
-  }
-
   const { start, end } = getWeekRange(weekOffset);
   const from = isoDate(start);
   const to = isoDate(end);
 
   try {
-    const res = await fetch(`${proxyUrl}?dateFrom=${from}&dateTo=${to}`);
+    const res = await fetch(`${PROXY_URL}?dateFrom=${from}&dateTo=${to}`);
     if (!res.ok) {
       list.innerHTML = `<div class="api-notice">API error ${res.status} — check your API key.</div>`;
       return;
@@ -1169,7 +1050,6 @@ function renderMatches() {
   });
 }
 
-initKeyPanel();
 fetchWeekMatches();
 </script>
 </body>
