@@ -747,27 +747,10 @@
 const PROXY_URL = 'https://silent-mode-cf93.quekwk.workers.dev';
 
 // ---- YouTube highlights ----
-const PL_CHANNEL_ID = 'UCqjwF8rxRsotnojmQT-Yybg'; // Premier League official channel
 const ytCache = {};
 
-function getYtKey() {
-  try { return localStorage.getItem('yt_api_key') || ''; } catch(e) { return ''; }
-}
-
-function saveYtKey() {
-  const val = (document.getElementById('ytKeyInput').value || '').trim();
-  if (!val) return;
-  try { localStorage.setItem('yt_api_key', val); } catch(e) {}
-  const pending = document.getElementById('ytModal').dataset.pending;
-  if (pending) {
-    const parts = pending.split('||');
-    loadHighlight(parts[0], parts[1], parts[2]);
-  }
-}
-
-function showYtModal(title, matchKey, home, away) {
+function showYtModal(title) {
   document.getElementById('ytModalTitle').textContent = title;
-  document.getElementById('ytModal').dataset.pending = `${matchKey}||${home}||${away}`;
   document.getElementById('ytModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -787,20 +770,7 @@ function showYtVideo(videoId) {
 }
 
 async function loadHighlight(matchKey, homeTeam, awayTeam) {
-  const title = `${homeTeam} vs ${awayTeam} Highlights`;
-  showYtModal(title, matchKey, homeTeam, awayTeam);
-
-  const ytKey = getYtKey();
-  if (!ytKey) {
-    document.getElementById('ytStatus').innerHTML = `
-      <p>To show highlights, enter your free <a href="https://console.cloud.google.com/" target="_blank">YouTube Data API v3</a> key.</p>
-      <p style="font-size:11px">Google Cloud Console &#8594; Enable <strong>YouTube Data API v3</strong> &#8594; Create API Key</p>
-      <div class="yt-key-row">
-        <input type="text" class="key-input" id="ytKeyInput" placeholder="Paste YouTube API key…" style="max-width:260px" onkeydown="if(event.key==='Enter')saveYtKey()">
-        <button class="key-save-btn" onclick="saveYtKey()">Save</button>
-      </div>`;
-    return;
-  }
+  showYtModal(`${homeTeam} vs ${awayTeam} Highlights`);
 
   if (ytCache[matchKey]) { showYtVideo(ytCache[matchKey]); return; }
 
@@ -808,12 +778,12 @@ async function loadHighlight(matchKey, homeTeam, awayTeam) {
   document.getElementById('ytStatus').textContent = 'Searching for highlights…';
 
   try {
-    const q = encodeURIComponent(`${homeTeam} ${awayTeam} highlights`);
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${PL_CHANNEL_ID}&q=${q}&type=video&maxResults=1&order=relevance&key=${ytKey}`;
-    const res = await fetch(url);
+    const res = await fetch(
+      `${PROXY_URL}/highlights?home=${encodeURIComponent(homeTeam)}&away=${encodeURIComponent(awayTeam)}`
+    );
     const data = await res.json();
     if (data.error) {
-      document.getElementById('ytStatus').textContent = `YouTube API error: ${data.error.message}`;
+      document.getElementById('ytStatus').textContent = `Error: ${data.error.message}`;
       return;
     }
     if (!data.items || data.items.length === 0) {
