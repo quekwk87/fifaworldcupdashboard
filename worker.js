@@ -10,11 +10,25 @@
 //   YT_API_KEY  — YouTube Data API v3 key
 // ============================================================
 
-// Origins allowed to call this Worker. Add your custom domain here
-// when you move off github.io.
+// Origins allowed to call this Worker.
+//   - exact matches in ALLOWED_ORIGINS
+//   - any *.pages.dev preview/production URL (Cloudflare Pages)
+//   - add your custom domain to ALLOWED_ORIGINS once it's live
 const ALLOWED_ORIGINS = [
   'https://quekwk87.github.io',
+  // 'https://worldcupdashboard.com',
+  // 'https://www.worldcupdashboard.com',
 ];
+
+function originAllowed(origin) {
+  if (!origin) return true; // direct navigation / curl — no Origin header
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  try {
+    const host = new URL(origin).hostname;
+    if (host.endsWith('.pages.dev')) return true;
+  } catch { /* malformed Origin */ }
+  return false;
+}
 
 // Club name → official YouTube handle. Unresolved handles are reported
 // in the `unresolved` field of /highlights responses.
@@ -187,7 +201,7 @@ export default {
     // Block cross-origin use from sites that aren't ours. Requests with no
     // Origin header (direct navigation, curl) are allowed so the endpoints
     // stay testable — this stops hotlinking, not a determined scripter.
-    if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    if (!originAllowed(origin)) {
       return new Response(JSON.stringify({ error: 'Origin not allowed' }), {
         status: 403,
         headers: JSON_HEADERS,

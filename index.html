@@ -2,758 +2,610 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premier League — SGT/MYT Fixtures</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0c">
+<title>Premier League — SGT/MYT</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Archivo:wght@400;500;600;700&display=swap');
 
   :root {
-    --pitch: #1a2e1a;
-    --pitch-mid: #213521;
-    --line: #2d4a2d;
-    --grass: #2ecc71;
-    --grass-dim: #27ae60;
-    --gold: #f0c040;
-    --sg-red: #ef4444;
-    --sg-dim: #7f1d1d;
-    --my-yellow: #f59e0b;
-    --my-dim: #78350f;
-    --both: #a78bfa;
-    --both-dim: #4c1d95;
-    --paid: #94a3b8;
-    --text: #e8f5e9;
-    --text-dim: #86a186;
-    --border: #2d4a2d;
+    --accent: #ff3b1f;            /* tweakable: #00e07b · #3d5afe · #f5c518 */
+    --bg: #0b0b0c;
+    --surface: #141416;
+    --surface-2: #1a1a1f;
+    --tile: #24242a;
+    --border: #1f1f24;
+    --border-soft: #17171a;
+    --border-hard: #1c1c21;
+    --t1: #f7f7f5;
+    --t2: #c9c9cf;
+    --t3: #8c8c93;
+    --t4: #6f6f75;
+    --t5: #5c5c62;
+    --live: #00e07b;
+    --yellow: #f5c518;
+    --cond: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --sans: 'Archivo', system-ui, -apple-system, sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  html, body { background: var(--bg); }
+
   body {
-    background: var(--pitch);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
+    color: var(--t1);
+    font-family: var(--sans);
     font-size: 14px;
+    -webkit-font-smoothing: antialiased;
     min-height: 100vh;
-  }
-
-  /* Pitch line texture */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 60px,
-      rgba(255,255,255,0.02) 60px,
-      rgba(255,255,255,0.02) 61px
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .container {
-    max-width: 900px;
+    max-width: 430px;
     margin: 0 auto;
-    padding: 20px 16px 60px;
     position: relative;
-    z-index: 1;
+    overflow-x: hidden;
+    padding-bottom: calc(74px + env(safe-area-inset-bottom));
   }
 
-  /* HEADER */
-  header {
-    text-align: center;
-    padding: 32px 0 20px;
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 0;
-  }
-  .trophy { font-size: 36px; margin-bottom: 8px; }
-  h1 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 2.4rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--gold);
-    line-height: 1.1;
-  }
-  .subtitle {
-    margin-top: 6px;
-    color: var(--text-dim);
-    font-size: 13px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
+  button { font-family: inherit; cursor: pointer; }
 
-  /* FILTERS */
-  .filters {
+  /* ---------- Header ---------- */
+  .app-header {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 20px;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 18px 20px 14px;
   }
-  .filter-btn {
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text-dim);
-    font-size: 12px;
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-    transition: all 0.15s;
+  .wordmark {
+    font-family: var(--cond);
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 0.9;
+    letter-spacing: .02em;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    color: var(--t1);
+  }
+  .wordmark span { color: #7d7d82; }
+  .tz {
+    font-size: 10px;
     font-weight: 500;
-  }
-  .filter-btn:hover { border-color: var(--grass); color: var(--text); }
-  .filter-btn.active { background: var(--grass); border-color: var(--grass); color: #0a1a0a; font-weight: 600; }
-
-  /* PHASE HEADER */
-  .phase-header {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: .14em;
     text-transform: uppercase;
-    color: var(--gold);
-    padding: 12px 0 8px;
-    border-bottom: 1px solid var(--line);
-    margin: 24px 0 10px;
+    color: var(--t4);
+    text-align: right;
+    padding-bottom: 3px;
+    line-height: 1.5;
   }
-
-  /* DATE GROUP */
-  .date-group { margin-bottom: 4px; }
-  .date-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 10px 0 4px;
-  }
-
-  /* MATCH CARD */
-  .match-card {
-    background: var(--pitch-mid);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin-bottom: 6px;
+  .tz .wk {
     display: flex;
     align-items: center;
-    gap: 12px;
-    position: relative;
-    transition: border-color 0.15s;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 4px;
+    color: var(--t2);
   }
-  .match-card:hover { border-color: #4a7a4a; }
-  .match-card.hidden { display: none; }
+  .tz .wk button {
+    background: none;
+    border: none;
+    color: var(--t3);
+    font-size: 14px;
+    line-height: 1;
+    padding: 2px 4px;
+  }
+  .tz .wk button:active { color: var(--accent); }
 
-  /* Left accent bar */
-  .match-card::before {
+  /* ---------- Week strip (sticky) ---------- */
+  .week-strip {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    gap: 6px;
+    padding: 10px 20px 12px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .day-pill {
+    flex: 1;
+    border-radius: 8px;
+    padding: 7px 0;
+    text-align: center;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--t3);
+    transition: background .12s, color .12s, border-color .12s;
+  }
+  .day-pill .dow {
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    opacity: .75;
+  }
+  .day-pill .num {
+    display: block;
+    font-family: var(--cond);
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1;
+    margin-top: 3px;
+  }
+  .day-pill.active {
+    background: var(--accent);
+    border-color: transparent;
+    color: #fff;
+  }
+  .day-pill.has-live .dow::after {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--live);
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  /* ---------- Search ---------- */
+  .search-wrap { padding: 12px 20px 4px; }
+  .search-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 9px 12px;
+    color: var(--t1);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: .02em;
+  }
+  .search-input::placeholder { color: var(--t5); }
+  .search-input:focus { outline: none; border-color: #2b2b31; }
+
+  /* ---------- Live hero ---------- */
+  .hero {
+    margin: 14px 20px 6px;
+    background: var(--surface);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero::before {
     content: '';
     position: absolute;
-    left: 0; top: 8px; bottom: 8px;
-    width: 3px;
-    border-radius: 2px;
+    inset: 0;
+    background: linear-gradient(105deg, color-mix(in srgb, var(--accent) 22%, transparent) 0%, transparent 58%);
+    pointer-events: none;
   }
-  .match-card.tv-both::before { background: var(--both); }
-  .match-card.tv-sg::before { background: var(--sg-red); }
-  .match-card.tv-my::before { background: var(--my-yellow); }
-  .match-card.tv-all::before { background: var(--grass); }
-
-  .match-time {
-    min-width: 64px;
-    text-align: center;
-    flex-shrink: 0;
+  .hero-bar {
+    height: 4px;
+    background: var(--accent);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
   }
-  .match-time .sgt {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text);
-    display: block;
-    line-height: 1.1;
-  }
-  .match-time .day-shift {
-    font-size: 10px;
-    color: var(--text-dim);
-    display: block;
-  }
-
-  .match-teams {
-    flex: 1;
-    min-width: 0;
-  }
-  .teams-row {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .match-meta {
-    font-size: 11px;
-    color: var(--text-dim);
-    margin-top: 2px;
-  }
-
-  /* TV BADGES */
-  .tv-badges {
+  .hero-body { position: relative; padding: 14px 18px 18px; }
+  .hero-top {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-    align-items: flex-end;
-    flex-shrink: 0;
-    min-width: 110px;
-  }
-  .badge {
-    display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    white-space: nowrap;
-  }
-  .badge-sg-free { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
-  .badge-sg-paid { background: rgba(148,163,184,0.08); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
-  .badge-my-free { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
-  .badge-my-paid { background: rgba(148,163,184,0.08); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
-
-  .group-tag {
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--grass-dim);
-    background: rgba(46,204,113,0.08);
-    border: 1px solid rgba(46,204,113,0.2);
-    border-radius: 3px;
-    padding: 1px 5px;
-    letter-spacing: 0.06em;
-  }
-
-  /* TABS */
-  .tab-nav {
-    display: flex;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 0;
-  }
-  .tab-btn {
-    padding: 14px 20px;
-    background: transparent;
-    border: none;
-    border-bottom: 3px solid transparent;
-    color: var(--text-dim);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.15s;
-    margin-bottom: -1px;
-  }
-  .tab-btn:hover { color: var(--text); }
-  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
-  .tab-panel { display: none; padding-top: 24px; }
-  .tab-panel.active { display: block; }
-
-  /* HOW TO WATCH */
-  .watch-section { margin-bottom: 32px; }
-  .watch-section h2 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    gap: 7px;
     margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  .watch-section h2.sg { color: var(--sg-red); border-color: rgba(239,68,68,0.3); }
-  .watch-section h2.my { color: var(--my-yellow); border-color: rgba(245,158,11,0.3); }
-  .platform-card {
-    background: var(--pitch-mid);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 10px;
-    transition: border-color 0.15s;
-  }
-  .platform-card:hover { border-color: #4a7a4a; }
-  .platform-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 10px; flex-wrap: wrap; }
-  .platform-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
-  .price-tag { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
-  .price-free { background: rgba(46,204,113,0.15); color: #6ee7a0; border: 1px solid rgba(46,204,113,0.3); }
-  .price-paid { background: rgba(148,163,184,0.1); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
-  .platform-desc { font-size: 13px; color: var(--text-dim); margin-bottom: 12px; line-height: 1.5; }
-  .access-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
-  .access-item { background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; }
-  .access-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-  .access-value { font-size: 13px; color: var(--text); font-weight: 500; }
-  .access-value a { color: var(--grass); text-decoration: none; }
-  .access-value a:hover { text-decoration: underline; }
-  .channels-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-  .ch-tag { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: rgba(46,204,113,0.1); border: 1px solid rgba(46,204,113,0.2); color: #6ee7a0; }
-  .note-box { background: rgba(240,192,64,0.07); border: 1px solid rgba(240,192,64,0.2); border-radius: 8px; padding: 12px 14px; font-size: 13px; color: #fde68a; line-height: 1.5; margin-bottom: 16px; }
-  .note-box strong { color: var(--gold); }
-
-  /* SEARCH */
-  .search-row {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-  .search-input {
-    flex: 1;
-    background: var(--pitch-mid);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    padding: 8px 12px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .search-input:focus { border-color: var(--grass); }
-  .search-input::placeholder { color: var(--text-dim); }
-
-  /* SCORE DISPLAY */
-  .status-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    display: block;
-    line-height: 1.2;
-  }
-  .status-ft { color: var(--text-dim); }
-  .status-live { color: var(--grass); }
-  .status-ht { color: var(--my-yellow); }
-  .match-score {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--gold);
-    display: block;
-    line-height: 1.1;
-    letter-spacing: 0.02em;
   }
   .live-dot {
-    display: inline-block;
-    width: 6px; height: 6px;
-    background: var(--grass);
+    width: 7px; height: 7px;
     border-radius: 50%;
-    margin-right: 3px;
-    vertical-align: middle;
-    animation: blink 1s ease-in-out infinite;
+    background: var(--live);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--live) 18%, transparent);
   }
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-
-  /* MATCH CARD STATUS ACCENTS */
-  .match-card.status-upcoming::before { background: var(--grass); }
-  .match-card.status-live::before { background: var(--grass); animation: pulse 1s ease-in-out infinite; }
-  .match-card.status-finished::before { background: var(--text-dim); }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-
-  /* WEEK NAV */
-  .week-nav {
+  .live-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    color: var(--live);
+  }
+  .hero-mw {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    color: var(--t4);
+  }
+  .hero-score-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
   }
-  .week-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    color: var(--text-dim);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1rem;
+  .hero-team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 96px;
+  }
+  .hero-team .name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--t1);
+    text-align: center;
+  }
+  .crest {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    background: var(--tile);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--cond);
     font-weight: 700;
-    letter-spacing: 0.04em;
-    padding: 6px 16px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .week-btn:hover { border-color: var(--grass); color: var(--text); }
-  .week-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  /* LOADING / NOTICE */
-  .loading-msg { text-align: center; color: var(--text-dim); padding: 48px 20px; font-size: 14px; }
-  .api-notice { text-align: center; color: var(--text-dim); padding: 48px 20px; font-size: 14px; line-height: 1.7; max-width: 480px; margin: 0 auto; }
-  .api-notice a { color: var(--grass); }
-  .api-notice code { background: var(--pitch-mid); padding: 1px 5px; border-radius: 3px; color: var(--gold); font-size: 12px; }
-
-  /* FILTERS FOOTER — sticky bar below the match list */
-  .filters-footer {
-    position: sticky;
-    bottom: 0;
-    background: var(--pitch);
-    border-top: 1px solid var(--border);
-    padding: 10px 0 14px;
-    z-index: 10;
-    margin-top: 12px;
-  }
-  .filters-footer .search-row { margin-bottom: 10px; }
-  .filters-footer .filters { margin-bottom: 0; }
-
-  /* Small screens & landscape phones */
-  @media (max-width: 600px) {
-    h1 { font-size: 1.7rem; }
-    .match-card { flex-wrap: wrap; }
-    /* Push badges to their own row so teams always get full width */
-    .tv-badges {
-      width: 100%;
-      min-width: 0;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 4px;
-    }
-    .week-btn { padding: 5px 12px; font-size: 0.85rem; }
-    .access-grid { grid-template-columns: 1fr; }
-  }
-
-  /* Portrait phones (≤480px) */
-  @media (max-width: 480px) {
-    .container { padding: 10px 10px 40px; }
-
-    header { padding: 20px 0 14px; }
-    .trophy { font-size: 28px; margin-bottom: 6px; }
-    h1 { font-size: 1.35rem; }
-    .subtitle { font-size: 11px; }
-
-    /* Tabs */
-    .tab-btn { padding: 10px 8px; font-size: 0.75rem; letter-spacing: 0.03em; }
-
-    /* Filters */
-    .filter-btn { padding: 5px 10px; font-size: 11px; }
-
-    /* Match cards — time+teams on top, badges full-width below */
-    .match-card { padding: 10px 10px 10px 14px; gap: 6px; }
-    .match-time { min-width: 52px; }
-    .match-time .sgt { font-size: 1.1rem; }
-    .match-time .day-shift { font-size: 9px; }
-    .teams-row { font-size: 1rem; }
-    .match-meta { font-size: 10px; }
-    .tv-badges {
-      width: 100%;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      min-width: 0;
-      gap: 4px;
-    }
-    .badge { font-size: 10px; padding: 2px 6px; }
-
-    /* How to Watch */
-    .platform-card { padding: 12px 12px; }
-    .platform-header { flex-direction: column; align-items: flex-start; gap: 4px; }
-    .platform-name { font-size: 1rem; }
-    .price-tag { font-size: 11px; }
-    .platform-desc { font-size: 12px; }
-    .note-box { font-size: 12px; padding: 10px 12px; }
-    .access-label { font-size: 9px; }
-    .access-value { font-size: 12px; }
-    .watch-section h2 { font-size: 1.2rem; }
-  }
-
-  /* YouTube key input (shared styles) */
-  .key-input {
-    flex: 1;
-    min-width: 0;
-    background: var(--pitch-dark);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
-    font-size: 13px;
-    padding: 8px 10px;
-    outline: none;
-    font-family: monospace;
-  }
-  .key-input:focus { border-color: var(--grass); }
-  .key-save-btn {
-    background: var(--grass);
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    padding: 8px 16px;
-    cursor: pointer;
-    white-space: nowrap;
+    font-size: 15px;
+    letter-spacing: .04em;
+    color: var(--t2);
+    overflow: hidden;
     flex-shrink: 0;
   }
-  .key-save-btn:hover { opacity: 0.85; }
-
-  /* Highlights button on finished match cards */
-  .highlights-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    color: var(--text-dim);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    padding: 3px 8px;
-    cursor: pointer;
-    margin-top: 6px;
-    transition: border-color 0.15s, color 0.15s;
+  .crest img { width: 30px; height: 30px; object-fit: contain; display: block; }
+  .hero-score {
+    font-family: var(--cond);
+    font-weight: 800;
+    font-size: 54px;
+    line-height: 0.85;
+    color: var(--t1);
+    letter-spacing: .01em;
+    text-align: center;
   }
-  .highlights-btn:hover { border-color: var(--grass); color: var(--text); }
-  .highlights-btn:disabled { opacity: 0.5; cursor: default; }
+  .hero-score .dash { color: #4a4a50; margin: 0 8px; }
+  .hero-venue {
+    margin-top: 8px;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--t4);
+    text-align: center;
+  }
+  .hero-cta {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+  }
+  .hero-cta button {
+    flex: 1;
+    border-radius: 9px;
+    padding: 11px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+  }
+  .hero-cta .filled { background: var(--accent); color: #fff; }
+  .hero-cta .outline { background: transparent; border-color: #2b2b31; color: var(--t2); }
 
-  /* YouTube modal */
+  /* ---------- Day section + fixture list ---------- */
+  .day-section { padding: 0 20px; }
+  .day-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 0 6px;
+  }
+  .day-head .label {
+    font-family: var(--cond);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--t1);
+  }
+  .day-head .rule { flex: 1; height: 1px; background: var(--border); }
+  .day-head .count {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--t4);
+  }
+
+  .fix-row {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 4px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .fix-time { width: 46px; flex-shrink: 0; }
+  .fix-time .hm {
+    font-family: var(--cond);
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1;
+    color: var(--t1);
+  }
+  .fix-time .mer {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    color: var(--t5);
+    margin-top: 3px;
+  }
+  .fix-time .status {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    margin-top: 3px;
+  }
+  .fix-time .status.live { color: var(--live); }
+  .fix-time .status.ft { color: var(--t4); }
+  .fix-divider {
+    width: 2px;
+    height: 30px;
+    background: #242429;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .fix-teams { flex: 1; min-width: 0; }
+  .fix-teams .team {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--t1);
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .fix-teams .team + .team { margin-top: 4px; }
+  .fix-teams .team.dim { color: var(--t3); }
+  .fix-teams .team .nm { overflow: hidden; text-overflow: ellipsis; }
+  .fix-teams .team .mini {
+    width: 16px; height: 16px;
+    border-radius: 3px;
+    background: var(--tile);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .fix-teams .team .mini img { width: 12px; height: 12px; object-fit: contain; }
+  .fix-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+  .fix-score {
+    font-family: var(--cond);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--t1);
+    white-space: nowrap;
+  }
+  .fix-score .dash { color: #4a4a50; margin: 0 5px; }
+  .fix-badge {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    color: var(--t4);
+    border: 1px solid #26262c;
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+  .fix-hl {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    color: var(--accent);
+  }
+
+  .empty, .loading {
+    padding: 60px 24px;
+    text-align: center;
+    color: var(--t4);
+    font-size: 13px;
+  }
+  .empty strong { color: var(--t2); display: block; margin-bottom: 6px; font-weight: 600; }
+  .api-notice {
+    margin: 24px 20px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--t3);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  /* ---------- Bottom tab bar ---------- */
+  .tab-bar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    max-width: 430px;
+    margin: 0 auto;
+    display: flex;
+    background: #0e0e10;
+    border-top: 1px solid var(--border-hard);
+    padding: 10px 12px calc(12px + env(safe-area-inset-bottom));
+    z-index: 30;
+  }
+  .tab-item {
+    flex: 1;
+    text-align: center;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  .tab-item .ind {
+    width: 20px; height: 3px;
+    border-radius: 2px;
+    background: transparent;
+    margin: 0 auto 8px;
+  }
+  .tab-item .lbl {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--t5);
+  }
+  .tab-item.active .ind { background: var(--accent); }
+  .tab-item.active .lbl { color: var(--t1); font-weight: 600; }
+
+  #placeholderView { display: none; }
+  #placeholderView.show { display: block; }
+  #homeView.hide { display: none; }
+
+  /* ---------- Highlights modal ---------- */
   .yt-modal {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.88);
-    z-index: 1000;
-    align-items: center;
+    background: rgba(0,0,0,.78);
+    z-index: 100;
+    align-items: flex-end;
     justify-content: center;
-    padding: 12px;
   }
   .yt-modal.open { display: flex; }
   .yt-modal-inner {
     width: 100%;
-    max-width: 760px;
-    background: var(--pitch-dark);
+    max-width: 430px;
+    max-height: 88vh;
+    background: var(--surface);
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
   }
   .yt-modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-hard);
   }
   .yt-modal-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.05rem;
+    font-family: var(--cond);
     font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--text);
+    font-size: 15px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--t1);
   }
   .yt-close-btn {
-    background: transparent;
-    border: none;
-    color: var(--text-dim);
-    font-size: 1.4rem;
+    background: none; border: none;
+    color: var(--t3);
+    font-size: 18px;
     line-height: 1;
-    cursor: pointer;
-    padding: 2px 6px;
+    padding: 4px 8px;
   }
-  .yt-close-btn:hover { color: var(--text); }
+  .yt-results {
+    display: none;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 8px;
+  }
+  .yt-result-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .yt-result-item:active { background: var(--surface-2); }
+  .yt-result-thumb {
+    width: 120px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 6px;
+    background: var(--surface-2);
+    flex-shrink: 0;
+  }
+  .yt-result-info { min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+  .yt-result-channel {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .yt-result-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--t2);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
   .yt-video-wrap {
-    position: relative;
-    padding-bottom: 56.25%;
+    display: none;
+    width: 100%;
+    aspect-ratio: 16/9;
     background: #000;
   }
-  .yt-video-wrap iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
+  .yt-video-wrap iframe { width: 100%; height: 100%; border: 0; }
   .yt-status {
     padding: 28px 20px;
     text-align: center;
-    color: var(--text-dim);
-    font-size: 13px;
-    line-height: 1.7;
+    color: var(--t4);
+    font-size: 12px;
   }
-  .yt-status a { color: var(--grass); }
-  .yt-status p { margin: 0 0 6px; }
-  .yt-key-row { display: flex; gap: 8px; margin-top: 12px; justify-content: center; }
-
-  /* Highlights results list */
-  .yt-results { display: flex; flex-direction: column; max-height: 420px; overflow-y: auto; }
-  .yt-result-item {
-    display: flex; gap: 10px; padding: 10px 14px; cursor: pointer;
-    border-bottom: 1px solid var(--border); transition: background 0.12s;
-    align-items: flex-start;
+  .yt-back-bar {
+    display: none;
+    padding: 10px 16px calc(14px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--border-hard);
   }
-  .yt-result-item:last-child { border-bottom: none; }
-  .yt-result-item:hover { background: var(--pitch-mid); }
-  .yt-result-thumb {
-    width: 110px; min-width: 110px; border-radius: 4px;
-    aspect-ratio: 16/9; object-fit: cover;
-  }
-  .yt-result-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-  .yt-result-channel { font-size: 10px; color: var(--grass); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
-  .yt-result-title { font-size: 13px; color: var(--text); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .yt-back-bar { padding: 8px 14px; border-top: 1px solid var(--border); }
   .yt-back-btn {
-    background: transparent; border: 1px solid var(--border); border-radius: 4px;
-    color: var(--text-dim); font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
-    padding: 4px 10px; cursor: pointer;
-  }
-  .yt-back-btn:hover { border-color: var(--grass); color: var(--text); }
-
-  @media (max-width: 480px) {
-    .yt-result-thumb { width: 80px; min-width: 80px; }
-    .yt-result-title { font-size: 12px; }
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--t2);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 8px 14px;
   }
 </style>
 </head>
 <body>
-<div class="container">
 
-  <header>
-    <div class="trophy">⚽</div>
-    <h1>Premier League</h1>
-    <div class="subtitle">All times in SGT / MYT (UTC+8) · 2026/27 Season</div>
+<div id="homeView">
+  <header class="app-header">
+    <div class="wordmark">Premier<br><span>League</span></div>
+    <div class="tz">
+      SGT / MYT · UTC+8
+      <div class="wk">
+        <button onclick="changeWeek(-1)" aria-label="Previous week">&lsaquo;</button>
+        <span id="weekLabel">This week</span>
+        <button onclick="changeWeek(1)" aria-label="Next week">&rsaquo;</button>
+      </div>
+    </div>
   </header>
 
-  <div class="week-nav">
-    <button class="week-btn" onclick="changeWeek(-1)">‹ Prev</button>
-    <span class="week-label" id="weekLabel">This Week</span>
-    <button class="week-btn" onclick="changeWeek(1)">Next ›</button>
+  <div class="week-strip" id="weekStrip"></div>
+
+  <div class="search-wrap">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search team…" oninput="onSearch()">
   </div>
 
-  <div id="matchList"></div>
+  <div id="heroSlot"></div>
+  <div id="matchList"><div class="loading">Loading fixtures…</div></div>
+</div>
 
-  <div class="filters-footer">
-    <div class="search-row">
-      <input type="text" class="search-input" id="searchInput" placeholder="Search team…" oninput="filterSearch()">
-    </div>
-    <div class="filters" id="filters">
-      <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
-      <button class="filter-btn" onclick="setFilter('today', this)">Today</button>
-    </div>
+<div id="placeholderView">
+  <div class="empty" style="padding-top:120px">
+    <strong id="phTitle">Table</strong>
+    Coming soon — this build ships the Fixtures screen only.
   </div>
+</div>
 
-  <div style="display:none"><!-- removed How to Watch content -->
-    <div class="watch-section">
-      <h2 class="sg">placeholder</h2>
-      <div class="note-box"><strong>Official broadcaster:</strong> Mediacorp. All 104 matches available. <strong>28 matches are free</strong> — the opening match, 23 group stage games, both semifinals, 3rd place playoff, and the Final. Everything else requires a paid pass.</div>
-
-      <div class="platform-card">
-        <div class="platform-header"><span class="platform-name">📺 Channel 5</span><span class="price-tag price-free">FREE — No signup needed</span></div>
-        <div class="platform-desc">Free-to-air TV. Tune in on your TV set. Covers the 28 selected FTA matches live. Best for the living room.</div>
-        <div class="access-grid">
-          <div class="access-item"><div class="access-label">How to access</div><div class="access-value">Regular TV aerial / HD set-top box</div></div>
-          <div class="access-item"><div class="access-label">Matches</div><div class="access-value">28 selected FTA matches live</div></div>
-        </div>
-        <div class="channels-row"><span class="ch-tag">Channel 5</span></div>
-      </div>
-
-      <div class="platform-card">
-        <div class="platform-header"><span class="platform-name">📱 mewatch</span><span class="price-tag price-free">FREE for 28 matches</span></div>
-        <div class="platform-desc">Mediacorp's streaming app and website. Free for the 28 FTA matches (free account may be needed). Great for watching from bed or on the go during early-morning SGT kickoffs.</div>
-        <div class="access-grid">
-          <div class="access-item"><div class="access-label">Website</div><div class="access-value"><a href="https://mewatch.sg" target="_blank">mewatch.sg</a></div></div>
-          <div class="access-item"><div class="access-label">App</div><div class="access-value">Search "mewatch" on App Store / Google Play</div></div>
-          <div class="access-item"><div class="access-label">Devices</div><div class="access-value">Phone, tablet, laptop, Smart TV</div></div>
-        </div>
-      </div>
-
-      <div class="platform-card">
-        <div class="platform-header"><span class="platform-name">🔓 mewatch Full Pass</span><span class="price-tag price-paid">S$118 / season</span></div>
-        <div class="platform-desc">Unlocks all 104 matches live + on-demand, plus a 24/7 analysis and highlights channel. Also available via Singtel TV GO and StarHub TV+ — check if your existing telco bundle includes it.</div>
-        <div class="access-grid">
-          <div class="access-item"><div class="access-label">Price</div><div class="access-value">S$118 season pass</div></div>
-          <div class="access-item"><div class="access-label">Also via</div><div class="access-value">Singtel TV GO / StarHub TV+</div></div>
-          <div class="access-item"><div class="access-label">Where to buy</div><div class="access-value"><a href="https://mewatch.sg" target="_blank">mewatch.sg</a></div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="watch-section">
-      <h2 class="my">🇲🇾 Malaysia — How to Watch</h2>
-      <div class="note-box"><strong>Official broadcasters:</strong> RTM and Unifi TV. <strong>Astro is NOT broadcasting</strong> the World Cup 2026. RTM shows the majority of matches free (some may be delayed). Unifi TV has all 104 live on paid plans. <strong>Note:</strong> RTM ends its broadcast on Astro from July 1, 2026 — use MyTV or RTMKlik instead.</div>
-
-      <div class="platform-card">
-        <div class="platform-header"><span class="platform-name">📺 RTM Free-to-Air TV</span><span class="price-tag price-free">FREE — No signup</span></div>
-        <div class="platform-desc">Watch live on your TV via a MyTV decoder (free terrestrial digital broadcast). Scan for channels to get RTM stations. Best for the TV at home.</div>
-        <div class="access-grid">
-          <div class="access-item"><div class="access-label">How to access</div><div class="access-value">MyTV decoder (free terrestrial)</div></div>
-          <div class="access-item"><div class="access-label">Coverage</div><div class="access-value">Majority of matches (some delayed)</div></div>
-        </div>
-        <div class="channels-row"><span class="ch-tag">TV1</span><span class="ch-tag">TV2</span><span class="ch-tag">TV Okey</span><span class="ch-tag">Sukan RTM</span></div>
-      </div>
-
-      <div class="platform-card">
-        <div class="platform-header"><span class="platform-name">🌐 RTMKlik</span><span class="price-tag price-free">FREE — No registration needed</span></div>
-        <div class="platform-desc">RTM's official free streaming platform. Open the website or app and watch — no account required. Expected to carry all 104 matches in some form (live or delayed). Available on Android, iOS, Android TV, and Google TV.</div>
-        <div class="access-grid">
-          <div class="access-item"><div class="access-label">Website</div><div class="access-value"><a href="https://rtmklik.rtm.gov.my" target="_blank">rtmklik.rtm.gov.my</a></div></div>
-          <div class="access-item"><div class="access-label">Android</div><div class="access-value"><a href="https://play.google.com/store/apps/details?id=my.gov.rtm.mobile" target="_blank">Google Play Store</a></div></div>
-          <div class="access-item"><div class="access-label">iOS</div><div class="access-value"><a href="https://apps.apple.com/my/app/rtmklik/id777391399" target="_blank">Apple App Store</a></div></div>
-          <div class="access-item"><div class="access-label">Huawei</div><div class="access-value"><a href="https://appgallery.huawei.com/#/app/C101841473" target="_blank">AppGallery</a></div></div>
-          <div class="access-item"><div class="access-label">Smart TV</div><div class="access-value">Android TV, Google TV</div></div>
-          <div class="access-item"><div class="access-label">Channels</div><div class="access-value">TV1, TV2, Okey, Sukan+, FIFA WC 1</div></div>
-        </div>
-        <div class="channels-row"><span class="ch-tag">TV1</span><span class="ch-tag">TV2</span><span class="ch-tag">TV Okey</span><span class="ch-tag">Sukan+</span><span class="ch-tag">FIFA WC 1</span></div>
-      </div>
-
-      <div class="platform-card">
-        <div class="platform-header"><span class="platform-name">📱 MyTV (ManaMana)</span><span class="price-tag price-free">FREE — No registration</span></div>
-        <div class="platform-desc">Another free streaming option — streams RTM channels including TV1, TV2, and Okey. Just open and watch, no account needed.</div>
-        <div class="access-grid">
-          <div class="access-item"><div class="access-label">Website</div><div class="access-value"><a href="https://www.mana2.my" target="_blank">mana2.my</a></div></div>
-          <div class="access-item"><div class="access-label">Android</div><div class="access-value"><a href="https://play.google.com/store/apps/details?id=my.mana2.mobile" target="_blank">Google Play Store</a></div></div>
-          <div class="access-item"><div class="access-label">iOS</div><div class="access-value"><a href="https://apps.apple.com/my/app/mytv-manamana/id1673030555" target="_blank">Apple App Store</a></div></div>
-          <div class="access-item"><div class="access-label">Smart TV</div><div class="access-value">Android TV, Google TV</div></div>
-        </div>
-        <div class="channels-row"><span class="ch-tag">TV1</span><span class="ch-tag">TV2</span><span class="ch-tag">Okey (Ch 110)</span><span class="ch-tag">Sukan+ (Ch 111)</span></div>
-      </div>
-
-      <div class="platform-card">
-        <div class="platform-header"><span class="platform-name">🏛️ MyGOV App</span><span class="price-tag price-free">FREE — MyDigitalID required</span></div>
-        <div class="platform-desc">Malaysia's MyGOV app includes an in-app link to RTM's live streams. Requires registration with MyDigitalID. Not supported on Smart TVs.</div>
-        <div class="access-grid">
-          <div class="access-item"><div class="access-label">Android</div><div class="access-value"><a href="https://play.google.com/store/search?q=MyGOV&c=apps" target="_blank">Google Play Store</a></div></div>
-          <div class="access-item"><div class="access-label">iOS</div><div class="access-value"><a href="https://apps.apple.com/my/app/mygov-malaysia/id6502623525" target="_blank">Apple App Store</a></div></div>
-          <div class="access-item"><div class="access-label">Requirement</div><div class="access-value">MyDigitalID account</div></div>
-          <div class="access-item"><div class="access-label">Smart TV</div><div class="access-value">Not supported</div></div>
-        </div>
-      </div>
-
-      <div class="platform-card">
-        <div class="platform-header"><span class="platform-name">💳 Unifi TV</span><span class="price-tag price-paid">RM50–60 season / RM20 day pass</span></div>
-        <div class="platform-desc">The only Malaysian platform with all 104 matches live in full HD, guaranteed. Best choice for uninterrupted, high-quality streams. Both subscribers and non-subscribers must purchase a pass.</div>
-        <div class="access-grid">
-          <div class="access-item"><div class="access-label">Website</div><div class="access-value"><a href="https://unifitv.com.my" target="_blank">unifitv.com.my</a></div></div>
-          <div class="access-item"><div class="access-label">Existing subscribers</div><div class="access-value">RM50 season pass</div></div>
-          <div class="access-item"><div class="access-label">Non-subscribers</div><div class="access-value">RM60 season pass</div></div>
-          <div class="access-item"><div class="access-label">Day pass</div><div class="access-value">RM20 / 24 hours</div></div>
-          <div class="access-item"><div class="access-label">Android</div><div class="access-value"><a href="https://play.google.com/store/apps/details?id=com.tm.unifitv.mobile" target="_blank">Google Play Store</a></div></div>
-          <div class="access-item"><div class="access-label">iOS</div><div class="access-value"><a href="https://apps.apple.com/my/app/unifi-tv-2-0/id6739202371" target="_blank">Apple App Store</a></div></div>
-          <div class="access-item"><div class="access-label">Smart TV</div><div class="access-value">Android TV, Google TV, Samsung Tizen, LG WebOS</div></div>
-        </div>
-        <div class="channels-row"><span class="ch-tag">Unifi FIFA WC 1</span><span class="ch-tag">Unifi FIFA WC 2</span><span class="ch-tag">Unifi FIFA WC 3</span></div>
-      </div>
-    </div>
-
-  </div><!-- end hidden removed content -->
-
-</div><!-- end container -->
+<nav class="tab-bar" id="tabBar">
+  <button class="tab-item active" data-tab="fixtures" onclick="setTab('fixtures')"><span class="ind"></span><span class="lbl">Fixtures</span></button>
+  <button class="tab-item" data-tab="table" onclick="setTab('table')"><span class="ind"></span><span class="lbl">Table</span></button>
+  <button class="tab-item" data-tab="teams" onclick="setTab('teams')"><span class="ind"></span><span class="lbl">My Teams</span></button>
+  <button class="tab-item" data-tab="watch" onclick="setTab('watch')"><span class="ind"></span><span class="lbl">Watch</span></button>
+</nav>
 
 <div id="ytModal" class="yt-modal" onclick="if(event.target===this)closeYtModal()">
   <div class="yt-modal-inner">
@@ -761,12 +613,12 @@
       <span class="yt-modal-title" id="ytModalTitle">Highlights</span>
       <button class="yt-close-btn" onclick="closeYtModal()">&#x2715;</button>
     </div>
-    <div class="yt-results" id="ytResultsList" style="display:none"></div>
-    <div class="yt-video-wrap" id="ytVideoWrap" style="display:none">
+    <div class="yt-results" id="ytResultsList"></div>
+    <div class="yt-video-wrap" id="ytVideoWrap">
       <iframe id="ytIframe" allowfullscreen allow="autoplay; encrypted-media"></iframe>
     </div>
     <div class="yt-status" id="ytStatus"></div>
-    <div class="yt-back-bar" id="ytBackBar" style="display:none">
+    <div class="yt-back-bar" id="ytBackBar">
       <button class="yt-back-btn" onclick="showYtResults()">&#8592; Back to results</button>
     </div>
   </div>
@@ -774,21 +626,321 @@
 
 <script>
 // ============================================================
-// Premier League fixtures — football-data.org free tier
-// Register free at https://www.football-data.org/client/register
-// Then paste your key below.
+// Premier League fixtures — football-data.org free tier,
+// proxied through a Cloudflare Worker (see worker.js).
 // ============================================================
 const PROXY_URL = 'https://silent-mode-cf93.quekwk.workers.dev';
 
-// ---- YouTube highlights ----
-const ytCache = {}; // matchKey → array of result items
+// ---- State ----
+let weekOffset = 0;
+let selectedDay = 0;       // 0–6 index into the visible week
+let allMatches = [];
+let searchTerm = '';
+
+// ---- Date helpers (all comparisons in SGT/MYT = UTC+8) ----
+function getMondayUTC(d) {
+  const day = d.getUTCDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + diff));
+}
+function getWeekRange(offset) {
+  const monday = getMondayUTC(new Date());
+  monday.setUTCDate(monday.getUTCDate() + offset * 7);
+  const sunday = new Date(monday);
+  sunday.setUTCDate(monday.getUTCDate() + 6);
+  sunday.setUTCHours(23, 59, 59, 999);
+  return { start: monday, end: sunday };
+}
+function toSGT(utcStr) {
+  return new Date(new Date(utcStr).getTime() + 8 * 3600000);
+}
+function isoDate(d) {
+  return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;
+}
+const DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+const DOW_FULL = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+const MON = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+function fmtClock(d) {
+  const h = d.getUTCHours(), m = d.getUTCMinutes();
+  return { hm: `${h % 12 || 12}:${String(m).padStart(2,'0')}`, mer: h >= 12 ? 'PM' : 'AM' };
+}
+function fmtDayHead(d) {
+  return `${DOW_FULL[d.getUTCDay()]} ${d.getUTCDate()} ${MON[d.getUTCMonth()]}`;
+}
+const todayStr = isoDate(toSGT(new Date().toISOString()));
+
+// ---- Week day list for the strip ----
+function weekDays() {
+  const { start } = getWeekRange(weekOffset);
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(start);
+    d.setUTCDate(start.getUTCDate() + i);
+    return d;
+  });
+}
+
+// ---- Team rendering ----
+function crestBig(team) {
+  const code = team.tla || (team.shortName || team.name || '').slice(0, 3).toUpperCase();
+  return team.crest
+    ? `<div class="crest"><img src="${team.crest}" alt="" loading="lazy" onerror="this.replaceWith(document.createTextNode('${code}'))"></div>`
+    : `<div class="crest">${code}</div>`;
+}
+function crestMini(team) {
+  return team.crest
+    ? `<span class="mini"><img src="${team.crest}" alt="" loading="lazy"></span>`
+    : `<span class="mini"></span>`;
+}
+function teamName(team) {
+  return team.shortName || team.name || 'TBD';
+}
+
+// ---- API ----
+async function fetchWeekMatches() {
+  const list = document.getElementById('matchList');
+  list.innerHTML = '<div class="loading">Loading fixtures…</div>';
+  document.getElementById('heroSlot').innerHTML = '';
+  updateWeekLabel();
+  renderWeekStrip();
+
+  const { start, end } = getWeekRange(weekOffset);
+  try {
+    const res = await fetch(`${PROXY_URL}?dateFrom=${isoDate(start)}&dateTo=${isoDate(end)}`);
+    if (!res.ok) {
+      list.innerHTML = `<div class="api-notice">API error ${res.status} — the fixtures service is unavailable right now.</div>`;
+      return;
+    }
+    const data = await res.json();
+    allMatches = data.matches || [];
+    selectedDay = pickDefaultDay();
+    render();
+  } catch (e) {
+    list.innerHTML = `<div class="api-notice">Could not load fixtures — check your connection and try again.</div>`;
+    console.warn(e);
+  }
+}
+
+function pickDefaultDay() {
+  const days = weekDays();
+  const counts = days.map(d => {
+    const ds = isoDate(d);
+    return allMatches.filter(m => isoDate(toSGT(m.utcDate)) === ds).length;
+  });
+  const todayIdx = days.findIndex(d => isoDate(d) === todayStr);
+  if (todayIdx >= 0 && counts[todayIdx] > 0) return todayIdx;
+  const firstWithMatches = counts.findIndex(c => c > 0);
+  if (firstWithMatches >= 0) return firstWithMatches;
+  return todayIdx >= 0 ? todayIdx : 0;
+}
+
+// ---- Navigation ----
+function updateWeekLabel() {
+  const { start, end } = getWeekRange(weekOffset);
+  const el = document.getElementById('weekLabel');
+  if (weekOffset === 0) { el.textContent = 'This week'; return; }
+  const a = `${MON[start.getUTCMonth()]} ${start.getUTCDate()}`;
+  const b = start.getUTCMonth() === end.getUTCMonth()
+    ? `${end.getUTCDate()}`
+    : `${MON[end.getUTCMonth()]} ${end.getUTCDate()}`;
+  el.textContent = `${a} – ${b}`;
+}
+function changeWeek(delta) {
+  weekOffset += delta;
+  fetchWeekMatches();
+}
+function selectDay(i) {
+  selectedDay = i;
+  render();
+}
+function onSearch() {
+  searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+  render();
+}
+function setTab(tab) {
+  document.querySelectorAll('.tab-item').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  const home = document.getElementById('homeView');
+  const ph = document.getElementById('placeholderView');
+  if (tab === 'fixtures') {
+    home.classList.remove('hide');
+    ph.classList.remove('show');
+  } else {
+    home.classList.add('hide');
+    ph.classList.add('show');
+    document.getElementById('phTitle').textContent =
+      { table: 'Table', teams: 'My Teams', watch: 'Watch' }[tab];
+  }
+}
+
+// ---- Match status ----
+function statusOf(m) {
+  if (m.status === 'IN_PLAY') return 'live';
+  if (m.status === 'PAUSED') return 'ht';
+  if (m.status === 'FINISHED' || m.status === 'AWARDED') return 'ft';
+  return 'upcoming';
+}
+function goals(m) {
+  const s = m.score || {};
+  const h = s.fullTime?.home ?? s.regularTime?.home ?? null;
+  const a = s.fullTime?.away ?? s.regularTime?.away ?? null;
+  return { h, a };
+}
+
+// ---- Render ----
+function render() {
+  renderWeekStrip();
+  renderHero();
+  renderList();
+}
+
+function renderWeekStrip() {
+  const strip = document.getElementById('weekStrip');
+  const days = weekDays();
+  strip.innerHTML = days.map((d, i) => {
+    const ds = isoDate(d);
+    const hasLive = allMatches.some(m =>
+      isoDate(toSGT(m.utcDate)) === ds && (statusOf(m) === 'live' || statusOf(m) === 'ht'));
+    return `<button class="day-pill${i === selectedDay ? ' active' : ''}${hasLive ? ' has-live' : ''}" onclick="selectDay(${i})">
+      <span class="dow">${DOW[d.getUTCDay()]}</span>
+      <span class="num">${d.getUTCDate()}</span>
+    </button>`;
+  }).join('');
+}
+
+function renderHero() {
+  const slot = document.getElementById('heroSlot');
+  const live = allMatches.find(m => statusOf(m) === 'live' || statusOf(m) === 'ht');
+  if (!live) { slot.innerHTML = ''; return; }
+
+  const { h, a } = goals(live);
+  const st = statusOf(live);
+  const label = st === 'ht' ? 'HALF TIME' : (live.minute ? `LIVE · ${live.minute}'` : 'LIVE');
+  const venue = live.venue ? `<div class="hero-venue">${live.venue.toUpperCase()}</div>` : '';
+
+  slot.innerHTML = `
+    <div class="hero">
+      <div class="hero-bar"></div>
+      <div class="hero-body">
+        <div class="hero-top">
+          <span class="live-dot"></span>
+          <span class="live-label">${label}</span>
+          <span class="hero-mw">MATCHWEEK ${live.matchday}</span>
+        </div>
+        <div class="hero-score-row">
+          <div class="hero-team">
+            ${crestBig(live.homeTeam)}
+            <div class="name">${teamName(live.homeTeam)}</div>
+          </div>
+          <div>
+            <div class="hero-score">${h ?? 0}<span class="dash">–</span>${a ?? 0}</div>
+            ${venue}
+          </div>
+          <div class="hero-team">
+            ${crestBig(live.awayTeam)}
+            <div class="name">${teamName(live.awayTeam)}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function matchVisible(m, ds) {
+  if (isoDate(toSGT(m.utcDate)) !== ds) return false;
+  if (searchTerm) {
+    const hay = [m.homeTeam.shortName, m.homeTeam.name, m.awayTeam.shortName, m.awayTeam.name]
+      .filter(Boolean).join(' ').toLowerCase();
+    if (!hay.includes(searchTerm)) return false;
+  }
+  return true;
+}
+
+function renderList() {
+  const list = document.getElementById('matchList');
+  const day = weekDays()[selectedDay];
+  const ds = isoDate(day);
+  const heroMatch = allMatches.find(m => statusOf(m) === 'live' || statusOf(m) === 'ht');
+
+  const matches = allMatches
+    .filter(m => matchVisible(m, ds))
+    .filter(m => !heroMatch || m.id !== heroMatch.id)
+    .sort((x, y) => new Date(x.utcDate) - new Date(y.utcDate));
+
+  if (matches.length === 0) {
+    list.innerHTML = `<div class="empty"><strong>No fixtures</strong>${
+      searchTerm ? 'No match for that search on this day.' : 'Nothing scheduled for ' + fmtDayHead(day).toLowerCase() + '.'
+    }</div>`;
+    return;
+  }
+
+  const rows = matches.map(m => {
+    const sgt = toSGT(m.utcDate);
+    const st = statusOf(m);
+    const { h, a } = goals(m);
+    const scored = h !== null && a !== null;
+    const isFinished = st === 'ft';
+    const tag = isFinished ? 'button' : 'div';
+    const onclick = isFinished ? ` data-hl="${m.id}"` : '';
+
+    // left block
+    let left;
+    if (st === 'live' || st === 'ht') {
+      left = `<div class="hm">${m.minute ? m.minute + "'" : ''}</div><div class="status live">${st === 'ht' ? 'HALF TIME' : 'LIVE'}</div>`;
+    } else if (isFinished) {
+      left = `<div class="hm" style="color:var(--t3)">FT</div>`;
+    } else {
+      const c = fmtClock(sgt);
+      left = `<div class="hm">${c.hm}</div><div class="mer">${c.mer} · SGT</div>`;
+    }
+
+    // right block
+    let right;
+    if (scored) {
+      right = `<div class="fix-score">${h}<span class="dash">–</span>${a}</div>${
+        isFinished ? '<span class="fix-hl">▶ HIGHLIGHTS</span>' : ''}`;
+    } else {
+      right = `<span class="fix-badge">MW ${m.matchday}</span>${
+        m.venue ? `<span class="fix-badge" style="border:none;padding:0">${m.venue}</span>` : ''
+      }`;
+    }
+
+    return `<${tag} class="fix-row"${onclick}>
+      <div class="fix-time">${left}</div>
+      <div class="fix-divider"></div>
+      <div class="fix-teams">
+        <div class="team${scored && a > h ? ' dim' : ''}">${crestMini(m.homeTeam)}<span class="nm">${teamName(m.homeTeam)}</span></div>
+        <div class="team${scored && h > a ? ' dim' : ''}">${crestMini(m.awayTeam)}<span class="nm">${teamName(m.awayTeam)}</span></div>
+      </div>
+      <div class="fix-right">${right}</div>
+    </${tag}>`;
+  }).join('');
+
+  list.innerHTML = `<div class="day-section">
+    <div class="day-head">
+      <span class="label">${fmtDayHead(day)}</span>
+      <span class="rule"></span>
+      <span class="count">${matches.length} ${matches.length === 1 ? 'match' : 'matches'}</span>
+    </div>
+    ${rows}
+  </div>`;
+
+  list.querySelectorAll('[data-hl]').forEach(el => {
+    const m = allMatches.find(x => String(x.id) === el.dataset.hl);
+    if (!m) return;
+    el.onclick = () => loadHighlight(
+      `${m.matchday}-${m.homeTeam.id}-${m.awayTeam.id}`,
+      m.homeTeam.name, m.awayTeam.name, m.utcDate);
+  });
+}
+
+// ============================================================
+// YouTube highlights modal
+// ============================================================
+const ytCache = {};
 
 function showYtModal(title) {
   document.getElementById('ytModalTitle').textContent = title;
   document.getElementById('ytModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeYtModal() {
   document.getElementById('ytModal').classList.remove('open');
   document.getElementById('ytIframe').src = '';
@@ -798,15 +950,13 @@ function closeYtModal() {
   document.getElementById('ytBackBar').style.display = 'none';
   document.body.style.overflow = '';
 }
-
 function showYtResults(items) {
-  const list = document.getElementById('ytResultsList');
-  const cachedItems = items || list._items;
-  if (!cachedItems) return;
-  list._items = cachedItems;
-
-  list.innerHTML = '';
-  cachedItems.forEach(item => {
+  const listEl = document.getElementById('ytResultsList');
+  const cached = items || listEl._items;
+  if (!cached) return;
+  listEl._items = cached;
+  listEl.innerHTML = '';
+  cached.forEach(item => {
     const thumb = item.snippet.thumbnails?.medium?.url || item.snippet.thumbnails?.default?.url || '';
     const el = document.createElement('div');
     el.className = 'yt-result-item';
@@ -817,15 +967,13 @@ function showYtResults(items) {
         <div class="yt-result-title">${item.snippet.title}</div>
       </div>`;
     el.onclick = () => playYtVideo(item.id.videoId);
-    list.appendChild(el);
+    listEl.appendChild(el);
   });
-
-  list.style.display = 'flex';
+  listEl.style.display = 'flex';
   document.getElementById('ytVideoWrap').style.display = 'none';
   document.getElementById('ytBackBar').style.display = 'none';
   document.getElementById('ytStatus').innerHTML = '';
 }
-
 function playYtVideo(videoId) {
   document.getElementById('ytResultsList').style.display = 'none';
   document.getElementById('ytStatus').innerHTML = '';
@@ -833,24 +981,20 @@ function playYtVideo(videoId) {
   document.getElementById('ytIframe').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
   document.getElementById('ytBackBar').style.display = '';
 }
-
 async function loadHighlight(matchKey, homeTeam, awayTeam, matchDate) {
-  showYtModal(`${homeTeam} vs ${awayTeam} Highlights`);
-
+  showYtModal(`${homeTeam} vs ${awayTeam}`);
   if (ytCache[matchKey]) { showYtResults(ytCache[matchKey]); return; }
-
   document.getElementById('ytResultsList').style.display = 'none';
   document.getElementById('ytVideoWrap').style.display = 'none';
   document.getElementById('ytBackBar').style.display = 'none';
   document.getElementById('ytStatus').textContent = 'Searching for highlights…';
-
   try {
     const res = await fetch(
       `${PROXY_URL}/highlights?home=${encodeURIComponent(homeTeam)}&away=${encodeURIComponent(awayTeam)}&date=${encodeURIComponent(matchDate)}`
     );
     const data = await res.json();
     if (data.error) {
-      document.getElementById('ytStatus').textContent = `Error: ${data.error.message}`;
+      document.getElementById('ytStatus').textContent = `Error: ${data.error.message || data.error}`;
       return;
     }
     if (!data.items || data.items.length === 0) {
@@ -859,231 +1003,10 @@ async function loadHighlight(matchKey, homeTeam, awayTeam, matchDate) {
     }
     ytCache[matchKey] = data.items;
     showYtResults(data.items);
-  } catch(e) {
-    document.getElementById('ytStatus').textContent = 'Could not load highlights — check console for details.';
-    console.warn(e);
-  }
-}
-
-let weekOffset = 0;
-let allMatches = [];
-let currentFilter = 'all';
-let searchTerm = '';
-
-// ---- Date helpers ----
-function getMondayUTC(d) {
-  const day = d.getUTCDay();
-  const diff = day === 0 ? -6 : 1 - day;
-  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + diff));
-}
-
-function getWeekRange(offset) {
-  const monday = getMondayUTC(new Date());
-  monday.setUTCDate(monday.getUTCDate() + offset * 7);
-  const sunday = new Date(monday);
-  sunday.setUTCDate(monday.getUTCDate() + 6);
-  sunday.setUTCHours(23, 59, 59, 999);
-  return { start: monday, end: sunday };
-}
-
-function toSGT(utcStr) {
-  return new Date(new Date(utcStr).getTime() + 8 * 3600000);
-}
-
-function fmtTime(d) {
-  const h = d.getUTCHours(), m = d.getUTCMinutes();
-  const hh = h % 12 || 12;
-  const mm = m.toString().padStart(2, '0');
-  return `${hh}:${mm}${h >= 12 ? 'pm' : 'am'}`;
-}
-
-function fmtDate(d) {
-  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return `${days[d.getUTCDay()]} ${d.getUTCDate()} ${months[d.getUTCMonth()]}`;
-}
-
-function isoDate(d) {
-  return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;
-}
-
-const todayStr = isoDate(toSGT(new Date().toISOString()));
-
-// ---- Week navigation ----
-function updateWeekLabel() {
-  const { start, end } = getWeekRange(weekOffset);
-  const el = document.getElementById('weekLabel');
-  el.textContent = weekOffset === 0 ? 'This Week' : `${fmtDate(start)} – ${fmtDate(end)}`;
-}
-
-function changeWeek(delta) {
-  weekOffset += delta;
-  fetchWeekMatches();
-}
-
-// ---- API fetch ----
-async function fetchWeekMatches() {
-  const list = document.getElementById('matchList');
-  list.innerHTML = '<div class="loading-msg">Loading fixtures…</div>';
-  updateWeekLabel();
-
-  const { start, end } = getWeekRange(weekOffset);
-  const from = isoDate(start);
-  const to = isoDate(end);
-
-  try {
-    const res = await fetch(`${PROXY_URL}?dateFrom=${from}&dateTo=${to}`);
-    if (!res.ok) {
-      list.innerHTML = `<div class="api-notice">API error ${res.status} — check your API key.</div>`;
-      return;
-    }
-    const data = await res.json();
-    allMatches = data.matches || [];
-    renderMatches();
   } catch (e) {
-    list.innerHTML = `<div class="api-notice">Could not load fixtures — check console for details.</div>`;
+    document.getElementById('ytStatus').textContent = 'Could not load highlights.';
     console.warn(e);
   }
-}
-
-// ---- Filters ----
-function setFilter(f, btn) {
-  currentFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderMatches();
-}
-
-function filterSearch() {
-  searchTerm = document.getElementById('searchInput').value.toLowerCase();
-  renderMatches();
-}
-
-function matchVisible(m) {
-  const ds = isoDate(toSGT(m.utcDate));
-  if (currentFilter === 'today' && ds !== todayStr) return false;
-  if (searchTerm) {
-    const hay = [m.homeTeam.shortName, m.homeTeam.name, m.awayTeam.shortName, m.awayTeam.name].join(' ').toLowerCase();
-    if (!hay.includes(searchTerm)) return false;
-  }
-  return true;
-}
-
-// ---- Render ----
-function renderMatches() {
-  const list = document.getElementById('matchList');
-  list.innerHTML = '';
-
-  const visible = allMatches.filter(matchVisible);
-  if (visible.length === 0) {
-    list.innerHTML = '<div class="loading-msg">No fixtures for this period.</div>';
-    return;
-  }
-
-  const byDate = {};
-  visible.forEach(m => {
-    const sgt = toSGT(m.utcDate);
-    const dk = isoDate(sgt);
-    if (!byDate[dk]) byDate[dk] = { label: fmtDate(sgt), ms: [] };
-    byDate[dk].ms.push(m);
-  });
-
-  Object.keys(byDate).sort().forEach(dk => {
-    const isToday = dk === todayStr;
-    const dg = document.createElement('div');
-    dg.className = 'date-group';
-
-    const dl = document.createElement('div');
-    dl.className = 'date-label';
-    dl.textContent = isToday ? `📅 TODAY — ${byDate[dk].label}` : byDate[dk].label;
-    if (isToday) dl.style.color = 'var(--gold)';
-    dg.appendChild(dl);
-
-    byDate[dk].ms.forEach(m => {
-      const sgt = toSGT(m.utcDate);
-      const status = m.status;
-      const isFinished = status === 'FINISHED' || status === 'AWARDED';
-      const isLive = status === 'IN_PLAY';
-      const isPaused = status === 'PAUSED';
-
-      let statusClass = 'status-upcoming';
-      if (isFinished) statusClass = 'status-finished';
-      else if (isLive || isPaused) statusClass = 'status-live';
-
-      const card = document.createElement('div');
-      card.className = `match-card ${statusClass}`;
-
-      // Time / Score
-      const timeDiv = document.createElement('div');
-      timeDiv.className = 'match-time';
-
-      if (isFinished || isLive || isPaused) {
-        const sc = m.score;
-        const homeGoals = sc.fullTime?.home ?? sc.regularTime?.home ?? null;
-        const awayGoals = sc.fullTime?.away ?? sc.regularTime?.away ?? null;
-
-        const statusEl = document.createElement('span');
-        if (isLive) {
-          statusEl.className = 'status-label status-live';
-          statusEl.innerHTML = '<span class="live-dot"></span>LIVE';
-        } else if (isPaused) {
-          statusEl.className = 'status-label status-ht';
-          statusEl.textContent = 'HT';
-        } else {
-          statusEl.className = 'status-label status-ft';
-          statusEl.textContent = 'FT';
-        }
-        timeDiv.appendChild(statusEl);
-
-        if (homeGoals !== null) {
-          const scoreEl = document.createElement('span');
-          scoreEl.className = 'match-score';
-          scoreEl.textContent = `${homeGoals} – ${awayGoals}`;
-          timeDiv.appendChild(scoreEl);
-        }
-      } else {
-        const sgtEl = document.createElement('span');
-        sgtEl.className = 'sgt';
-        sgtEl.textContent = fmtTime(sgt);
-        timeDiv.appendChild(sgtEl);
-        const dayEl = document.createElement('span');
-        dayEl.className = 'day-shift';
-        dayEl.textContent = 'SGT/MYT';
-        timeDiv.appendChild(dayEl);
-      }
-
-      // Teams
-      const teamsDiv = document.createElement('div');
-      teamsDiv.className = 'match-teams';
-      const tr = document.createElement('div');
-      tr.className = 'teams-row';
-      const homeShort = m.homeTeam.shortName || m.homeTeam.name;
-      const awayShort = m.awayTeam.shortName || m.awayTeam.name;
-      tr.textContent = `${homeShort} vs ${awayShort}`;
-      teamsDiv.appendChild(tr);
-      const meta = document.createElement('div');
-      meta.className = 'match-meta';
-      const parts = [`GW ${m.matchday}`];
-      if (m.venue) parts.push(m.venue);
-      meta.textContent = parts.join(' · ');
-      teamsDiv.appendChild(meta);
-
-      if (isFinished) {
-        const hlBtn = document.createElement('button');
-        hlBtn.className = 'highlights-btn';
-        hlBtn.innerHTML = '&#9654; Highlights';
-        const matchKey = `${m.matchday}-${m.homeTeam.id}-${m.awayTeam.id}`;
-        hlBtn.onclick = () => loadHighlight(matchKey, m.homeTeam.name, m.awayTeam.name, m.utcDate);
-        meta.appendChild(hlBtn);
-      }
-
-      card.appendChild(timeDiv);
-      card.appendChild(teamsDiv);
-      dg.appendChild(card);
-    });
-
-    list.appendChild(dg);
-  });
 }
 
 fetchWeekMatches();
