@@ -10,25 +10,11 @@
 //   YT_API_KEY  — YouTube Data API v3 key
 // ============================================================
 
-// Origins allowed to call this Worker.
-//   - exact matches in ALLOWED_ORIGINS
-//   - any *.pages.dev preview/production URL (Cloudflare Pages)
-//   - add your custom domain to ALLOWED_ORIGINS once it's live
+// Origins allowed to call this Worker. Add your custom domain here
+// when you move off github.io.
 const ALLOWED_ORIGINS = [
   'https://quekwk87.github.io',
-  // 'https://worldcupdashboard.com',
-  // 'https://www.worldcupdashboard.com',
 ];
-
-function originAllowed(origin) {
-  if (!origin) return true; // direct navigation / curl — no Origin header
-  if (ALLOWED_ORIGINS.includes(origin)) return true;
-  try {
-    const host = new URL(origin).hostname;
-    if (host.endsWith('.pages.dev')) return true;
-  } catch { /* malformed Origin */ }
-  return false;
-}
 
 // Club name → official YouTube handle. Unresolved handles are reported
 // in the `unresolved` field of /highlights responses.
@@ -61,6 +47,10 @@ const ALWAYS = ['@premierleague', '@NBCSports'];
 const MIN_SECONDS = 60;   // 1 minute
 const MAX_SECONDS = 600;  // 10 minutes
 
+// Bump when search/filter logic changes, to invalidate cached results
+// keyed on the old behaviour.
+const CACHE_VERSION = 'v3';
+
 // Cache TTLs (seconds)
 const TTL_FIXTURES_LIVE = 300;    // current/future week — scores still moving
 const TTL_FIXTURES_PAST = 21600;  // finished week — results are final (6h)
@@ -80,6 +70,16 @@ function normalizeTeam(name) {
     .replace(/\b(fc|afc)\b/g, '')
     .replace(/&/g, 'and')
     .replace(/[^a-z0-9]/g, '');
+}
+
+// football-data.org returns names like "Liverpool FC" / "AFC Bournemouth",
+// but official highlight videos are titled "Liverpool 2-1 Arsenal | ...".
+// Strip the club suffix so the search matches how videos are actually named.
+function searchName(name) {
+  return (name || '')
+    .replace(/\b(FC|AFC)\b/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function parseDuration(iso) {
@@ -123,7 +123,7 @@ async function handleHighlights(url, env) {
     const before = new Date(d); before.setDate(before.getDate() + 3);
     dateParams = `&publishedAfter=${after.toISOString()}&publishedBefore=${before.toISOString()}`;
   }
-  const q = encodeURIComponent(`"${home}" "${away}" highlights`);
+  const q = encodeURIComponent(`${searchName(home)} ${searchName(away)} highlights`);
   const searchRes = await fetch(
     `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&type=video` +
     `&maxResults=25&order=relevance&videoEmbeddable=true${dateParams}&key=${key}`
@@ -135,7 +135,7 @@ async function handleHighlights(url, env) {
 
   const items = search.items || [];
   if (items.length === 0) {
-    return { body: { items: [], officialOnly: true, unresolved }, status: 200, ttl: TTL_HIGHLIGHTS_MISS };
+    return { body: { items: [], unresolved }, status: 200, ttl: TTL_HIGHLIGHTS_MISS };
   }
 
   // 3. Exact durations in one batched call (1 quota unit for up to 50 ids)
@@ -154,17 +154,13 @@ async function handleHighlights(url, env) {
   };
   const official = items.filter(i => officialIds.has(i.snippet.channelId) && inRange(i));
 
-  let out = official;
-  let officialOnly = true;
-  if (out.length === 0) {
-    out = items.filter(inRange).slice(0, 10);
-    officialOnly = false;
-  }
-
+  // Official channels only — no fallback. An empty result means official
+  // highlights aren't up yet (or a handle in HANDLES is wrong), so cache
+  // briefly and retry rather than showing unofficial uploads.
   return {
-    body: { items: out, officialOnly, unresolved },
+    body: { items: official, unresolved },
     status: 200,
-    ttl: out.length > 0 ? TTL_HIGHLIGHTS_HIT : TTL_HIGHLIGHTS_MISS,
+    ttl: official.length > 0 ? TTL_HIGHLIGHTS_HIT : TTL_HIGHLIGHTS_MISS,
   };
 }
 
@@ -201,7 +197,7 @@ export default {
     // Block cross-origin use from sites that aren't ours. Requests with no
     // Origin header (direct navigation, curl) are allowed so the endpoints
     // stay testable — this stops hotlinking, not a determined scripter.
-    if (!originAllowed(origin)) {
+    if (origin && !ALLOWED_ORIGINS.includes(origin)) {
       return new Response(JSON.stringify({ error: 'Origin not allowed' }), {
         status: 403,
         headers: JSON_HEADERS,
@@ -210,7 +206,10 @@ export default {
 
     const url = new URL(request.url);
     const cache = caches.default;
-    const cacheKey = new Request(url.toString(), { method: 'GET' });
+
+    const keyUrl = new URL(url.toString());
+    keyUrl.searchParams.set('_v', CACHE_VERSION);
+    const cacheKey = new Request(keyUrl.toString(), { method: 'GET' });
 
     const hit = await cache.match(cacheKey);
     if (hit) return hit;
