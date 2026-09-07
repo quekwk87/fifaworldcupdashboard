@@ -147,7 +147,7 @@ async function handleHighlights(url, env) {
   const durations = {};
   (det.items || []).forEach(v => { durations[v.id] = parseDuration(v.contentDetails?.duration); });
 
-  // 4. Keep official channels within the duration window; fall back if none
+  // 4. Keep only official channels within the duration window
   const inRange = i => {
     const s = durations[i.id.videoId];
     return s >= MIN_SECONDS && s <= MAX_SECONDS;
