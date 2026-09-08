@@ -993,9 +993,11 @@ function showYtResults(items) {
 function playYtVideo(videoId) {
   document.getElementById('ytResultsList').style.display = 'none';
   document.getElementById('ytStatus').innerHTML = '';
-  document.getElementById('ytVideoWrap').style.display = '';
+  // Explicit values, not '' — these elements are display:none in the
+  // stylesheet, so clearing the inline style would re-hide them.
+  document.getElementById('ytVideoWrap').style.display = 'block';
   document.getElementById('ytIframe').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-  document.getElementById('ytBackBar').style.display = '';
+  document.getElementById('ytBackBar').style.display = 'block';
 }
 async function loadHighlight(matchKey, homeTeam, awayTeam, matchDate) {
   showYtModal(`${homeTeam} vs ${awayTeam}`);
