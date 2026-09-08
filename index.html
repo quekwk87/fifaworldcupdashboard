@@ -701,6 +701,9 @@ async function fetchWeekMatches() {
   list.innerHTML = '<div class="loading">Loading fixtures…</div>';
   document.getElementById('heroSlot').innerHTML = '';
   updateWeekLabel();
+  // Drop the previous week's fixtures before redrawing, so the day strip
+  // doesn't briefly show play days belonging to the week we just left.
+  allMatches = [];
   renderWeekStrip();
 
   const { start, end } = getWeekRange(weekOffset);
@@ -794,8 +797,21 @@ function render() {
 
 function renderWeekStrip() {
   const strip = document.getElementById('weekStrip');
-  const days = weekDays();
-  strip.innerHTML = days.map((d, i) => {
+
+  // Only surface days that actually have fixtures. selectedDay stays an
+  // index into the full week, so the day lookup in renderList is unaffected.
+  const playDays = weekDays()
+    .map((d, i) => ({ d, i }))
+    .filter(({ d }) => allMatches.some(m => isoDate(toSGT(m.utcDate)) === isoDate(d)));
+
+  if (playDays.length === 0) {
+    strip.style.display = 'none';
+    strip.innerHTML = '';
+    return;
+  }
+  strip.style.display = '';
+
+  strip.innerHTML = playDays.map(({ d, i }) => {
     const ds = isoDate(d);
     const hasLive = allMatches.some(m =>
       isoDate(toSGT(m.utcDate)) === ds && (statusOf(m) === 'live' || statusOf(m) === 'ht'));
