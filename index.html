@@ -277,7 +277,8 @@
   .hero-cta .outline { background: transparent; border-color: #2b2b31; color: var(--t2); }
 
   /* ---------- Day section + fixture list ---------- */
-  .day-section { padding: 0 20px; }
+  /* scroll-margin clears the sticky week strip when jumping to a day */
+  .day-section { padding: 0 20px; scroll-margin-top: 64px; }
   .day-head {
     display: flex;
     align-items: center;
@@ -633,7 +634,6 @@ const PROXY_URL = 'https://silent-mode-cf93.quekwk.workers.dev';
 
 // ---- State ----
 let weekOffset = 0;
-let selectedDay = 0;       // 0–6 index into the visible week
 let allMatches = [];
 let searchTerm = '';
 
@@ -668,16 +668,6 @@ function fmtDayHead(d) {
   return `${DOW_FULL[d.getUTCDay()]} ${d.getUTCDate()} ${MON[d.getUTCMonth()]}`;
 }
 const todayStr = isoDate(toSGT(new Date().toISOString()));
-
-// ---- Week day list for the strip ----
-function weekDays() {
-  const { start } = getWeekRange(weekOffset);
-  return Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(start);
-    d.setUTCDate(start.getUTCDate() + i);
-    return d;
-  });
-}
 
 // ---- Team rendering ----
 function crestBig(team) {
@@ -715,25 +705,11 @@ async function fetchWeekMatches() {
     }
     const data = await res.json();
     allMatches = data.matches || [];
-    selectedDay = pickDefaultDay();
     render();
   } catch (e) {
     list.innerHTML = `<div class="api-notice">Could not load fixtures — check your connection and try again.</div>`;
     console.warn(e);
   }
-}
-
-function pickDefaultDay() {
-  const days = weekDays();
-  const counts = days.map(d => {
-    const ds = isoDate(d);
-    return allMatches.filter(m => isoDate(toSGT(m.utcDate)) === ds).length;
-  });
-  const todayIdx = days.findIndex(d => isoDate(d) === todayStr);
-  if (todayIdx >= 0 && counts[todayIdx] > 0) return todayIdx;
-  const firstWithMatches = counts.findIndex(c => c > 0);
-  if (firstWithMatches >= 0) return firstWithMatches;
-  return todayIdx >= 0 ? todayIdx : 0;
 }
 
 // ---- Navigation ----
@@ -751,9 +727,9 @@ function changeWeek(delta) {
   weekOffset += delta;
   fetchWeekMatches();
 }
-function selectDay(i) {
-  selectedDay = i;
-  render();
+function jumpToDay(ds) {
+  const el = document.getElementById(`day-${ds}`);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 function onSearch() {
   searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
@@ -798,24 +774,22 @@ function render() {
 function renderWeekStrip() {
   const strip = document.getElementById('weekStrip');
 
-  // Only surface days that actually have fixtures. selectedDay stays an
-  // index into the full week, so the day lookup in renderList is unaffected.
-  const playDays = weekDays()
-    .map((d, i) => ({ d, i }))
-    .filter(({ d }) => allMatches.some(m => isoDate(toSGT(m.utcDate)) === isoDate(d)));
+  // Built from the same set the list renders, so each pill is a jump link
+  // to a section that exists. Days without fixtures get no pill.
+  const days = groupByDay(visibleMatches());
 
-  if (playDays.length === 0) {
+  if (days.size === 0) {
     strip.style.display = 'none';
     strip.innerHTML = '';
     return;
   }
   strip.style.display = '';
 
-  strip.innerHTML = playDays.map(({ d, i }) => {
-    const ds = isoDate(d);
-    const hasLive = allMatches.some(m =>
-      isoDate(toSGT(m.utcDate)) === ds && (statusOf(m) === 'live' || statusOf(m) === 'ht'));
-    return `<button class="day-pill${i === selectedDay ? ' active' : ''}${hasLive ? ' has-live' : ''}" onclick="selectDay(${i})">
+  strip.innerHTML = [...days].map(([ds, ms]) => {
+    const d = new Date(`${ds}T00:00:00Z`);
+    const hasLive = ms.some(m => statusOf(m) === 'live' || statusOf(m) === 'ht');
+    // 'active' marks today rather than a selection — every day is on screen.
+    return `<button class="day-pill${ds === todayStr ? ' active' : ''}${hasLive ? ' has-live' : ''}" onclick="jumpToDay('${ds}')">
       <span class="dow">${DOW[d.getUTCDay()]}</span>
       <span class="num">${d.getUTCDate()}</span>
     </button>`;
@@ -859,84 +833,99 @@ function renderHero() {
     </div>`;
 }
 
-function matchVisible(m, ds) {
-  if (isoDate(toSGT(m.utcDate)) !== ds) return false;
-  if (searchTerm) {
-    const hay = [m.homeTeam.shortName, m.homeTeam.name, m.awayTeam.shortName, m.awayTeam.name]
-      .filter(Boolean).join(' ').toLowerCase();
-    if (!hay.includes(searchTerm)) return false;
+function matchesSearch(m) {
+  if (!searchTerm) return true;
+  const hay = [m.homeTeam.shortName, m.homeTeam.name, m.awayTeam.shortName, m.awayTeam.name]
+    .filter(Boolean).join(' ').toLowerCase();
+  return hay.includes(searchTerm);
+}
+
+// Everything the list will actually render, chronologically. The day strip
+// derives from this too, so every pill has a section to jump to.
+function visibleMatches() {
+  const hero = allMatches.find(m => statusOf(m) === 'live' || statusOf(m) === 'ht');
+  return allMatches
+    .filter(matchesSearch)
+    .filter(m => !hero || m.id !== hero.id)
+    .sort((x, y) => new Date(x.utcDate) - new Date(y.utcDate));
+}
+
+// Group by SGT date — a late UTC kickoff belongs to the next day here.
+function groupByDay(list) {
+  const groups = new Map();
+  list.forEach(m => {
+    const ds = isoDate(toSGT(m.utcDate));
+    if (!groups.has(ds)) groups.set(ds, []);
+    groups.get(ds).push(m);
+  });
+  return groups;
+}
+
+function fixtureRow(m) {
+  const sgt = toSGT(m.utcDate);
+  const st = statusOf(m);
+  const { h, a } = goals(m);
+  const scored = h !== null && a !== null;
+  const isFinished = st === 'ft';
+  const tag = isFinished ? 'button' : 'div';
+  const onclick = isFinished ? ` data-hl="${m.id}"` : '';
+
+  // left block
+  let left;
+  if (st === 'live' || st === 'ht') {
+    left = `<div class="hm">${m.minute ? m.minute + "'" : ''}</div><div class="status live">${st === 'ht' ? 'HALF TIME' : 'LIVE'}</div>`;
+  } else if (isFinished) {
+    left = `<div class="hm" style="color:var(--t3)">FT</div>`;
+  } else {
+    const c = fmtClock(sgt);
+    left = `<div class="hm">${c.hm}</div><div class="mer">${c.mer} · SGT</div>`;
   }
-  return true;
+
+  // right block
+  let right;
+  if (scored) {
+    right = `<div class="fix-score">${h}<span class="dash">–</span>${a}</div>${
+      isFinished ? '<span class="fix-hl">▶ HIGHLIGHTS</span>' : ''}`;
+  } else {
+    right = `<span class="fix-badge">MW ${m.matchday}</span>${
+      m.venue ? `<span class="fix-badge" style="border:none;padding:0">${m.venue}</span>` : ''
+    }`;
+  }
+
+  return `<${tag} class="fix-row"${onclick}>
+    <div class="fix-time">${left}</div>
+    <div class="fix-divider"></div>
+    <div class="fix-teams">
+      <div class="team${scored && a > h ? ' dim' : ''}">${crestMini(m.homeTeam)}<span class="nm">${teamName(m.homeTeam)}</span></div>
+      <div class="team${scored && h > a ? ' dim' : ''}">${crestMini(m.awayTeam)}<span class="nm">${teamName(m.awayTeam)}</span></div>
+    </div>
+    <div class="fix-right">${right}</div>
+  </${tag}>`;
 }
 
 function renderList() {
   const list = document.getElementById('matchList');
-  const day = weekDays()[selectedDay];
-  const ds = isoDate(day);
-  const heroMatch = allMatches.find(m => statusOf(m) === 'live' || statusOf(m) === 'ht');
+  const visible = visibleMatches();
 
-  const matches = allMatches
-    .filter(m => matchVisible(m, ds))
-    .filter(m => !heroMatch || m.id !== heroMatch.id)
-    .sort((x, y) => new Date(x.utcDate) - new Date(y.utcDate));
-
-  if (matches.length === 0) {
+  if (visible.length === 0) {
     list.innerHTML = `<div class="empty"><strong>No fixtures</strong>${
-      searchTerm ? 'No match for that search on this day.' : 'Nothing scheduled for ' + fmtDayHead(day).toLowerCase() + '.'
+      searchTerm ? 'No match for that search this week.' : 'Nothing scheduled this week.'
     }</div>`;
     return;
   }
 
-  const rows = matches.map(m => {
-    const sgt = toSGT(m.utcDate);
-    const st = statusOf(m);
-    const { h, a } = goals(m);
-    const scored = h !== null && a !== null;
-    const isFinished = st === 'ft';
-    const tag = isFinished ? 'button' : 'div';
-    const onclick = isFinished ? ` data-hl="${m.id}"` : '';
-
-    // left block
-    let left;
-    if (st === 'live' || st === 'ht') {
-      left = `<div class="hm">${m.minute ? m.minute + "'" : ''}</div><div class="status live">${st === 'ht' ? 'HALF TIME' : 'LIVE'}</div>`;
-    } else if (isFinished) {
-      left = `<div class="hm" style="color:var(--t3)">FT</div>`;
-    } else {
-      const c = fmtClock(sgt);
-      left = `<div class="hm">${c.hm}</div><div class="mer">${c.mer} · SGT</div>`;
-    }
-
-    // right block
-    let right;
-    if (scored) {
-      right = `<div class="fix-score">${h}<span class="dash">–</span>${a}</div>${
-        isFinished ? '<span class="fix-hl">▶ HIGHLIGHTS</span>' : ''}`;
-    } else {
-      right = `<span class="fix-badge">MW ${m.matchday}</span>${
-        m.venue ? `<span class="fix-badge" style="border:none;padding:0">${m.venue}</span>` : ''
-      }`;
-    }
-
-    return `<${tag} class="fix-row"${onclick}>
-      <div class="fix-time">${left}</div>
-      <div class="fix-divider"></div>
-      <div class="fix-teams">
-        <div class="team${scored && a > h ? ' dim' : ''}">${crestMini(m.homeTeam)}<span class="nm">${teamName(m.homeTeam)}</span></div>
-        <div class="team${scored && h > a ? ' dim' : ''}">${crestMini(m.awayTeam)}<span class="nm">${teamName(m.awayTeam)}</span></div>
+  // The whole week on one page, one section per day, in chronological order.
+  list.innerHTML = [...groupByDay(visible)].map(([ds, ms]) => {
+    const day = new Date(`${ds}T00:00:00Z`);
+    return `<div class="day-section" id="day-${ds}">
+      <div class="day-head">
+        <span class="label">${fmtDayHead(day)}</span>
+        <span class="rule"></span>
+        <span class="count">${ms.length} ${ms.length === 1 ? 'match' : 'matches'}</span>
       </div>
-      <div class="fix-right">${right}</div>
-    </${tag}>`;
+      ${ms.map(fixtureRow).join('')}
+    </div>`;
   }).join('');
-
-  list.innerHTML = `<div class="day-section">
-    <div class="day-head">
-      <span class="label">${fmtDayHead(day)}</span>
-      <span class="rule"></span>
-      <span class="count">${matches.length} ${matches.length === 1 ? 'match' : 'matches'}</span>
-    </div>
-    ${rows}
-  </div>`;
 
   list.querySelectorAll('[data-hl]').forEach(el => {
     const m = allMatches.find(x => String(x.id) === el.dataset.hl);
