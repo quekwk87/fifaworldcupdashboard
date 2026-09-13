@@ -4,7 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0b0b0c">
-<title>Premier League — SGT/MYT</title>
+<title>Premier League Fixtures, Results &amp; Highlights (SGT/MYT)</title>
+<meta name="description" content="Live Premier League fixtures, results and official match highlights, with kickoff times converted to Singapore/Malaysia time (SGT/MYT). Unofficial fan-made dashboard, updated weekly.">
+<link rel="canonical" href="https://quekwk87.github.io/fifaworldcupdashboard/">
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+<!-- Open Graph / Facebook, WhatsApp, etc. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PL Fixtures SGT/MYT">
+<meta property="og:url" content="https://quekwk87.github.io/fifaworldcupdashboard/">
+<meta property="og:title" content="Premier League Fixtures, Results &amp; Highlights (SGT/MYT)">
+<meta property="og:description" content="Live Premier League fixtures, results and official match highlights, with kickoff times converted to Singapore/Malaysia time (SGT/MYT).">
+<meta property="og:image" content="https://quekwk87.github.io/fifaworldcupdashboard/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_SG">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Premier League Fixtures, Results &amp; Highlights (SGT/MYT)">
+<meta name="twitter:description" content="Live Premier League fixtures, results and official match highlights, with kickoff times converted to Singapore/Malaysia time (SGT/MYT).">
+<meta name="twitter:image" content="https://quekwk87.github.io/fifaworldcupdashboard/assets/og-image.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Archivo:wght@400;500;600;700&display=swap');
 
@@ -395,6 +419,17 @@
     letter-spacing: .1em;
     color: var(--accent);
   }
+  .fix-row.clickable { cursor: pointer; }
+  .fix-permalink {
+    display: block;
+    margin-top: 4px;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    color: var(--t4);
+    text-decoration: none;
+  }
+  .fix-permalink:active { color: var(--t2); }
 
   .empty, .loading {
     padding: 60px 24px;
@@ -861,13 +896,30 @@ function groupByDay(list) {
   return groups;
 }
 
+// Mirrors the slug logic in scripts/generate-match-pages.mjs — both must
+// produce the same folder name or these links 404.
+function slugifyTeam(name) {
+  return (name || '')
+    .replace(/\b(FC|AFC)\b/gi, '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+function matchSlug(m) {
+  const date = isoDate(toSGT(m.utcDate));
+  return `${slugifyTeam(m.homeTeam.name)}-vs-${slugifyTeam(m.awayTeam.name)}-${date}`;
+}
+
 function fixtureRow(m) {
   const sgt = toSGT(m.utcDate);
   const st = statusOf(m);
   const { h, a } = goals(m);
   const scored = h !== null && a !== null;
   const isFinished = st === 'ft';
-  const tag = isFinished ? 'button' : 'div';
+  // A <div>, not <button>, for every row — finished rows nest a permalink
+  // <a>, which HTML doesn't allow inside a <button>. Click-to-open-modal
+  // is wired via .onclick in renderList() regardless of tag.
   const onclick = isFinished ? ` data-hl="${m.id}"` : '';
 
   // left block
@@ -885,14 +937,16 @@ function fixtureRow(m) {
   let right;
   if (scored) {
     right = `<div class="fix-score">${h}<span class="dash">–</span>${a}</div>${
-      isFinished ? '<span class="fix-hl">▶ HIGHLIGHTS</span>' : ''}`;
+      isFinished
+        ? `<span class="fix-hl">▶ HIGHLIGHTS</span><a class="fix-permalink" href="matches/${matchSlug(m)}/" onclick="event.stopPropagation()">Match page &rarr;</a>`
+        : ''}`;
   } else {
     right = `<span class="fix-badge">MW ${m.matchday}</span>${
       m.venue ? `<span class="fix-badge" style="border:none;padding:0">${m.venue}</span>` : ''
     }`;
   }
 
-  return `<${tag} class="fix-row"${onclick}>
+  return `<div class="fix-row${isFinished ? ' clickable' : ''}"${onclick}>
     <div class="fix-time">${left}</div>
     <div class="fix-divider"></div>
     <div class="fix-teams">
@@ -900,7 +954,7 @@ function fixtureRow(m) {
       <div class="team${scored && h > a ? ' dim' : ''}">${crestMini(m.awayTeam)}<span class="nm">${teamName(m.awayTeam)}</span></div>
     </div>
     <div class="fix-right">${right}</div>
-  </${tag}>`;
+  </div>`;
 }
 
 function renderList() {
