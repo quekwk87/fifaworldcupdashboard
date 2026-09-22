@@ -28,6 +28,11 @@ const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const PROXY_URL = 'https://silent-mode-cf93.quekwk.workers.dev';
 const SITE_URL = 'https://quekwk87.github.io/fifaworldcupdashboard';
 
+// Cookie-free pageview tracking. The token is a public identifier, not a
+// secret — it's meant to sit in client-side HTML like this. Kept in sync
+// with the same snippet in index.html's <head>.
+const CF_ANALYTICS_SNIPPET = `<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "9f21dbefefbd4670bd288a05a8f4e462"}'></script>`;
+
 const WEEKS_BACK = 10;   // regenerate/refresh this many past weeks each run
 const WEEKS_FORWARD = 2; // and preview this many upcoming weeks
 
@@ -287,6 +292,7 @@ ${jsonLd({
 <meta name="twitter:description" content="${escapeHtml(summary)}">
 <meta name="twitter:image" content="${ogImage}">
 ${eventJsonLd}${videoJsonLd}
+${CF_ANALYTICS_SNIPPET}
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Archivo:wght@400;500;600&display=swap');
   *{box-sizing:border-box;margin:0;padding:0}
