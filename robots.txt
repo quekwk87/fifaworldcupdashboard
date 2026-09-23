@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://quekwk87.github.io/fifaworldcupdashboard/sitemap.xml
