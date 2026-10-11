@@ -528,5 +528,313 @@
     },
     "attempts": 1,
     "lastCheckedDate": "2026-09-23"
+  },
+  "560592": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "oZkiU5cyTxjsXT3LxNg9fxuI1-4",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "l7lrkcUIbzs"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-10T15:38:06Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Maxim De Cuyper buries Brighton&#39;s go-ahead goal against Sunderland | Premier League | NBC Sports",
+        "description": "Maxim De Cuyper finds his name on the scoresheet for the second time this season as his left-footed effort ripples the back of the ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/l7lrkcUIbzs/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/l7lrkcUIbzs/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/l7lrkcUIbzs/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/l7lrkcUIbzs/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/l7lrkcUIbzs/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/l7lrkcUIbzs/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-10T15:38:06Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-11"
+  },
+  "560593": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "-qHjt9etzC4oIPmfJ7ptFgBRQUs",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "p2kZ0O4IJg4"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-10T21:00:04Z",
+        "channelId": "UCyQcJHDN4uYfPa1DHzKVSnw",
+        "title": "Arsenal 2-1 Leeds United | Premier League highlights",
+        "description": "Highlights from our game against Arsenal at the Emirates Stadium in the 2026/27 Premier League. #leedsunited #lufc Get ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/p2kZ0O4IJg4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/p2kZ0O4IJg4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/p2kZ0O4IJg4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/p2kZ0O4IJg4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/p2kZ0O4IJg4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/p2kZ0O4IJg4/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Leeds United Official",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-10T21:00:04Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-11"
+  },
+  "560595": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "spuquzqQ6egxn5jpu9UG56-kTSw",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "mL-qGgJf6Ug"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-10T21:00:36Z",
+        "channelId": "UCU2PacFf99vhb3hNiYDmxww",
+        "title": "Chelsea 5-1 Bournemouth | HIGHLIGHTS | Premier League 2026/27",
+        "description": "Highlights of Chelsea's 5-1 Premier League win over Bournemouth at Stamford Bridge. Subscribe to our channel here: ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/mL-qGgJf6Ug/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/mL-qGgJf6Ug/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/mL-qGgJf6Ug/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/mL-qGgJf6Ug/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/mL-qGgJf6Ug/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/mL-qGgJf6Ug/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Chelsea Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-10T21:00:36Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-11"
+  },
+  "560599": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "ABNFQlVPNe4Zhrate1E3VNNv05E",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "FUJeXSLgXjU"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-10T16:56:45Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Ipswich Town v. Fulham | PREMIER LEAGUE HIGHLIGHTS | 10/10/2026 | NBC Sports",
+        "description": "Watch full-match highlights from Fulham's visit to Portman Road to take on Ipswich Town in Matchweek 6. #NBCSports #Soccer ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/FUJeXSLgXjU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/FUJeXSLgXjU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/FUJeXSLgXjU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/FUJeXSLgXjU/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/FUJeXSLgXjU/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-10T16:56:45Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-11"
+  },
+  "560600": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "oH8yVTEgec2EcKwL6h7Iihy0fXY",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "28S9RO6OhnY"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-10T21:01:28Z",
+        "channelId": "UC6yW44UGJJBvYTlfC7CRg2Q",
+        "title": "Man Utd 1-1 Spurs | Highlights",
+        "description": "Watch the key moments from Manchester United's 1-1 draw to Spurs at Old Trafford in the Premier League. Join us to access ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/28S9RO6OhnY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/28S9RO6OhnY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/28S9RO6OhnY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/28S9RO6OhnY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/28S9RO6OhnY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/28S9RO6OhnY/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Manchester United",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-10T21:01:28Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-11"
+  },
+  "560601": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "CWPFGKqt4HGlpoura6nRYLWEZNo",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "7JCkPn7J-y4"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-10T21:00:05Z",
+        "channelId": "UCICNP0mvtr0prFwGUQIABfQ",
+        "title": "Aston Villa 2-2 Brentford | Premier League Highlights",
+        "description": "Action from Villa's draw with Brentford in the Premier League. __ Stay ahead of the game and be the first to know when we ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/7JCkPn7J-y4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/7JCkPn7J-y4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/7JCkPn7J-y4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/7JCkPn7J-y4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/7JCkPn7J-y4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Aston Villa Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-10T21:00:05Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-11"
   }
 }
