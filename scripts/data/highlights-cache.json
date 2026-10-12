@@ -635,6 +635,59 @@
     "attempts": 1,
     "lastCheckedDate": "2026-10-11"
   },
+  "560594": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "SRYpFR2Fvb_FZItwgy3Wuyhg2ug",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "J1zrWRGNArs"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-11T21:00:31Z",
+        "channelId": "UCtK4QAczAN2mt2ow_jlGinQ",
+        "title": "HULL CITY v EVERTON | Premier League highlights",
+        "description": "Highlights from Everton's 2-2 draw at Hull City.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/J1zrWRGNArs/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/J1zrWRGNArs/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/J1zrWRGNArs/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/J1zrWRGNArs/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/J1zrWRGNArs/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/J1zrWRGNArs/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Everton Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-11T21:00:31Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-12"
+  },
   "560595": {
     "video": {
       "kind": "youtube#searchResult",
@@ -687,6 +740,112 @@
     },
     "attempts": 1,
     "lastCheckedDate": "2026-10-11"
+  },
+  "560596": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "FY_erwdr_fHaUX8Y4KEQ2nNKDLE",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "U7zfapyvVAE"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-11T15:00:54Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Yeremy Pino blasts Crystal Palace 3-1 ahead of Nottingham Forest | Premier League | NBC Sports",
+        "description": "Yeremy Pino is first to pounce on the loose ball inside the box and gives Crystal Palace a two-goal cushion over Nottingham ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/U7zfapyvVAE/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/U7zfapyvVAE/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/U7zfapyvVAE/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/U7zfapyvVAE/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/U7zfapyvVAE/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/U7zfapyvVAE/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-11T15:00:54Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-12"
+  },
+  "560598": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "PtM9Nj0czmuXJbYL1c5QsF8dc_U",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "i_BqweuiZhg"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-11T21:14:36Z",
+        "channelId": "UCkzCjdRMrW2vXLx8mvPVLdQ",
+        "title": "HIGHLIGHTS | City return with Anfield win | Liverpool 0-3 Man City | Haaland, Doku &amp; Cherki goals",
+        "description": "Enjoy bite-sized action from City's superb Premier League victory at Liverpool. On our return to action after the September/October ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/i_BqweuiZhg/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/i_BqweuiZhg/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/i_BqweuiZhg/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/i_BqweuiZhg/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/i_BqweuiZhg/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/i_BqweuiZhg/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Man City",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-11T21:14:36Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-12"
   },
   "560599": {
     "video": {
