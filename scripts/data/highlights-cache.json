@@ -795,8 +795,57 @@
     "lastCheckedDate": "2026-10-12"
   },
   "560597": {
-    "attempts": 1,
-    "lastCheckedDate": "2026-10-13"
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "jAqmQwYcNuYsb5d0PWR7YHsfEzw",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "fcbfETiAEsw"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-12T22:20:41Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Coventry City upend Newcastle | Premier League Update | NBC Sports",
+        "description": "Cara Banks and Danny Higginbotham react to Coventry City's stunning 4-1 victory against Newcastle and discuss what went ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/fcbfETiAEsw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/fcbfETiAEsw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/fcbfETiAEsw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/fcbfETiAEsw/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/fcbfETiAEsw/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/fcbfETiAEsw/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-12T22:20:41Z"
+      }
+    },
+    "attempts": 2,
+    "lastCheckedDate": "2026-10-14"
   },
   "560598": {
     "video": {
