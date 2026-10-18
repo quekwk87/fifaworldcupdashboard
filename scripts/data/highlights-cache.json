@@ -1048,5 +1048,260 @@
     },
     "attempts": 1,
     "lastCheckedDate": "2026-10-11"
+  },
+  "560602": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "G-SLgKYOlt7_wecxP5rt1hW2ukM",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "Wv2e6iihj0o"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-17T17:29:46Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Fulham v. Hull City | PREMIER LEAGUE HIGHLIGHTS | 10/17/2026",
+        "description": "Watch full-match highlights from Fulham's showdown with Hull City at Craven Cottage in Matchweek 7. #NBCSports #Soccer ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Wv2e6iihj0o/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Wv2e6iihj0o/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Wv2e6iihj0o/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Wv2e6iihj0o/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Wv2e6iihj0o/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-17T17:29:46Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-18"
+  },
+  "560603": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "Itwj_QMXm6CsehuQj08q2_fDTWQ",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "xt7v2R-ap_c"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-17T21:00:12Z",
+        "channelId": "UCU2PacFf99vhb3hNiYDmxww",
+        "title": "Everton 0-2 Chelsea | HIGHLIGHTS | Premier League 2026/27",
+        "description": "PL Matchday 7 - Highlights of Chelsea's 2-0 Premier League win against Everton at the Hill Dickinson Stadium... Subscribe to our ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/xt7v2R-ap_c/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/xt7v2R-ap_c/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/xt7v2R-ap_c/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/xt7v2R-ap_c/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/xt7v2R-ap_c/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/xt7v2R-ap_c/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Chelsea Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-17T21:00:12Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-18"
+  },
+  "560607": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "fxKbhA4MVNBn_KNKrWJzE4pdDCs",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "WKz2XqemdLI"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-17T18:59:55Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Newcastle United v. Aston Villa | PREMIER LEAGUE HIGHLIGHTS | 10/17/2026",
+        "description": "Look back on full-match highlights from Aston Villa's visit to St. James' Park to battle Newcastle in Matchweek 7. #NBCSports ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/WKz2XqemdLI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/WKz2XqemdLI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/WKz2XqemdLI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/WKz2XqemdLI/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/WKz2XqemdLI/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-17T18:59:55Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-18"
+  },
+  "560610": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "Dv7dtK-MxYCSbnpXw7htgSWKWV8",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "9Bd8gb6k7hE"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-17T21:00:33Z",
+        "channelId": "UCkzCjdRMrW2vXLx8mvPVLdQ",
+        "title": "HIGHLIGHTS | Man City 3-2 Ipswich | Haaland brace and Foden goal!",
+        "description": "Highlights from the Premier League match between Manchester City and Ipswich Town. SUBSCRIBE!",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/9Bd8gb6k7hE/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/9Bd8gb6k7hE/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/9Bd8gb6k7hE/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/9Bd8gb6k7hE/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/9Bd8gb6k7hE/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/9Bd8gb6k7hE/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Man City",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-17T21:00:33Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-18"
+  },
+  "560611": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "9_GddJxoSJ4Nik7H6LzU54IQ6iA",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "QeVs-m7og9E"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-17T21:00:07Z",
+        "channelId": "UC9LQwHZoucFT94I2h6JOcjw",
+        "title": "Highlights: Brentford 1-2 Liverpool | Munoz &amp; Isak Goals!",
+        "description": "Watch highlights from Liverpool's 2-1 victory over Brentford in the Premier League. Liverpool: Alisson, Van Dijk, Jacquet, Kerkez, ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/QeVs-m7og9E/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/QeVs-m7og9E/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/QeVs-m7og9E/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/QeVs-m7og9E/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/QeVs-m7og9E/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/QeVs-m7og9E/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Liverpool FC",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-17T21:00:07Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-18"
   }
 }
