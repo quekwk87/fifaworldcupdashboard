@@ -1150,6 +1150,112 @@
     "attempts": 1,
     "lastCheckedDate": "2026-10-18"
   },
+  "560604": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "VIwg6tk7fs3bC_M8BSIUBi7nTFU",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "5uV-0ZX9KKk"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-18T21:00:36Z",
+        "channelId": "UCeOCuVSSweaEj6oVtJZEKQw",
+        "title": "Cherries pick up first Premier League win of the campaign | AFC Bournemouth 2-0 Sunderland",
+        "description": "Make sure you don't miss anything from the Cherries by tapping the and following us on social media: TikTok: ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/5uV-0ZX9KKk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/5uV-0ZX9KKk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/5uV-0ZX9KKk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/5uV-0ZX9KKk/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/5uV-0ZX9KKk/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/5uV-0ZX9KKk/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "AFC Bournemouth",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-18T21:00:36Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-19"
+  },
+  "560605": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "ZaPqL7xjnPsb4Wt4IvBFnizKGl0",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "4OTqgha1Mf0"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-18T21:00:00Z",
+        "channelId": "UC6yW44UGJJBvYTlfC7CRg2Q",
+        "title": "Leeds 1-1 Man Utd | Highlights",
+        "description": "Watch the key moments from Manchester United's 1-1 draw away to Leeds United in the Premier League. Join us to access ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/4OTqgha1Mf0/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/4OTqgha1Mf0/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/4OTqgha1Mf0/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/4OTqgha1Mf0/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/4OTqgha1Mf0/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/4OTqgha1Mf0/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Manchester United",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-18T21:00:00Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-19"
+  },
   "560607": {
     "video": {
       "kind": "youtube#searchResult",
@@ -1197,6 +1303,107 @@
     },
     "attempts": 1,
     "lastCheckedDate": "2026-10-18"
+  },
+  "560608": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "Ba4zdpsPenUpYfxgq2_S-lvu3uk",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "tOg0zFIes84"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-18T18:07:22Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Nottingham Forest v. Arsenal | PREMIER LEAGUE HIGHLIGHTS | 10/18/2026",
+        "description": "Watch full-match highlights from Arsenal's Matchweek 7 matchup with Nottingham Forest at the City Ground. #NBCSports #Soccer ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/tOg0zFIes84/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/tOg0zFIes84/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/tOg0zFIes84/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/tOg0zFIes84/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/tOg0zFIes84/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-18T18:07:22Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-19"
+  },
+  "560609": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "kRmaTJL4tMfKtOivk5g4fNDs6G8",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "uDAphWOVHk4"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-18T13:43:34Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Yasin Ayari strikes Brighton 3-0 in front of Crystal Palace | Premier League",
+        "description": "Brighton are cruising against their rivals Crystal Palace as Yasin Ayari tucks away the Seagulls' third goal of the first half in style.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/uDAphWOVHk4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/uDAphWOVHk4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/uDAphWOVHk4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/uDAphWOVHk4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/uDAphWOVHk4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/uDAphWOVHk4/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-18T13:43:34Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-19"
   },
   "560610": {
     "video": {
