@@ -1256,6 +1256,59 @@
     "attempts": 1,
     "lastCheckedDate": "2026-10-19"
   },
+  "560606": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "l4-bilQ3u6mNkX5OqXhZ9n60nEw",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "pDyaurLPeko"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-19T23:07:38Z",
+        "channelId": "UCEg25rdRZXg32iwai6N6l0w",
+        "title": "Marmoush&#39;s first goal! | Spurs 3-1 Coventry City | Premier League Highlights",
+        "description": "Watch highlights from Tottenham Hotspur's 3-1 victory over Coventry City in the Premier League. Goals from James Maddison, ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/pDyaurLPeko/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/pDyaurLPeko/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/pDyaurLPeko/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/pDyaurLPeko/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/pDyaurLPeko/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/pDyaurLPeko/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Tottenham Hotspur",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-19T23:07:38Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-20"
+  },
   "560607": {
     "video": {
       "kind": "youtube#searchResult",
