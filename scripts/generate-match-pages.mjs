@@ -341,7 +341,10 @@ async function writeIfChanged(filePath, content) {
 }
 
 async function buildSitemap() {
-  const urls = [{ loc: `${SITE_URL}/`, priority: '1.0', changefreq: 'daily' }];
+  const today = isoDate(new Date());
+  // changefreq dropped — crawlers largely ignore it; lastmod is the signal
+  // that actually matters and is kept.
+  const urls = [{ loc: `${SITE_URL}/`, priority: '1.0', lastmod: today }];
   if (existsSync(MATCHES_DIR)) {
     const entries = await readdir(MATCHES_DIR, { withFileTypes: true });
     for (const entry of entries) {
@@ -349,11 +352,11 @@ async function buildSitemap() {
       const indexPath = path.join(MATCHES_DIR, entry.name, 'index.html');
       if (!existsSync(indexPath)) continue;
       const mtime = (await stat(indexPath)).mtime.toISOString().slice(0, 10);
-      urls.push({ loc: `${SITE_URL}/matches/${entry.name}/`, priority: '0.7', changefreq: 'monthly', lastmod: mtime });
+      urls.push({ loc: `${SITE_URL}/matches/${entry.name}/`, priority: '0.7', lastmod: mtime });
     }
   }
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${
-    urls.map(u => `  <url>\n    <loc>${u.loc}</loc>\n${u.lastmod ? `    <lastmod>${u.lastmod}</lastmod>\n` : ''}    <changefreq>${u.changefreq}</changefreq>\n    <priority>${u.priority}</priority>\n  </url>`).join('\n')
+    urls.map(u => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${u.lastmod}</lastmod>\n    <priority>${u.priority}</priority>\n  </url>`).join('\n')
   }\n</urlset>\n`;
   return writeIfChanged(SITEMAP_PATH, xml);
 }
