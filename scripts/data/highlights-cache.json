@@ -1564,6 +1564,420 @@
     "attempts": 1,
     "lastCheckedDate": "2026-10-18"
   },
+  "560612": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "nI26bgrEgM1itPAMLlTsjfK0Zac",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "V8Q5cQuuOso"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-25T22:00:23Z",
+        "channelId": "UC9LQwHZoucFT94I2h6JOcjw",
+        "title": "Highlights: Liverpool 2-0 Brighton",
+        "description": "Get closer to LFC this season with All Red Video! Full-match replays, exclusive interviews, live audio and much more available ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/V8Q5cQuuOso/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/V8Q5cQuuOso/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/V8Q5cQuuOso/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/V8Q5cQuuOso/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/V8Q5cQuuOso/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Liverpool FC",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-25T22:00:23Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-26"
+  },
+  "560613": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "4qHFptdXLhUY5QnEBuDT_MTRB_8",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "SK5ZGFC1EPg"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-25T22:00:39Z",
+        "channelId": "UCywGl_BPp9QhD0uAcP2HsJw",
+        "title": "Crystal Palace 0 Newcastle United 2 | Premier League Highlights",
+        "description": "Match action from Newcastle United's 2-0 victory over Crystal Palace at Selhurst Park in the Premier League. For more from ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/SK5ZGFC1EPg/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/SK5ZGFC1EPg/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/SK5ZGFC1EPg/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/SK5ZGFC1EPg/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/SK5ZGFC1EPg/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/SK5ZGFC1EPg/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Newcastle United",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-25T22:00:39Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-26"
+  },
+  "560614": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "ao_TOuUpATXfacyup149unHhXd0",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "xac6qY6d9pI"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-26T00:00:15Z",
+        "channelId": "UCkzCjdRMrW2vXLx8mvPVLdQ",
+        "title": "EXTENDED HIGHLIGHTS | Aston Villa 2-1 Man City | A first league setback for the Blues",
+        "description": "City's perfect start to the Premier League season was checked as we went down to a 2-1 defeat away at Aston Villa. SUBSCRIBE!",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/xac6qY6d9pI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/xac6qY6d9pI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/xac6qY6d9pI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/xac6qY6d9pI/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/xac6qY6d9pI/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/xac6qY6d9pI/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Man City",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-26T00:00:15Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-26"
+  },
+  "560615": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "m6ct1CaziIL5s1tzb1J334ylTaA",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "pQF14OXgR9I"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-25T18:14:33Z",
+        "channelId": "UCeOCuVSSweaEj6oVtJZEKQw",
+        "title": "THREE goals at Old Trafford as Cherries run riot AGAIN | Manchester United 0-3 AFC Bournemouth",
+        "description": "Goals from Rayan, Marcus Tavernier and Evanilson saw the Cherries on their way to a brilliant victory away to Manchester United ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/pQF14OXgR9I/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/pQF14OXgR9I/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/pQF14OXgR9I/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/pQF14OXgR9I/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/pQF14OXgR9I/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/pQF14OXgR9I/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "AFC Bournemouth",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-25T18:14:33Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-26"
+  },
+  "560616": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "jtuwpdMIPa6bjE9j1pzYCdAyvD0",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "i4eXftEkNAc"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-24T21:00:26Z",
+        "channelId": "UCtK4QAczAN2mt2ow_jlGinQ",
+        "title": "ARSENAL v EVERTON | Premier League highlights",
+        "description": "Subscribe to Everton Football Club's official YouTube Channel: http://bit.ly/2wtCEbB Follow us on Facebook: ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/i4eXftEkNAc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/i4eXftEkNAc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/i4eXftEkNAc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/i4eXftEkNAc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/i4eXftEkNAc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/i4eXftEkNAc/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Everton Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-24T21:00:26Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-26"
+  },
+  "560617": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "YnZ19hQA_E2ECNxDX7f-cPu2GtE",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "-CorEPR-y1o"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-26T08:00:14Z",
+        "channelId": "UCEg25rdRZXg32iwai6N6l0w",
+        "title": "Chelsea 0-2 Tottenham | Premier League Extended Highlights",
+        "description": "Watch the extended highlights from Spurs' 2-0 win against Chelsea in the Premier League. SUBSCRIBE to ensure you don't miss ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/-CorEPR-y1o/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/-CorEPR-y1o/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/-CorEPR-y1o/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/-CorEPR-y1o/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/-CorEPR-y1o/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/-CorEPR-y1o/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Tottenham Hotspur",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-26T08:00:14Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-26"
+  },
+  "560618": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "biY0tBaxg4OyB8KV-PykLYj_lJQ",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "yWs2AkhPUTA"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-24T16:40:48Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Coventry City v. Fulham | PREMIER LEAGUE HIGHLIGHTS | 10/24/2026",
+        "description": "Enjoy full-match highlights from Fulham's showdown with Coventry City at the CBS Arena in Matchweek 8. #NBCSports #Soccer ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/yWs2AkhPUTA/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/yWs2AkhPUTA/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/yWs2AkhPUTA/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/yWs2AkhPUTA/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/yWs2AkhPUTA/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-24T16:40:48Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-26"
+  },
+  "560619": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "JHG_m6Tt1rcewjNg6wT0d7fdWSQ",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "eCK-yWkw_wc"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-25T22:00:17Z",
+        "channelId": "UCAalMUm3LIf504ItA3rqfug",
+        "title": "Hull City 1-1 Brentford | Dango Ouattara opens his account on the road! | Premier League Highlights",
+        "description": "Dango Ouattara scored a second-half equaliser as Brentford came from behind to draw 1-1 with Hull City at MKM Stadium.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/eCK-yWkw_wc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/eCK-yWkw_wc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/eCK-yWkw_wc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/eCK-yWkw_wc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/eCK-yWkw_wc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/eCK-yWkw_wc/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Brentford Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-25T22:00:17Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-26"
+  },
   "560620": {
     "video": {
       "kind": "youtube#searchResult",
@@ -1611,5 +2025,53 @@
     },
     "attempts": 1,
     "lastCheckedDate": "2026-10-24"
+  },
+  "560621": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "8N737L1SVdw68BCyI4IL9Mnp4Yo",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "PWIL5ywiiNU"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-25T19:18:22Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Sunderland v. Leeds United | PREMIER LEAGUE HIGHLIGHTS | 10/25/2026",
+        "description": "Watch full-match highlights from Sunderland's showdown with Leeds United at Elland Road in Matchweek 8. #NBCSports ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/PWIL5ywiiNU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/PWIL5ywiiNU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/PWIL5ywiiNU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/PWIL5ywiiNU/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/PWIL5ywiiNU/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-25T19:18:22Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-10-26"
   }
 }
