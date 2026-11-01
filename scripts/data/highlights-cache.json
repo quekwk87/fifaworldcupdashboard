@@ -2073,5 +2073,414 @@
     },
     "attempts": 1,
     "lastCheckedDate": "2026-10-26"
+  },
+  "560623": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "X1zzhn_8sF_gdUErP0ZF95MYl2E",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "kfkJYSDWNLA"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-31T22:00:27Z",
+        "channelId": "UCkzCjdRMrW2vXLx8mvPVLdQ",
+        "title": "HIGHLIGHTS | Man City 0-1 Brighton | City unable to finish their chances at the Etihad!",
+        "description": "City suffered a second Premier League loss in a row after a frustrating 1-0 home defeat to Brighton. The visitors took advantage of ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/kfkJYSDWNLA/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/kfkJYSDWNLA/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/kfkJYSDWNLA/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/kfkJYSDWNLA/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/kfkJYSDWNLA/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/kfkJYSDWNLA/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Man City",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-31T22:00:27Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-01"
+  },
+  "560624": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "eAEqmjfM6fsDYfTUhk4in6B09Vc",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "xOEg4hazFHE"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-31T17:48:52Z",
+        "channelId": "UCyQcJHDN4uYfPa1DHzKVSnw",
+        "title": "“Football can be brutal” | Daniel Farke reaction | AFC Bournemouth 2-0 Leeds United",
+        "description": "Get exclusive Leeds United video content first - download the Official App: https://linktr.ee/leedsunited If you enjoyed this video ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/xOEg4hazFHE/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/xOEg4hazFHE/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/xOEg4hazFHE/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/xOEg4hazFHE/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/xOEg4hazFHE/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/xOEg4hazFHE/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Leeds United Official",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-31T17:48:52Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-01"
+  },
+  "560625": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "aQMhLmOdVAdwc5Mdmhl_5TsX-9I",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "XN2mfQNGDHg"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-31T16:15:05Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Taiwo Awoniyi fires Coventry City 2-0 in front of Sunderland | Premier League",
+        "description": "Taiwo Awoniyi's brilliant run and some poor defending from Sunderland results in Coventry City's second goal of the first half at ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/XN2mfQNGDHg/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/XN2mfQNGDHg/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/XN2mfQNGDHg/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/XN2mfQNGDHg/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/XN2mfQNGDHg/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/XN2mfQNGDHg/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-31T16:15:05Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-01"
+  },
+  "560626": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "TSmRuG9K7qHFBOqyq7BAt6w80AY",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "OI58_-4ezU8"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-31T22:00:30Z",
+        "channelId": "UCU2PacFf99vhb3hNiYDmxww",
+        "title": "Chelsea 2-0 Man Utd | HIGHLIGHTS | Premier League 2026/27",
+        "description": "PL Matchday 9 - Highlights of Chelsea's 2-0 Premier League win against Manchester United at Stamford Bridge... Subscribe to ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/OI58_-4ezU8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/OI58_-4ezU8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/OI58_-4ezU8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/OI58_-4ezU8/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/OI58_-4ezU8/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/OI58_-4ezU8/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Chelsea Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-31T22:00:30Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-01"
+  },
+  "560627": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "KHlyZw8Pz1Oc_5bEqYYT5Zr6U3o",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "-HLgn5JpE6Y"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-31T22:00:12Z",
+        "channelId": "UCEg25rdRZXg32iwai6N6l0w",
+        "title": "Spurs win three in a row | Tottenham 2-0 Crystal Palace | Premier League Highlights",
+        "description": "Watch highlights from Tottenham Hotspur's 2-0 win against Crystal Palace in the Premier League. Goals from Archie Gray and Jan ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/-HLgn5JpE6Y/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/-HLgn5JpE6Y/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/-HLgn5JpE6Y/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/-HLgn5JpE6Y/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/-HLgn5JpE6Y/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/-HLgn5JpE6Y/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Tottenham Hotspur",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-31T22:00:12Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-01"
+  },
+  "560628": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "vjdrAmCnSn9rlvvLK8zuvSWMIyg",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "EtHymllACi0"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-01T00:02:31Z",
+        "channelId": "UCICNP0mvtr0prFwGUQIABfQ",
+        "title": "Villa 1-1 Fulham | Premier League Highlights",
+        "description": "Action as it ends all square between Villa and Fulham at Villa Park. __ Stay ahead of the game and be the first to know when we ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/EtHymllACi0/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/EtHymllACi0/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/EtHymllACi0/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/EtHymllACi0/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/EtHymllACi0/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Aston Villa Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-01T00:02:31Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-01"
+  },
+  "560629": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "Mv7IcNl2gthYQvajLyhYDKqdRrA",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "k8ECgePTd7I"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-31T19:29:40Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Hull City v. Ipswich Town | PREMIER LEAGUE HIGHLIGHTS | 10/31/2026",
+        "description": "Watch full-match highlights from Hull City's matchup with fellow newly-promoted side Ipswich Town at MKM Stadium in ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/k8ECgePTd7I/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/k8ECgePTd7I/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/k8ECgePTd7I/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/k8ECgePTd7I/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/k8ECgePTd7I/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-31T19:29:40Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-01"
+  },
+  "560630": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "lmHK_H5a3887pVRVjo8gPoE5Q2w",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "mmhVBtf66io"
+      },
+      "snippet": {
+        "publishedAt": "2026-10-31T17:25:12Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Brentford v. Nottingham Forest | PREMIER LEAGUE HIGHLIGHTS | 10/31/2026",
+        "description": "Watch full-match highlights from Brentford's showdown with Nottingham Forest at the Gtech in Matchweek 9. #NBCSports #Soccer ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/mmhVBtf66io/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/mmhVBtf66io/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/mmhVBtf66io/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/mmhVBtf66io/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/mmhVBtf66io/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-10-31T17:25:12Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-01"
   }
 }
