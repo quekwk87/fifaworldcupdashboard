@@ -2074,6 +2074,59 @@
     "attempts": 1,
     "lastCheckedDate": "2026-10-26"
   },
+  "560622": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "nCNe5LFY5LUzE0S0ViBqABjY7YI",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "uy0IsTTSpaA"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-03T00:00:37Z",
+        "channelId": "UCtK4QAczAN2mt2ow_jlGinQ",
+        "title": "NEWCASTLE v EVERTON | Premier League Highlights ▶️🔵",
+        "description": "Thierno Barry's eighth goal of the season proved enough for Everton to beat Newcastle for the second time in the space of four ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/uy0IsTTSpaA/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/uy0IsTTSpaA/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/uy0IsTTSpaA/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/uy0IsTTSpaA/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/uy0IsTTSpaA/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/uy0IsTTSpaA/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Everton Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-03T00:00:37Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-03"
+  },
   "560623": {
     "video": {
       "kind": "youtube#searchResult",
