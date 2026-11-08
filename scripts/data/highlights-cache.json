@@ -2584,6 +2584,107 @@
     "attempts": 1,
     "lastCheckedDate": "2026-11-02"
   },
+  "560632": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "tLb58oquiuYsmmPhTEeX-LB8jzw",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "7c1KI9a_67g"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-07T22:00:07Z",
+        "channelId": "UCEg25rdRZXg32iwai6N6l0w",
+        "title": "Leeds United 1-0 Tottenham | Premier League Highlights",
+        "description": "Watch highlights from Leeds United 1-0 Tottenham Hotspur in the Premier League. Second-half substitute Noah Okafor's goal for ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/7c1KI9a_67g/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/7c1KI9a_67g/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/7c1KI9a_67g/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/7c1KI9a_67g/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/7c1KI9a_67g/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/7c1KI9a_67g/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Tottenham Hotspur",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-07T22:00:07Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-08"
+  },
+  "560633": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "PlgFlr-nyk5giGOSjSHRmqgY2m8",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "WWHdLnBaTuA"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-07T22:00:31Z",
+        "channelId": "UCywGl_BPp9QhD0uAcP2HsJw",
+        "title": "Fulham 1 Newcastle United 1 | Premier League Highlights",
+        "description": "Match action from our 1-1 draw with Fulham at Craven Cottage. For more from Newcastle United, check out our Linktree!",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/WWHdLnBaTuA/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/WWHdLnBaTuA/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/WWHdLnBaTuA/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/WWHdLnBaTuA/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/WWHdLnBaTuA/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Newcastle United",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-07T22:00:31Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-08"
+  },
   "560634": {
     "video": {
       "kind": "youtube#searchResult",
@@ -2636,5 +2737,111 @@
     },
     "attempts": 1,
     "lastCheckedDate": "2026-11-07"
+  },
+  "560640": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "sIiK4WtQ9JfkeXKFuwlSsUJf6C0",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "MNuLQ3YT50E"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-07T16:51:11Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Martin Odegaard blasts Arsenal in front of Hull City | Premier League",
+        "description": "Arsenal find their breakthrough thanks to Martin Odegaard's finish from close range to make it 1-0 for the Gunners against Hull ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/MNuLQ3YT50E/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/MNuLQ3YT50E/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/MNuLQ3YT50E/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/MNuLQ3YT50E/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/MNuLQ3YT50E/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/MNuLQ3YT50E/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-07T16:51:11Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-08"
+  },
+  "560641": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "nrhsozougqo26LVuLT6N-FAZR64",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "jGW0vt6rMLM"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-07T22:00:39Z",
+        "channelId": "UCkzCjdRMrW2vXLx8mvPVLdQ",
+        "title": "HIGHLIGHTS | Nottingham Forest 3-1 Man City | Defeat on the road for the Blues.",
+        "description": "City suffered a 3-1 defeat at the hands of Nottingham Forest, who produced their best performance of the season to take all three ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/jGW0vt6rMLM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/jGW0vt6rMLM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/jGW0vt6rMLM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/jGW0vt6rMLM/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/jGW0vt6rMLM/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/jGW0vt6rMLM/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Man City",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-07T22:00:39Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-08"
   }
 }
