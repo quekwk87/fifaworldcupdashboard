@@ -2738,6 +2738,256 @@
     "attempts": 1,
     "lastCheckedDate": "2026-11-07"
   },
+  "560635": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "8RQoyyShkz0GO4VWON_YR_IsWVY",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "Y1PBrhOYNfc"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-08T15:21:38Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Alexis Mac Allister scores Liverpool&#39;s opener against Crystal Palace | Premier League",
+        "description": "Alexis Mac Allister breaks the deadlock for the Reds to make it 1-0 against Crystal Palace at Selhurst Park. #NBCSports #Soccer ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Y1PBrhOYNfc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Y1PBrhOYNfc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Y1PBrhOYNfc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Y1PBrhOYNfc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Y1PBrhOYNfc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/Y1PBrhOYNfc/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-08T15:21:38Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-09"
+  },
+  "560636": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "j-tve0lpL_-5pDLABEcchvxYMo4",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "FdjavBJu4SU"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-08T16:46:43Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Sunderland v. Chelsea | PREMIER LEAGUE HIGHLIGHTS | 11/8/2026",
+        "description": "Enjoy full-match highlights from Sunderland's showdown against Chelsea at the Stadium of Light in Matchweek 10. #NBCSports ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/FdjavBJu4SU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/FdjavBJu4SU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/FdjavBJu4SU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/FdjavBJu4SU/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/FdjavBJu4SU/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-08T16:46:43Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-09"
+  },
+  "560637": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "SJj35xOK8fzIVr1PfKm-etVF4Ro",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "v7C2i8jKzsc"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-08T16:42:22Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Ipswich Town v. Bournemouth | PREMIER LEAGUE HIGHLIGHTS | 11/8/2026",
+        "description": "Watch full-match highlights from Bournemouth's visit to Portman Road to take on Ipswich Town in Matchweek 10. #NBCSports ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/v7C2i8jKzsc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/v7C2i8jKzsc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/v7C2i8jKzsc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/v7C2i8jKzsc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/v7C2i8jKzsc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-08T16:42:22Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-09"
+  },
+  "560638": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "LX62c645_dLR_TAR_FwSTHyB2sU",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "UvkMo7NHt2A"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-08T22:00:03Z",
+        "channelId": "UCAalMUm3LIf504ItA3rqfug",
+        "title": "Brighton 2-0 Brentford | Defeat on the south coast | Premier League Highlights",
+        "description": "10-man Brentford fell to a 2-0 Premier League defeat against Brighton and Hove Albion at American Express Stadium.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/UvkMo7NHt2A/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/UvkMo7NHt2A/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/UvkMo7NHt2A/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/UvkMo7NHt2A/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/UvkMo7NHt2A/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/UvkMo7NHt2A/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Brentford Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-08T22:00:03Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-09"
+  },
+  "560639": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "xixWnv_ORER9hDZ2B6IwxSmC_Mk",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "wOLZ_jiQLdw"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-08T22:00:14Z",
+        "channelId": "UCICNP0mvtr0prFwGUQIABfQ",
+        "title": "Man Utd 4-4 Aston Villa | HIGHLIGHTS",
+        "description": "Highlights of Aston Villa's 4-4 draw with Manchester United at Old Trafford. __ Stay ahead of the game and be the first to know ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/wOLZ_jiQLdw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/wOLZ_jiQLdw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/wOLZ_jiQLdw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/wOLZ_jiQLdw/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/wOLZ_jiQLdw/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Aston Villa Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-08T22:00:14Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-09"
+  },
   "560640": {
     "video": {
       "kind": "youtube#searchResult",
