@@ -3093,5 +3093,268 @@
     },
     "attempts": 1,
     "lastCheckedDate": "2026-11-08"
+  },
+  "560642": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "i2sjItV_6xmB1kr3UEhCRlAYNV4",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "7FO9vPbudn4"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-22T00:00:27Z",
+        "channelId": "UCU2PacFf99vhb3hNiYDmxww",
+        "title": "Chelsea 1-4 Leeds Utd | HIGHLIGHTS - Extended | Premier League 2026/27",
+        "description": "PL Matchday 11 - Extended highlights of Chelsea's 1-4 Premier League defeat against Leeds United at Stamford Bridge.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/7FO9vPbudn4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/7FO9vPbudn4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/7FO9vPbudn4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/7FO9vPbudn4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/7FO9vPbudn4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/7FO9vPbudn4/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Chelsea Football Club",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-22T00:00:27Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-22"
+  },
+  "560643": {
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-22"
+  },
+  "560644": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "82Pfa_jNNy3zn3B9RTJQlMzI6Oo",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "22n9oyWtQSM"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-21T19:08:06Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Aston Villa v. Sunderland | PREMIER LEAGUE HIGHLIGHTS | 11/21/2026",
+        "description": "Look back on full-match highlights from Aston Villa battle with Sunderland at Villa Park in Matchweek 11. #NBCSports #Soccer ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/22n9oyWtQSM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/22n9oyWtQSM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/22n9oyWtQSM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/22n9oyWtQSM/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/22n9oyWtQSM/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-21T19:08:06Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-22"
+  },
+  "560647": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "1SoRLJ1ONH7nsfHXM2_9oouZUx4",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "cacYEeP4tFU"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-21T17:40:17Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "Bournemouth v. Nottingham Forest | PREMIER LEAGUE HIGHLIGHTS | 11/21/2026",
+        "description": "Watch full-match highlights from Bournemouth's Matchweek 11 fixture with Nottingham Forest at the Vitality Stadium. #NBCSports ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/cacYEeP4tFU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/cacYEeP4tFU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/cacYEeP4tFU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/cacYEeP4tFU/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/cacYEeP4tFU/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-21T17:40:17Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-22"
+  },
+  "560648": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "a24iqg9RxXwiRMIpavOvDw3bBGg",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "-f5rhR4zQiY"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-21T22:00:38Z",
+        "channelId": "UCEg25rdRZXg32iwai6N6l0w",
+        "title": "Williams-Barnett makes history! | Tottenham 2-0 Ipswich | Premier League Highlights",
+        "description": "SUBSCRIBE to ensure you don't miss a video from the Spurs YouTube channel. ▶️ Subscribe: ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/-f5rhR4zQiY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/-f5rhR4zQiY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/-f5rhR4zQiY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/-f5rhR4zQiY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/-f5rhR4zQiY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/-f5rhR4zQiY/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "Tottenham Hotspur",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-21T22:00:38Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-22"
+  },
+  "560650": {
+    "video": {
+      "kind": "youtube#searchResult",
+      "etag": "neReNtz-8wo7JAz1-4z7RhYNPT8",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "sC-V0JXAtKw"
+      },
+      "snippet": {
+        "publishedAt": "2026-11-21T16:06:05Z",
+        "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+        "title": "&#39;STUNNING!&#39; 😲 Tatsuhiro Sakamoto&#39;s screamer lifts Coventry ahead of Crystal Palace | Premier League",
+        "description": "You won't see a better strike all weekend as Tatsuhiro Sakamoto's belter makes it 2-1 for Frank Lampard's side against Crystal ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/sC-V0JXAtKw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/sC-V0JXAtKw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/sC-V0JXAtKw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/sC-V0JXAtKw/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/sC-V0JXAtKw/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "fhd": {
+            "url": "https://i.ytimg.com/vi/sC-V0JXAtKw/fhddefault.jpg",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        "channelTitle": "NBC Sports",
+        "liveBroadcastContent": "none",
+        "publishTime": "2026-11-21T16:06:05Z"
+      }
+    },
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-22"
+  },
+  "560651": {
+    "attempts": 1,
+    "lastCheckedDate": "2026-11-22"
   }
 }
